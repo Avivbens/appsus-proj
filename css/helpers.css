@@ -1,0 +1,4 @@
+.clickable {
+    cursor: pointer;
+    filter: contrast(130%);
+}

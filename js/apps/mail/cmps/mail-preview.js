@@ -1,9 +1,11 @@
-// import componentName from 'url'
-
 export default {
-    props: [],
+    props: ['mail'],
     template: `
-
+        <article v-if="mail">
+            <span>{{mail.subject}}</span>
+            <span>{{mail.body}}</span>
+            <span>{{mail.sentAt}}</span>
+        </article>
     `,
     data() {
         return {
@@ -23,7 +25,6 @@ export default {
 
     },
     components: {
-        // componentName
 
     },
 }

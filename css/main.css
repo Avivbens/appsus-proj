@@ -1,3 +1,4 @@
+@import url(./helpers.css);
 * {
     box-sizing: border-box;
 }
@@ -8,8 +9,21 @@ body {
 
 .app-header {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    /*  */
+    background-color: lightblue;
+    width: 100%;
+}
+
+.app-header .container {
+    display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: lightblue;
-    padding: 30px;
+    width: 90%;
+    padding: 10px;
+}
+
+.app-header img {
+    width: 30px;
 }
