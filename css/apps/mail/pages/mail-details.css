@@ -1,0 +1,10 @@
+.mail-details {
+    margin: 0 20px;
+    position: relative;
+}
+
+.details-buttons-area {
+    position: absolute;
+    top: 0;
+    right: 20px;
+}

@@ -3,6 +3,7 @@ import aboutPage from './pages/about-page.js'
 // 
 import misterEmail from './apps/mail/pages/mail-app.js'
 import mailDetails from './apps/mail/pages/mail-details.js'
+import mailCompose from './apps/mail/pages/mail-compose.js'
 // 
 import missKeep from './apps/keep/pages/keep-app.js'
 import noteDetails from './apps/keep/pages/note-details.js'
@@ -16,8 +17,12 @@ const routes = [{
         component: misterEmail
     },
     {
-        path: '/misterEmail/:id',
+        path: '/misterEmail/?:id',
         component: mailDetails
+    },
+    {
+        path: '/misterEmail/newMail',
+        component: mailCompose
     },
     {
         path: '/missKeep',

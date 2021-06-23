@@ -1,4 +1,5 @@
 import { mailService } from "../services/mail-service.js"
+import { eventBus } from "../../../services/event-bus.js"
 // import componentName from 'url'
 
 export default {
@@ -7,6 +8,22 @@ export default {
         class="mail-details"
         v-if="mail"
         >
+
+            <aside class="details-buttons-area">
+                <button 
+                class="clickable"
+                @click.stop="onDeleteMail(mail)"
+                >✖</button>
+
+
+                <button 
+                class="clickable"
+                @click.stop="onExitFullSize"
+                >➡</button>
+
+            </aside>
+
+
             <h1 class="details-title">
                 {{mail.subject}}
             </h1>
@@ -27,7 +44,13 @@ export default {
         }
     },
     methods: {
-
+        onDeleteMail(mail) {
+            eventBus.$emit('removeMail', mail)
+            this.onExitFullSize()
+        },
+        onExitFullSize() {
+            this.$router.push('/misterEmail')
+        }
     },
     computed: {
 

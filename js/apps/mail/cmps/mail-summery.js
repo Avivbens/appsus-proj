@@ -17,7 +17,6 @@ export default {
                 @click.stop="onFullSize(mail)"
                 >🔲</button>
 
-
             </aside>
 
             <h2 class="summery-title">

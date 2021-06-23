@@ -25,13 +25,19 @@ export default {
                         <span>{{timeToShow}}</span>
 
                         <span
-                            v-if="hoverBody">
+                        v-if="hoverBody">
 
                             <button 
                             class="clickable"
                             @click.stop="onSendToArchive"
                             
                             >📩</button>
+
+                            <button 
+                            class="clickable"
+                            @click.stop="mail.isRead = !mail.isRead"
+                            
+                            >{{readButton}}</button>
                             
                             <button 
                             class="clickable"
@@ -61,7 +67,7 @@ export default {
     },
     methods: {
         updateBodyToShow() {
-            const minusButtons = (this.hoverBody) ? 120 : 20
+            const minusButtons = (this.hoverBody) ? 160 : 20
             const screenW = (window.innerWidth * 0.7 - minusButtons) / 7.5
             this.bodyToShow = this.mail.body.substr(0, screenW) + '...'
         },
@@ -92,13 +98,16 @@ export default {
         boldText() {
             return { bold: this.mail.isRead }
         },
-
         timeToShow() {
             const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
             const month = months[new Date(this.mail.sentAt).getMonth()]
             const res = `${month} ${new Date(this.mail.sentAt).getDay()}`
 
             return res
+        },
+        readButton() {
+            if (this.mail.isRead) return '💌'
+            return '📧'
         }
     },
     created() {
