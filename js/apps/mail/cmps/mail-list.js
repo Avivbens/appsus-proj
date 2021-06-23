@@ -7,6 +7,7 @@ export default {
         class="mail-list">
 
             <mail-preview
+            class="clickable"
             v-for="mail in mails"
             :mail="mail" 
             />

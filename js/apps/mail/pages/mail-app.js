@@ -1,12 +1,17 @@
 import mailPreview from '../cmps/mail-preview.js'
 import mailList from '../cmps/mail-list.js'
 import { mailService } from "../services/mail-service.js"
+import { eventBus } from "../../../services/event-bus.js"
 
 export default {
     template: `
-        <main v-if="mailsToShow">
+        <main>
+
             <mail-list 
-            :mails="mailsToShow"/>
+            :mails="mailsToShow"
+            v-if="mailsToShow"
+            />
+
         </main>
     `,
     data() {
@@ -26,6 +31,12 @@ export default {
                             })
                     }
                 })
+        },
+        removeMail(mail) {
+            mailService.remove(mail)
+                .then((res) => {
+                    this.mailsToShow = res
+                })
         }
     },
     computed: {
@@ -33,9 +44,10 @@ export default {
     },
     created() {
         this.loadMails()
+        eventBus.$on('removeMail', this.removeMail)
     },
     destroyed() {
-
+        eventBus.$off('removeMail')
     },
     components: {
         mailPreview,

@@ -8,6 +8,7 @@ export const mailService = {
     get,
     post,
     postMany,
+    remove,
     getIndex,
     createMail,
     createSimpleMail,
@@ -28,6 +29,15 @@ function post(mail) {
 
 function postMany(mails) {
     return storageService.postMany(MAILS_KEY, mails)
+}
+
+function remove(mail) {
+    return storageService.remove(MAILS_KEY, mail.id)
+        .then(() => query()
+            .then(res => {
+                return res
+            })
+        )
 }
 
 function getIndex(mailId) {
@@ -51,7 +61,7 @@ function createSimpleMail() {
     return {
         sender: 'You',
         subject: 'Wassap?',
-        body: utilService.makeLorem(20),
+        body: utilService.makeLorem(200),
         isRead: false,
         sentAt: Date.now()
     }
