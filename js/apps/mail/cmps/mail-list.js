@@ -10,6 +10,7 @@ export default {
             class="clickable"
             v-for="mail in mails"
             :mail="mail" 
+            :key="mail.id"
             />
 
 

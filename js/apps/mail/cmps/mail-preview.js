@@ -16,7 +16,10 @@ export default {
                 class="small-prev-container"
                 v-if="!summery">
                     <span>
-                        <span>{{mail.sender}}</span>
+                        <span v-if="isSentMail">{{mail.to}}</span>
+                        <span v-else>{{mail.sender}}</span>
+
+
                         <span>{{mail.subject}}</span>
                     </span>
 
@@ -29,7 +32,7 @@ export default {
 
                             <button 
                             class="clickable"
-                            @click.stop="onSendToArchive"
+                            @click.stop="onSendToArchive(mail)"
                             
                             >📩</button>
 
@@ -68,8 +71,26 @@ export default {
     methods: {
         updateBodyToShow() {
             const minusButtons = (this.hoverBody) ? 160 : 20
-            const screenW = (window.innerWidth * 0.7 - minusButtons) / 9
-            this.bodyToShow = this.mail.body.substr(0, screenW) + '...'
+
+            let allText = this.mail.body
+            let stringWidth = 0
+            let stringToShow = ''
+            while (stringWidth < (window.innerWidth * 0.55 - minusButtons) - 20) {
+                stringToShow += allText.charAt(0)
+                allText = allText.substr(1)
+
+                stringWidth = this.measureText(stringToShow, 16)
+                if (!allText) {
+                    this.bodyToShow = stringToShow
+                    return
+                }
+            }
+
+            this.bodyToShow = stringToShow + '...'
+
+            // const minusButtons = (this.hoverBody) ? 160 : 20
+            // const screenW = (window.innerWidth * 0.7 - minusButtons) / 9
+            // this.bodyToShow = this.mail.body.substr(0, screenW) + '...'
         },
         onHover(hover) {
             this.hoverBody = hover
@@ -92,6 +113,9 @@ export default {
         },
         onDeleteMail(mail) {
             eventBus.$emit('removeMail', mail)
+        },
+        onSendToArchive(mail) {
+            eventBus.$emit('archiveMail', mail)
         }
     },
     computed: {
@@ -108,6 +132,9 @@ export default {
         readButton() {
             if (this.mail.isRead) return '💌'
             return '📧'
+        },
+        isSentMail() {
+            return this.mail.categories.includes('sent mails')
         }
     },
     created() {

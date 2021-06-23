@@ -1,3 +1,24 @@
 .mail-app {
     display: flex;
 }
+
+.mail-side-bar-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    width: 150px;
+    gap: 20px;
+}
+
+.mail-compose-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: rgb(65, 65, 65);
+    border: 2px solid rgb(53, 53, 53);
+    border-radius: 3em;
+    text-decoration: none;
+    padding: 5px;
+}

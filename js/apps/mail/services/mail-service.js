@@ -11,6 +11,7 @@ export const mailService = {
     remove,
     getIndex,
     createMail,
+    toggleArchive,
     createSimpleMail,
     createFirstMails,
     getByFilter,
@@ -24,7 +25,8 @@ function getByFilter(filterBy) {
     return query()
         .then(mails => {
             return mails.filter(mail => {
-                return mail.category === filterBy
+                return mail.categories.includes(filterBy) &&
+                    (filterBy === 'archived' || !mail.categories.includes('archived'))
             })
         })
 }
@@ -50,6 +52,21 @@ function remove(mail) {
         )
 }
 
+function toggleArchive(mailId) {
+    return query()
+        .then(res => {
+            const targetMail = res.find(mail => mail.id === mailId)
+            const idx = targetMail.categories.findIndex(c => c === 'archived')
+
+            if (idx === -1) targetMail.categories.push('archived')
+            else targetMail.categories.splice(idx, 1)
+
+            _save(targetMail)
+
+            return res
+        })
+}
+
 function getIndex(mailId) {
     return query()
         .then(mails => {
@@ -57,11 +74,13 @@ function getIndex(mailId) {
         })
 }
 
-function createMail(sender, subject, body, isRead = false, sentAt = Date.now()) {
+function createMail(sender, subject, body, category, to = 'you', isRead = false, sentAt = Date.now()) {
     return {
         sender,
         subject,
         body,
+        categories: [category],
+        to,
         isRead,
         sentAt,
     }
@@ -74,7 +93,7 @@ function createSimpleMail() {
         body: utilService.makeLorem(200),
         isRead: false,
         sentAt: Date.now(),
-        category: 'inbox'
+        categories: ['inbox']
     }
 }
 

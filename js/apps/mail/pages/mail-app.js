@@ -7,11 +7,22 @@ import { eventBus } from "../../../services/event-bus.js"
 export default {
     template: `
         <main class="mail-app">
-            <side-bar
-            class="mail-side-bar"
-            :categories="categories"
-            @setFilter="setFilter"
-            />
+            <div
+            class="mail-side-bar-container"
+            >   
+                <router-link
+                class="mail-compose-btn"
+                to="/misterEmail/newMail"
+                >
+                   ➕ Compose
+                </router-link>
+
+                <side-bar
+                class="mail-side-bar"
+                :categories="categories"
+                @setFilter="setFilter"
+                />
+            </div>
 
             <mail-list 
             :mails="mailsToShow"
@@ -23,8 +34,15 @@ export default {
     data() {
         return {
             mailsToShow: null,
-            categories: ['inbox', 'starred', 'sent mails', 'drafts'],
-            filterBy: ''
+            categories: [
+                'all',
+                'inbox',
+                'sent mails',
+                'starred',
+                'archived',
+                'drafts'
+            ],
+            filterBy: 'inbox'
         }
     },
     methods: {
@@ -46,22 +64,36 @@ export default {
                     this.mailsToShow = res
                 })
         },
+        archiveMail(mail) {
+            mailService.toggleArchive(mail.id)
+                .then(res => this.mailsToShow = res)
+                .then(() => {
+                    this.updateMailsToShow()
+                })
+        },
         setFilter(filter) {
             this.filterBy = filter
             this.updateMailsToShow()
         },
         updateMailsToShow() {
-            if (!this.filterBy) return
+            if (!this.filterBy || this.filterBy === 'all') {
+                mailService.query()
+                    .then(res => this.mailsToShow = res)
+                return
+            }
             mailService.getByFilter(this.filterBy)
                 .then(res => this.mailsToShow = res)
         }
     },
     created() {
-        this.loadMails()
         eventBus.$on('removeMail', this.removeMail)
+        eventBus.$on('archiveMail', this.archiveMail)
+        this.loadMails()
+        this.updateMailsToShow()
     },
     destroyed() {
         eventBus.$off('removeMail')
+        eventBus.$off('archiveMail')
     },
     components: {
         mailPreview,

@@ -1,3 +1,5 @@
+import { mailService } from "../services/mail-service.js"
+
 export default {
     template: `
         <main
@@ -6,27 +8,55 @@ export default {
         <h4>New Message</h4>
 
             <form>
-                <input type="text" placeholder="To:">
+                <input v-model="newMail.to" type="text" placeholder="To:">
                 <input type="text" placeholder="Cc:">
                 <input type="text" placeholder="Bcc:">
-                <input type="text" placeholder="Subject:">
+                <input v-model="newMail.subject" type="text" placeholder="Subject:">
             
-                <textarea name="mailBody" cols="30" rows="10" placeholder="Your Message"></textarea>
+                <textarea v-model="newMail.body" name="mailBody" cols="30" rows="10" placeholder="Your Message"></textarea>
 
                 <div class="compose-buttons-area">
-                    <button>Send</button>
-                    <button>✖</button>
+                    <button
+                    @click="onSendMail"
+                    >Send</button>
+
+
+                    <button
+                    @click.prevent="onDeclareChanges"
+                    >✖</button>
                 </div>
             </form>
         </main> 
     `,
     data() {
         return {
-
+            newMail: {
+                sender: 'You',
+                to: '',
+                subject: '',
+                body: '',
+                category: 'sent mails'
+            }
         }
     },
     methods: {
+        onDeclareChanges() {
+            if (confirm('Are you sure?')) this.$router.push('/misterEmail')
+        },
+        onSendMail() {
+            const mail = mailService.createMail(
+                this.newMail.sender,
+                this.newMail.subject,
+                this.newMail.body,
+                this.newMail.category,
+                this.newMail.to,
+            )
 
+            mailService.post(mail)
+                .then(() => {
+                    this.$router.push('/misterEmail')
+                })
+        }
     },
     computed: {
 
