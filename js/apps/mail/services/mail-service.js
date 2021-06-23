@@ -15,6 +15,7 @@ export const mailService = {
     createSimpleMail,
     createFirstMails,
     getByFilter,
+    save,
 }
 
 function query() {
@@ -61,7 +62,7 @@ function toggleArchive(mailId) {
             if (idx === -1) targetMail.categories.push('archived')
             else targetMail.categories.splice(idx, 1)
 
-            _save(targetMail)
+            save(targetMail)
 
             return res
         })
@@ -99,7 +100,7 @@ function createSimpleMail() {
 
 function createFirstMails() {
     const mails = []
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 10; i++) {
         const mail = createSimpleMail()
         mail.id = utilService.makeId()
         mails.push(mail)
@@ -108,7 +109,7 @@ function createFirstMails() {
     return mails
 }
 
-function _save(mail) {
+function save(mail) {
     if (mail.id) {
         return storageService.put(MAILS_KEY, mail)
     } else {

@@ -1,4 +1,5 @@
 import mailPreview from '../cmps/mail-preview.js'
+import progressBar from '../cmps/progress-bar.js'
 import mailList from '../cmps/mail-list.js'
 import sideBar from '../../../cmps/side-bar.js'
 import { mailService } from "../services/mail-service.js"
@@ -14,13 +15,17 @@ export default {
                 class="mail-compose-btn"
                 to="/misterEmail/newMail"
                 >
-                   ➕ Compose
+                    ➕ Compose
                 </router-link>
 
                 <side-bar
                 class="mail-side-bar"
                 :categories="categories"
                 @setFilter="setFilter"
+                />
+
+                <progress-bar
+                :ratio="readRatio"
                 />
             </div>
 
@@ -42,34 +47,59 @@ export default {
                 'archived',
                 'drafts'
             ],
-            filterBy: 'inbox'
+            filterBy: 'inbox',
+            readRatio: 100
         }
     },
     methods: {
         loadMails() {
             mailService.query()
                 .then((res) => {
-                    if (res.length) this.mailsToShow = res
-                    else {
+                    if (res.length) {
+                        this.mailsToShow = res
+                        this.updateReadRatio(res)
+                    } else {
                         mailService.postMany(mailService.createFirstMails())
                             .then(res => {
                                 this.mailsToShow = res
+                                this.updateReadRatio(res)
                             })
                     }
                 })
+        },
+        updateReadRatio(mails) {
+            let counter = 0
+            mails.forEach(mail => {
+                if (mail.isRead) counter++
+            })
+
+            if (!mails.length) {
+                this.readRatio = 100
+                return
+            }
+
+            this.readRatio = counter / mails.length * 100
         },
         removeMail(mail) {
             mailService.remove(mail)
                 .then((res) => {
                     this.mailsToShow = res
+                    this.updateReadRatio(res)
                 })
         },
         archiveMail(mail) {
             mailService.toggleArchive(mail.id)
-                .then(res => this.mailsToShow = res)
+                .then(res => {
+                    this.mailsToShow = res
+                    this.updateReadRatio(res)
+                })
                 .then(() => {
                     this.updateMailsToShow()
                 })
+        },
+        saveMail(mail) {
+            mailService.save(mail)
+            this.updateMailsToShow()
         },
         setFilter(filter) {
             this.filterBy = filter
@@ -78,16 +108,24 @@ export default {
         updateMailsToShow() {
             if (!this.filterBy || this.filterBy === 'all') {
                 mailService.query()
-                    .then(res => this.mailsToShow = res)
+                    .then(res => {
+                        this.mailsToShow = res
+                        this.updateReadRatio(res)
+                    })
                 return
             }
             mailService.getByFilter(this.filterBy)
-                .then(res => this.mailsToShow = res)
+                .then(res => {
+                    this.mailsToShow = res
+                    this.updateReadRatio(res)
+                })
         }
     },
     created() {
         eventBus.$on('removeMail', this.removeMail)
         eventBus.$on('archiveMail', this.archiveMail)
+        eventBus.$on('saveMail', this.saveMail)
+
         this.loadMails()
         this.updateMailsToShow()
     },
@@ -98,6 +136,7 @@ export default {
     components: {
         mailPreview,
         mailList,
-        sideBar
+        sideBar,
+        progressBar
     },
 }
