@@ -14,7 +14,8 @@ export const keepService = {
     getByFilter,
     createNote,
     createSimpleNote,
-    createFirstNotes
+    createFirstNotes,
+    toggleIsDone
 }
 
 function query() {
@@ -68,7 +69,7 @@ function createNote(type, isPinned, info) {
 
 function createSimpleNote() {
     return {
-        type: "NoteTxt",
+        type: "noteTxt",
         isPinned: true,
         info: {
             title: "My Note Title",
@@ -88,10 +89,12 @@ function createFirstNotes() {
     return notes
 }
 
-// function getEmptyBook() {
-//     return {
-//         id: '',
-//         vendor: '',
-//         maxSpeed: 0
-//     };
-// }
+function toggleIsDone({ noteId, todoIdx }) {
+    return query()
+        .then(res => {
+            const note = res.find(note => (note.id === noteId))
+            note.info.txt[todoIdx].isDone = !(note.info.txt[todoIdx].isDone)
+            save(note)
+            return res
+        })
+}

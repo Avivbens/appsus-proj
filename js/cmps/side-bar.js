@@ -6,14 +6,11 @@ export default {
         <aside>
             <div
             v-if="categories" 
-            v-for="category in categories"    
+            v-for="category in categories" 
+            @click="filterBy(category)"   
             >
-                <span
-                @click="filterBy(category)"
-                >
-                <span class="capitalize">
-                    {{category}}
-                </span>
+                <span >
+                    <span class="capitalize"> {{category}}</span>
                 </span>
             </div>
 
