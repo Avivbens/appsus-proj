@@ -2,9 +2,9 @@ export default {
 
     props: ['note'],
     template: `
-      <div class="nore-preview" @click="goToNote">
+      <div class="nore-preview border" @click="goToNote">
         <!-- <h2>{{note.info.txt}}</h2> -->
-        <p>{{note.info.txt}}</p>
+        <p>{{note.info.txt}} , id: {{note.id}}</p>
       </div>
     `,
     data() {
@@ -15,6 +15,8 @@ export default {
     methods: {
         goToNote() {
             // if (this.$route.path === '/add') return;
+            console.log('going to');
+
             this.$router.push('/note/' + this.note.id)
         }
     },
