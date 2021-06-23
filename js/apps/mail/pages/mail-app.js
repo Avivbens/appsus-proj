@@ -1,11 +1,17 @@
 import mailPreview from '../cmps/mail-preview.js'
 import mailList from '../cmps/mail-list.js'
+import sideBar from '../../../cmps/side-bar.js'
 import { mailService } from "../services/mail-service.js"
 import { eventBus } from "../../../services/event-bus.js"
 
 export default {
     template: `
-        <main>
+        <main class="mail-app">
+            <side-bar
+            class="mail-side-bar"
+            :categories="categories"
+            @setFilter="setFilter"
+            />
 
             <mail-list 
             :mails="mailsToShow"
@@ -16,7 +22,9 @@ export default {
     `,
     data() {
         return {
-            mailsToShow: null
+            mailsToShow: null,
+            categories: ['inbox', 'starred', 'sent mails', 'drafts'],
+            filterBy: ''
         }
     },
     methods: {
@@ -37,10 +45,16 @@ export default {
                 .then((res) => {
                     this.mailsToShow = res
                 })
+        },
+        setFilter(filter) {
+            this.filterBy = filter
+            this.updateMailsToShow()
+        },
+        updateMailsToShow() {
+            if (!this.filterBy) return
+            mailService.getByFilter(this.filterBy)
+                .then(res => this.mailsToShow = res)
         }
-    },
-    computed: {
-
     },
     created() {
         this.loadMails()
@@ -51,16 +65,7 @@ export default {
     },
     components: {
         mailPreview,
-        mailList
+        mailList,
+        sideBar
     },
-    // watch: {
-    //     // /misterEmail
-    //     '$route.params.id': {
-    //         immediate: true,
-    //         deep: true,
-    //         handler(newValue, oldValue) {
-
-    //         }
-    //     }
-    // },
 }

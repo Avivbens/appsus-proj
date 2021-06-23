@@ -1,11 +1,18 @@
 import noteList from '../cmps/note-list.js'
 import noteAdd from '../cmps/note-add.js'
+import sideBar from '../../../cmps/side-bar.js'
 import { keepService } from '../services/keep-service.js'
 
 export default {
     props: [],
     template: `
-        <section>
+        <section 
+        class="keep-app">
+            <side-bar 
+            class="keep-side-bar"
+            :categories="categories"
+            @setFilter="setFilter"
+            />
             <note-add @save="saveNote"/>
             <note-list :notes="notes"/>
         </section>
@@ -13,12 +20,19 @@ export default {
     data() {
         return {
             notes: [],
-            // filterBy: null
+            filterBy: '',
+            categories: [
+                'notes',
+                'alerts',
+                'work',
+                'personal',
+                'trash',
+            ],
         }
     },
     methods: {
         loadNotes() {
-            console.log('happened');
+            console.log('happened')
 
             keepService.query()
                 .then(res => {
@@ -33,6 +47,15 @@ export default {
         saveNote(note) {
             keepService.save(note)
                 .then(() => this.loadNotes())
+        },
+        setFilter(filter) {
+            this.filterBy = filter
+            this.updateNotesToShow()
+        },
+        updateNotesToShow() {
+            if (!this.filterBy) return
+            keepService.getByFilter(this.filterBy)
+                .then(res => this.notes = res)
         }
     },
     computed: {
@@ -47,5 +70,6 @@ export default {
     components: {
         noteList,
         noteAdd,
+        sideBar
     },
 }

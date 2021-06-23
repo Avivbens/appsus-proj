@@ -6,7 +6,7 @@ import mailDetails from './apps/mail/pages/mail-details.js'
 import mailCompose from './apps/mail/pages/mail-compose.js'
 // 
 import missKeep from './apps/keep/pages/keep-app.js'
-import noteDetails from './apps/keep/pages/note-details.js'
+// import noteDetails from './apps/keep/pages/note-details.js'
 
 const routes = [{
         path: '/',
@@ -28,10 +28,10 @@ const routes = [{
         path: '/missKeep',
         component: missKeep
     },
-    {
-        path: '/note/:noteId?',
-        component: noteDetails
-    },
+    // {
+    //     path: '/note/:noteId?',
+    //     component: noteDetails
+    // },
     {
         path: '/about',
         component: aboutPage

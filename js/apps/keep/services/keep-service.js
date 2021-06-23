@@ -11,6 +11,7 @@ export const keepService = {
     remove,
     save,
     getById,
+    getByFilter,
     createNote,
     createSimpleNote,
     createFirstNotes
@@ -48,6 +49,15 @@ function getById(noteId) {
     return storageService.get(NOTES_KEY, noteId)
 }
 
+function getByFilter(filterBy) {
+    return query()
+        .then(notes => {
+            return notes.filter(note => {
+                return note.category.includes(filterBy)
+            })
+        })
+}
+
 function createNote(type, isPinned, info) {
     return {
         type,
@@ -63,7 +73,8 @@ function createSimpleNote() {
         info: {
             title: "My Note Title",
             txt: "Fullstack Me Baby!"
-        }
+        },
+        category: ['notes', 'work']
     }
 
 }

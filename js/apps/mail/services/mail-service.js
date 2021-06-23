@@ -13,10 +13,20 @@ export const mailService = {
     createMail,
     createSimpleMail,
     createFirstMails,
+    getByFilter,
 }
 
 function query() {
     return storageService.query(MAILS_KEY)
+}
+
+function getByFilter(filterBy) {
+    return query()
+        .then(mails => {
+            return mails.filter(mail => {
+                return mail.category === filterBy
+            })
+        })
 }
 
 function get(mailId) {
@@ -63,7 +73,8 @@ function createSimpleMail() {
         subject: 'Wassap?',
         body: utilService.makeLorem(200),
         isRead: false,
-        sentAt: Date.now()
+        sentAt: Date.now(),
+        category: 'inbox'
     }
 }
 

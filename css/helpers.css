@@ -10,3 +10,7 @@
 .border {
     border: 2px solid red;
 }
+
+.capitalize {
+    text-transform: capitalize;
+}

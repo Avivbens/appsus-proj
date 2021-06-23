@@ -68,7 +68,7 @@ export default {
     methods: {
         updateBodyToShow() {
             const minusButtons = (this.hoverBody) ? 160 : 20
-            const screenW = (window.innerWidth * 0.7 - minusButtons) / 7.5
+            const screenW = (window.innerWidth * 0.7 - minusButtons) / 9
             this.bodyToShow = this.mail.body.substr(0, screenW) + '...'
         },
         onHover(hover) {

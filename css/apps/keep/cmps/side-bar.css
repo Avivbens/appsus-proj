@@ -1,0 +1,19 @@
+.keep-side-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    width: 150px;
+    gap: 20px;
+}
+
+.keep-side-bar>* {
+    border-radius: 0 3em 3em 0;
+    padding: 5px;
+}
+
+.keep-side-bar>*:hover {
+    cursor: pointer;
+    background-color: lightpink;
+    color: white;
+}

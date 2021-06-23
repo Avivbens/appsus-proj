@@ -86,8 +86,8 @@ export default {
                 }
             }
             if (val.type === 'noteTodos') {
-                const valTxt = val.txt.slice();
-                valTxt.pop();
+                const valTxt = val.txt.slice()
+                valTxt.pop()
                 this.note = {
                     type: 'noteTodos',
                     isPinned,
@@ -101,9 +101,6 @@ export default {
         },
     }
 }
-
-
-
 
 /* <section class="border">
 <form @submit.prevent="save">

@@ -8,7 +8,8 @@ export default {
               <note-preview 
               v-for="note in notes"
                :key="note.id" class="note-preview-container" 
-               :note="note"  @click.native="goToNote(note)"/>
+               :note="note"/>
+               <!-- :note="note"  @click.native="goToNote(note)"/> -->
        </ul>
     `,
     data() {
@@ -17,9 +18,9 @@ export default {
         }
     },
     methods: {
-        goToNote(note) {
-            this.$router.push('/note/' + note.id)
-        }
+        // goToNote(note) {
+        //     this.$router.push('/note/' + note.id)
+        // }
     },
     computed: {
 

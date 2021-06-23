@@ -1,32 +1,32 @@
-import { keepService } from '../services/keep-service.js'
+// import { keepService } from '../services/keep-service.js'
 
-export default {
-    template: `
+// export default {
+//     template: `
 
-    <section v-if="note" class="border">
-    <h2>{{note.info.title}}</h2>
-    <p>{{note.info.txt}}</p>
-    </section>
-    `,
-    data() {
-        return {
-            note: null
-        }
-    },
-    methods: {
+//     <section v-if="note" class="border">
+//     <h2>{{note.info.title}}</h2>
+//     <p>{{note.info.txt}}</p>
+//     </section>
+//     `,
+//     data() {
+//         return {
+//             note: null
+//         }
+//     },
+//     methods: {
 
-    },
-    computed: {
+//     },
+//     computed: {
 
-    },
-    created() {
+//     },
+//     created() {
 
-        const { noteId } = this.$route.params;
-        keepService.getById(noteId)
-            .then(note => this.note = note)
+//         const { noteId } = this.$route.params;
+//         keepService.getById(noteId)
+//             .then(note => this.note = note)
 
-    },
-    destroyed() {
+//     },
+//     destroyed() {
 
-    }
-}
+//     }
+// }
