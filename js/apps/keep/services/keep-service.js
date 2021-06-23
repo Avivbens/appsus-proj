@@ -11,6 +11,7 @@ export const keepService = {
     remove,
     save,
     getById,
+    createNote,
     createSimpleNote,
     createFirstNotes
 }
@@ -31,7 +32,7 @@ function postMany(mails) {
     return storageService.postMany(NOTES_KEY, mails)
 }
 
-function remove(bookId) {
+function remove(noteId) {
     return storageService.remove(NOTES_KEY, noteId)
 }
 
@@ -60,6 +61,7 @@ function createSimpleNote() {
         type: "NoteTxt",
         isPinned: true,
         info: {
+            title: "My Note Title",
             txt: "Fullstack Me Baby!"
         }
     }

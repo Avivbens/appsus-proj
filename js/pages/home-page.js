@@ -4,6 +4,7 @@ export default {
     props: [],
     template: `
 
+    <section>home</section>
     `,
     data() {
         return {
