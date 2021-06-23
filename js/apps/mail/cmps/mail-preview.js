@@ -11,6 +11,7 @@ export default {
             @mouseleave="onHover(false)"
             @click="openSummery(mail)"
             v-if="mail">
+
                 <section
                 class="small-prev-container"
                 v-if="!summery">
@@ -43,7 +44,7 @@ export default {
 
 
                 <mail-summery 
-                    v-if="summery"
+                    v-else
                     :mail="summery"
                     @existSummery="summery=null"
                 />

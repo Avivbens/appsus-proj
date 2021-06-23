@@ -2,12 +2,11 @@ export default {
 
     props: [],
     template: `
+        <section>
 
-<section>
+            <input type="text" v-model="val" @change="reportVal" placeholder="write your note here"/>
 
-<input type="text" v-model="val" @change="reportVal" placeholder="write yor note here"/>
-
-</section>
+        </section>
     `,
     data() {
         return {
@@ -17,7 +16,7 @@ export default {
     },
     methods: {
         reportVal() {
-            console.log('reporting....');
+            console.log('reporting....')
         }
     }
 }

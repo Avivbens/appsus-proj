@@ -1,6 +1,6 @@
 // import componentName from 'url'
-import textBox from './text-box.js';
-import listBox from './list-box.js';
+import textBox from './text-box.js'
+import listBox from './list-box.js'
 export default {
     components: {
         textBox,
@@ -15,7 +15,10 @@ export default {
                   <div  class="bold" style="font-size:40px" @click="cmp = 'listBox'">list</div>
 
             <form @submit.prevent="save">
-            <input v-model="note.info.title" placeholder="Title">
+                
+            <input
+            v-model="note.info.title" 
+            placeholder="Title">
 
                 <component  :is="cmp"/>
 
@@ -54,10 +57,10 @@ export default {
     },
     methods: {
         save() {
-            this.$emit('save', this.note);
+            this.$emit('save', this.note)
         },
         test() {
-            console.log('test!');
+            console.log('test!')
 
         }
 

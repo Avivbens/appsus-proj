@@ -7,9 +7,9 @@ export default {
 
     <section>
 
-       <input v-for="(line,idx) in lines"
+       <input v-for="(line, idx) in val"
         type="text" v-model="val[idx]" 
-        @change="reportVal" @input="addNewLine" placeholder="write yor note here"/>
+        @change="reportVal" @input="addNewLine(idx)" placeholder="write yor note here"/>
          
           <!-- <div  class="bold" style="font-size:40px">+</div> -->
 
@@ -18,17 +18,16 @@ export default {
     `,
     data() {
         return {
-            val: [],
-            lines: 1
+            val: [''],
         }
     },
     methods: {
         reportVal() {
-            console.log('reporting....');
+            console.log('reporting....')
 
         },
-        addNewLine() {
-            if (this.val[this.val.length - 1].length === 1) this.lines++
+        addNewLine(idx) {
+            if (idx === this.val.length - 1) this.val.push('')
         }
     }
 }
