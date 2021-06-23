@@ -7,10 +7,12 @@ export default {
 
     <section>
 
-       <div v-for="(line, idx) in val">  <input 
-        type="text" v-model="val[idx]" 
-        @change="reportVal" @input="addNewLine(idx)" placeholder="write your note here"/>
-        </div>
+         <input v-model="title" placeholder="Title">
+         <br>
+        <div v-for="(line, idx) in val" > 
+            <input type="text" v-model="val[idx].txt" @change="reportVal"
+                @input="addNewLine(idx)" placeholder="write your note here"/>
+        </div> 
           <!-- <div  class="bold" style="font-size:40px">+</div> -->
 
           {{val}}
@@ -18,7 +20,9 @@ export default {
     `,
     data() {
         return {
-            val: [''],
+            title: '',
+            isPinned: false,
+            val: [{ txt: '', isDone: false }],
             type: 'noteTodos'
 
         }
@@ -26,12 +30,16 @@ export default {
     methods: {
         reportVal() {
             console.log('reporting....')
-            this.$emit('setVal', { txt: this.val, type: this.type })
-                // this.val = []
+            this.$emit('setVal', {
+                title: this.title,
+                isPinned: this.isPinned,
+                txt: this.val,
+                type: this.type
+            })
 
         },
         addNewLine(idx) {
-            if (idx === this.val.length - 1) this.val.push('')
+            if (idx === this.val.length - 1) this.val.push({ txt: '', isDone: false })
         }
     }
 }

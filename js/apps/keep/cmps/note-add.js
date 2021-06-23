@@ -14,29 +14,26 @@ export default {
                   <span  class="bold" style="font-size:40px" @click="changeToTodos">list</span>
 
             <form @submit.prevent="save" class="border">
-                
-                <input
-                    v-model="note.info.title" 
-                    placeholder="Title">
 
                 <component  :is="cmp" @setVal="setAns"/>
 
                 <button>Save</button>
 
             </form>
-            {{note}}
+            <!-- {{note}} -->
         </section>
 
     `,
     data() {
         return {
             note: {
-                type: 'note',
+                type: 'noteTxt',
                 isPinned: false,
                 info: {
                     title: '',
                     txt: ''
-                }
+                },
+                category: ['notes']
             },
             cmp: 'noteTxt'
         }
@@ -56,7 +53,8 @@ export default {
                 info: {
                     title: '',
                     txt: ''
-                }
+                },
+                category: ['notes']
             }
             this.cmp = 'noteTxt'
         },
@@ -68,21 +66,22 @@ export default {
                 info: {
                     title: '',
                     todos: []
-                }
+                },
+                category: ['notes', 'todos']
+
             }
             this.cmp = 'noteTodos'
         },
-        setAns(val) {
-            const title = this.note.info.title
-            const isPinned = this.note.isPinned
+        setAns(val) { // later merge it to smaller if statment
             if (val.type === 'noteTxt') {
                 this.note = {
                     type: 'noteTxt',
-                    isPinned,
+                    isPinned: val.isPinned,
                     info: {
-                        title,
+                        title: val.title,
                         txt: val.txt
-                    }
+                    },
+                    category: ['notes']
                 }
             }
             if (val.type === 'noteTodos') {
@@ -90,26 +89,15 @@ export default {
                 valTxt.pop()
                 this.note = {
                     type: 'noteTodos',
-                    isPinned,
+                    isPinned: val.isPinned,
                     info: {
-                        title,
+                        title: val.title,
                         txt: valTxt
-                    }
+                    },
+                    category: ['notes', 'todos']
                 }
             }
 
         },
     }
 }
-
-/* <section class="border">
-<form @submit.prevent="save">
-    <input v-model="note.info.title" placeholder="Title">
-    <br>
-    <br>
-    <span style="padding:10px" @click="test">N</span><span style="padding:10px">I</span><span style="padding:10px">L</span>
-    <textarea v-model="note.info.txt" placeholder="Write your note..."></textarea>
-    <button>Save</button>
-</form>
-{{note}}
-</section> */

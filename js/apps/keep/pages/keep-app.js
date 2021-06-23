@@ -2,6 +2,8 @@ import noteList from '../cmps/note-list.js'
 import noteAdd from '../cmps/note-add.js'
 import sideBar from '../../../cmps/side-bar.js'
 import { keepService } from '../services/keep-service.js'
+import { eventBus } from "../../../services/event-bus.js"
+
 
 export default {
     props: [],
@@ -23,6 +25,7 @@ export default {
             filterBy: '',
             categories: [
                 'notes',
+                'todos',
                 'alerts',
                 'work',
                 'personal',
@@ -32,8 +35,6 @@ export default {
     },
     methods: {
         loadNotes() {
-            console.log('happened')
-
             keepService.query()
                 .then(res => {
                     if (res.length) {
@@ -56,13 +57,19 @@ export default {
             if (!this.filterBy) return
             keepService.getByFilter(this.filterBy)
                 .then(res => this.notes = res)
+        },
+        toggleIsDone({ noteId, todoIdx }) {
+            keepService.toggleIsDone({ noteId, todoIdx })
+                .then(res => this.notes = res)
         }
     },
     computed: {
 
     },
     created() {
-        this.loadNotes()
+        this.loadNotes(),
+            eventBus.$on('toggleIsDone', this.toggleIsDone)
+
     },
     destroyed() {
 
