@@ -1,0 +1,4 @@
+.mail-summery {
+    display: flex;
+    flex-direction: column;
+}

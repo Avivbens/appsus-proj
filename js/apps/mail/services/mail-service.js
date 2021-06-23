@@ -37,9 +37,9 @@ function getIndex(mailId) {
         })
 }
 
-function createMail(subject, body, isRead = false, sentAt = Date.now()) {
+function createMail(sender, subject, body, isRead = false, sentAt = Date.now()) {
     return {
-        id: utilService.makeId(),
+        sender,
         subject,
         body,
         isRead,
@@ -49,9 +49,9 @@ function createMail(subject, body, isRead = false, sentAt = Date.now()) {
 
 function createSimpleMail() {
     return {
-        id: utilService.makeId(),
+        sender: 'You',
         subject: 'Wassap?',
-        body: 'Pick up!',
+        body: utilService.makeLorem(20),
         isRead: false,
         sentAt: Date.now()
     }
@@ -60,7 +60,9 @@ function createSimpleMail() {
 function createFirstMails() {
     const mails = []
     for (let i = 0; i < 4; i++) {
-        mails.push(createSimpleMail())
+        const mail = createSimpleMail()
+        mail.id = utilService.makeId()
+        mails.push(mail)
     }
 
     return mails

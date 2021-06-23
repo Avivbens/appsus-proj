@@ -3,10 +3,15 @@ import mailPreview from './mail-preview.js'
 export default {
     props: ['mails'],
     template: `
-        <section>
+        <section
+        class="mail-list">
+
             <mail-preview
             v-for="mail in mails"
-            :mail="mail" />
+            :mail="mail" 
+            />
+
+
         </section>
     `,
     data() {
@@ -17,16 +22,7 @@ export default {
     methods: {
 
     },
-    computed: {
-
-    },
-    created() {
-
-    },
-    destroyed() {
-
-    },
     components: {
-        mailPreview
+        mailPreview,
     },
 }

@@ -1,0 +1,26 @@
+.mail-preview {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    min-height: 30px;
+    margin: 10px;
+    gap: 20px;
+}
+
+.mail-preview .small-prev-container {
+    display: flex;
+    width: 100%;
+}
+
+.mail-preview .small-prev-container>:first-child {
+    text-align: left;
+    display: flex;
+    gap: 80px;
+    min-width: 30%;
+}
+
+.mail-preview .small-prev-container>:last-child {
+    flex-grow: 1;
+    color: gray;
+}

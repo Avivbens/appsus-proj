@@ -2,3 +2,7 @@
     cursor: pointer;
     filter: contrast(130%);
 }
+
+.bold {
+    font-weight: bold;
+}
