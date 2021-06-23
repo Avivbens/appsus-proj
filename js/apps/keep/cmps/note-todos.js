@@ -7,10 +7,10 @@ export default {
 
     <section>
 
-       <input v-for="(line, idx) in val"
+       <div v-for="(line, idx) in val">  <input 
         type="text" v-model="val[idx]" 
-        @change="reportVal" @input="addNewLine(idx)" placeholder="write yor note here"/>
-         
+        @change="reportVal" @input="addNewLine(idx)" placeholder="write your note here"/>
+        </div>
           <!-- <div  class="bold" style="font-size:40px">+</div> -->
 
           {{val}}
@@ -19,11 +19,15 @@ export default {
     data() {
         return {
             val: [''],
+            type: 'noteTodos'
+
         }
     },
     methods: {
         reportVal() {
             console.log('reporting....')
+            this.$emit('setVal', { txt: this.val, type: this.type })
+                // this.val = []
 
         },
         addNewLine(idx) {
