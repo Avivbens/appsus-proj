@@ -1,4 +1,5 @@
 import { mailService } from "../services/mail-service.js"
+import { eventBus } from "../../../services/event-bus.js"
 
 export default {
     template: `
@@ -52,10 +53,15 @@ export default {
                 this.newMail.to,
             )
 
-            mailService.post(mail)
-                .then(() => {
-                    this.$router.push('/misterEmail')
-                })
+            this.$router.push('/misterEmail')
+
+            // Set delay when sending mail
+            setTimeout(() => {
+                mailService.post(mail)
+                    .then(() => {
+                        eventBus.$emit('reloadMails')
+                    })
+            }, 3500)
         }
     },
     computed: {

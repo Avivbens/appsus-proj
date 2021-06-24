@@ -37,7 +37,20 @@ function get(mailId) {
 }
 
 function post(mail) {
+    if (mail.to !== 'You') return sendMailToMe(mail)
     return storageService.post(MAILS_KEY, mail)
+}
+
+function sendMailToMe(mail) {
+    let newMail = JSON.parse(JSON.stringify(mail))
+    newMail.categories = ['inbox']
+    newMail.to = 'You'
+
+    mail.isRead = true
+    return storageService.post(MAILS_KEY, newMail)
+        .then(() => {
+            storageService.post(MAILS_KEY, mail)
+        })
 }
 
 function postMany(mails) {

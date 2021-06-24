@@ -99,7 +99,9 @@ export default {
         },
         saveMail(mail) {
             mailService.save(mail)
-            this.updateMailsToShow()
+                .then(() => {
+                    this.updateMailsToShow()
+                })
         },
         setFilter(filter) {
             this.filterBy = filter
@@ -125,6 +127,7 @@ export default {
         eventBus.$on('removeMail', this.removeMail)
         eventBus.$on('archiveMail', this.archiveMail)
         eventBus.$on('saveMail', this.saveMail)
+        eventBus.$on('reloadMails', this.loadMails)
 
         this.loadMails()
         this.updateMailsToShow()
