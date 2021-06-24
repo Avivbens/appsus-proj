@@ -17,6 +17,7 @@ export const keepService = {
     createSimpleNote,
     createFirstNotes,
     toggleIsDone,
+    togglePinNode
 }
 
 function query() {
@@ -55,6 +56,16 @@ function save(note) {
     }
 }
 
+function togglePinNode(note) {
+
+    note.isPinned = !note.isPinned
+
+    return save(note)
+        .then(() => {
+            return query()
+        })
+}
+
 function getById(noteId) {
     return storageService.get(NOTES_KEY, noteId)
 }
@@ -88,7 +99,7 @@ function createSimpleNote() {
     return {
         id: utilService.makeId(),
         type: "noteTxt",
-        isPinned: true,
+        isPinned: false,
         info: {
             title: "My Note Title",
             txt: "Fullstack Me Baby!"

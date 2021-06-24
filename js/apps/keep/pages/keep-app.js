@@ -15,7 +15,13 @@ export default {
             @setFilter="setFilter"
             />
             <note-add @save="saveNote"/>
-            <note-list :notes="notes"/> 
+            
+            <note-list :notes="pinnedNotes"
+            v-if="pinnedNotes"
+            /> 
+            <note-list :notes="restNotes"
+            v-if="restNotes"
+            /> 
         </section>
     `,
     data() {
@@ -34,6 +40,8 @@ export default {
     },
     methods: {
         loadNotes() {
+            console.log('loaded');
+
             keepService.query()
                 .then(res => this.notes = res)
         },
@@ -58,25 +66,38 @@ export default {
             keepService.remove(noteId)
                 .then(() => this.loadNotes())
         },
+        pinNote(note) {
+            console.log('note :>> ', note);
+            keepService.togglePinNode(note)
+                .then((res) => this.notes = res)
+        },
         setSearch(search) {
             console.log('here', search);
             // this.notes = keepService.getBySearch(this.notes, this.searchBy)
         }
     },
     computed: {
-
+        pinnedNotes() {
+            if (!this.notes) return
+            return this.notes.filter(note => note.isPinned)
+        },
+        restNotes() {
+            if (!this.notes) return
+            return this.notes.filter(note => !note.isPinned)
+        }
     },
     created() {
-        this.loadNotes(),
-            eventBus.$on('toggleIsDone', this.toggleIsDone),
-            eventBus.$on('deleteNote', this.deleteNote),
-            eventBus.$on('searchInKeep', this.setSearch),
-            eventBus.$on('onSaveNote', this.saveNote)
+        this.notes = this.loadNotes()
+        eventBus.$on('toggleIsDone', this.toggleIsDone)
+        eventBus.$on('deleteNote', this.deleteNote)
+        eventBus.$on('searchInKeep', this.setSearch)
+        eventBus.$on('onSaveNote', this.saveNote)
+        eventBus.$on('pinNote', this.pinNote)
     },
     destroyed() {
-        eventBus.$off('toggleIsDone', this.toggleIsDone),
-            eventBus.$off('deleteNote', this.deleteNote),
-            eventBus.$off('searchInKeep', this.setSearch)
+        eventBus.$off('toggleIsDone', this.toggleIsDone)
+        eventBus.$off('deleteNote', this.deleteNote)
+        eventBus.$off('searchInKeep', this.setSearch)
 
     },
     components: {
