@@ -9,7 +9,7 @@ export default {
             :class="boldText"
             @mouseover="onHover(true)"
             @mouseleave="onHover(false)"
-            @click="openSummery(mail)"
+            @click="openSummery"
             v-if="mail">
 
                 <section
@@ -18,7 +18,7 @@ export default {
 
                     <button 
                     class="starred-mail-btn"
-                    @click.stop="onStarMail(mail)"
+                    @click.stop="onStarMail"
                     >
                         {{starred}}
                     </button>
@@ -40,19 +40,19 @@ export default {
 
                             <button 
                             class="clickable"
-                            @click.stop="onSendToArchive(mail)"
+                            @click.stop="onSendToArchive"
                             
                             >📩</button>
 
                             <button 
                             class="clickable"
-                            @click.stop="onToggleMarkAsRead(mail)"
+                            @click.stop="onToggleMarkAsRead"
                             
                             >{{readButton}}</button>
                             
                             <button 
                             class="clickable"
-                            @click.stop="onDeleteMail(mail)"
+                            @click.stop="onDeleteMail"
                             
                             >✖</button>
                         </span>
@@ -114,30 +114,28 @@ export default {
             this.hoverBody = hover
             this.updateBodyToShow()
         },
-        openSummery(mail) {
-            mail.isRead = true
-            eventBus.$emit('saveMail', mail)
+        openSummery() {
+            this.mail.isRead = true
+            this.$emit('saveMail', this.mail)
 
             if (this.summery) {
                 this.summery = null
                 return
             }
-            this.summery = mail
+            this.summery = this.mail
         },
-        onToggleMarkAsRead(mail) {
-            mail.isRead = !mail.isRead
-            eventBus.$emit('saveMail', mail)
-
+        onToggleMarkAsRead() {
+            this.mail.isRead = !this.mail.isRead
+            this.$emit('saveMail', this.mail)
         },
-        onDeleteMail(mail) {
-            eventBus.$emit('removeMail', mail)
+        onDeleteMail() {
+            this.$emit('removeMail', this.mail)
         },
-        onSendToArchive(mail) {
-            eventBus.$emit('archiveMail', mail)
+        onSendToArchive() {
+            this.$emit('archiveMail', this.mail)
         },
-        onStarMail(mail) {
-            eventBus.$emit('starMail', mail)
-                // this.isStarred = !this.isStarred
+        onStarMail() {
+            this.$emit('starMail', this.mail)
         },
     },
     computed: {

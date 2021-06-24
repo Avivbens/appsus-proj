@@ -32,6 +32,10 @@ export default {
 
             <mail-list 
             :mails="mailsToShow"
+            @saveMail="saveMail"
+            @removeMail="removeMail"
+            @archiveMail="archiveMail"
+            @starMail="starMail"
             v-if="mails"
             />
 
@@ -120,20 +124,13 @@ export default {
 
     },
     created() {
-        eventBus.$on('removeMail', this.removeMail)
-        eventBus.$on('archiveMail', this.archiveMail)
-        eventBus.$on('starMail', this.starMail)
 
-        eventBus.$on('saveMail', this.saveMail)
         eventBus.$on('reloadMails', this.loadMails)
         eventBus.$on('searchInMail', this.onSearch)
 
         this.loadMails()
     },
     destroyed() {
-        eventBus.$off('removeMail')
-        eventBus.$off('archiveMail')
-        eventBus.$off('saveMail')
         eventBus.$off('reloadMails')
         eventBus.$off('searchInMail')
     },
