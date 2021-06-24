@@ -15,7 +15,7 @@ export default {
             @setFilter="setFilter"
             />
             <note-add @save="saveNote"/>
-            <note-list :notes="notes"/> //will be get from the compouted
+            <note-list :notes="notes"/> 
         </section>
     `,
     data() {

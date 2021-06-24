@@ -14,7 +14,7 @@ export default {
     template: `
       <section class="border">
             <button @click="deleteNote">X</button>
-            <button @click="onEditNote">Edit</button>
+            <button v-if="isEditable" @click="onEditNote">Edit</button>
             
             <component 
             :note="note"
@@ -37,15 +37,15 @@ export default {
         },
         onEditNote() {
             this.editMode = !this.editMode
-            console.log('editNote', this.note);
-            eventBus.$emit('editNote', this.note)
         },
         offEdit() {
             this.editMode = false
         }
     },
     computed: {
-
+        isEditable() {
+            return this.note.type === 'noteTxt' || this.note.type === 'noteTodos'
+        }
     },
 
     created() {

@@ -1,5 +1,4 @@
-import { eventBus } from "../../../services/event-bus.js"
-
+import { eventBus } from '../../../services/event-bus.js';
 export default {
 
     props: [],
@@ -39,15 +38,14 @@ export default {
     methods: {
         reportVal() {
             this.$emit('setVal', this.note)
-        },
-        editNote(note) {
-            if (note.type !== 'noteTxt') return
-            this.note = JSON.parse(JSON.stringify(note))
-        },
 
+        },
+        cleanInput() {
+            this.note.info.title = ''
+            this.note.info.txt = ''
+        }
     },
-    created() {
-        eventBus.$on('editNote', this.editNote)
-
-    }
+    created() {;
+        eventBus.$on('cleanInput', this.cleanInput)
+    },
 }

@@ -2,7 +2,7 @@ import noteTxt from './note-txt.js'
 import noteImg from './note-img.js'
 import noteVideo from './note-video.js'
 import noteTodos from './note-todos.js'
-import { eventBus } from "../../../services/event-bus.js"
+import { eventBus } from '../../../services/event-bus.js';
 
 export default {
     components: {
@@ -26,7 +26,7 @@ export default {
 
                 <component :is="cmp" @setVal="setAns"/>
 
-                <button>Save</button>
+                <button >Save</button>
 
             </form>
         </section>
@@ -52,20 +52,13 @@ export default {
         save() {
             if (this.note.type === 'noteTodos') this.note.info.todos.pop() //remove last empty line
             this.$emit('save', this.note)
+            eventBus.$emit('cleanInput')
         },
         setAns(val) {
             this.note = JSON.parse(JSON.stringify(val))
         },
-        editNote(note) {
-            //     console.log('note', note)
-            this.cmp = note.type
-                //     console.log('this.note1 :>> ', this.note);
-                //     this.note = JSON.parse(JSON.stringify(note))
-                //     console.log('this.note2 :>> ', this.note);
-        }
+        // editNote(note) {
+        //     this.cmp = note.type
+        // }
     },
-    created() {
-        eventBus.$on('editNote', this.editNote)
-
-    }
 }

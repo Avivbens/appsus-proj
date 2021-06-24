@@ -1,9 +1,11 @@
+import { eventBus } from '../../../services/event-bus.js';
+
 export default {
 
     props: [],
     template: `
     <section>
-            <input type="text" v-model="info.videoUrl" @change="reportVal"
+            <input type="text" v-model="note.info.videoUrl" @change="reportVal"
                  placeholder="write your note here"/>
     </section>
     `,
@@ -25,8 +27,14 @@ export default {
     },
     methods: {
         reportVal() {
-            this.info.videoUrl = this.info.videoUrl.split('=')[1].split('&')[0]
-            this.$emit('setVal', this._data)
+            this.note.info.videoUrl = this.note.info.videoUrl.split('=')[1].split('&')[0]
+            this.$emit('setVal', this.note)
         },
+        cleanInput() {
+            this.note.info.videoUrl = ''
+        }
+    },
+    created() {
+        eventBus.$on('cleanInput', this.cleanInput)
     }
 }

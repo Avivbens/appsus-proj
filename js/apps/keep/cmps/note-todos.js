@@ -1,5 +1,4 @@
-import { eventBus } from "../../../services/event-bus.js"
-
+import { eventBus } from '../../../services/event-bus.js';
 export default {
 
     props: [],
@@ -44,15 +43,13 @@ export default {
         addNewLine(idx) {
             if (idx === this.note.info.todos.length - 1) this.note.info.todos.push({ txt: '', isDone: false })
         },
-        editNote(note) {
-            console.log('note', note)
-            if (note.type !== 'noteTodos') return
-            this.note = JSON.parse(JSON.stringify(note))
-        },
-
+        cleanInput() {
+            this.note.info.title = ''
+            this.note.info.txt = ''
+            this.note.info.todos = [{ txt: '', isDone: false }]
+        }
     },
     created() {
-        eventBus.$on('editNote', this.editNote)
-
+        eventBus.$on('cleanInput', this.cleanInput)
     }
 }
