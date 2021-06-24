@@ -1,14 +1,24 @@
 .note-list {
     padding: 0;
-    /* column-count: 3;
-    column-gap: 10px; */
+    column-count: 3;
+    margin: 0 auto 2em;
+    column-gap: 1.5em;
 }
 
 .note-list>* {
     list-style: none;
-    /* min-height: 150px; */
+    break-inside: avoid;
+    background: #fff;
+    padding: 1em;
+    margin: 0 0 1.5em;
+    border-radius: 2px;
+    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%), 0 1px 5px 0 rgb(0 0 0 / 12%);
 }
 
 .done {
     text-decoration: line-through
+}
+
+.note-list img {
+    width: 150px
 }

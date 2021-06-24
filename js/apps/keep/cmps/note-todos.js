@@ -23,7 +23,9 @@ export default {
             title: '',
             isPinned: false,
             val: [{ txt: '', isDone: false }],
-            type: 'noteTodos'
+            type: 'noteTodos',
+            category: ['notes', 'todos']
+
 
         }
     },
@@ -31,10 +33,15 @@ export default {
         reportVal() {
             console.log('reporting....')
             this.$emit('setVal', {
-                title: this.title,
+                info: {
+                    title: this.title,
+                    txt: this.val,
+                    imgUrl: '',
+                    videoUrl: ''
+                },
                 isPinned: this.isPinned,
-                txt: this.val,
-                type: this.type
+                type: this.type,
+                category: this.category
             })
 
         },

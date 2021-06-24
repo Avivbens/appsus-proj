@@ -61,6 +61,10 @@ export default {
         toggleIsDone({ noteId, todoIdx }) {
             keepService.toggleIsDone({ noteId, todoIdx })
                 .then(res => this.notes = res)
+        },
+        deleteNote(noteId) {
+            keepService.remove(noteId)
+                .then(() => this.loadNotes())
         }
     },
     computed: {
@@ -68,7 +72,9 @@ export default {
     },
     created() {
         this.loadNotes(),
-            eventBus.$on('toggleIsDone', this.toggleIsDone)
+            eventBus.$on('toggleIsDone', this.toggleIsDone),
+            eventBus.$on('deleteNote', this.deleteNote)
+
 
     },
     destroyed() {
