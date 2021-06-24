@@ -69,6 +69,7 @@ function createNote(type, isPinned, info) {
 
 function createSimpleNote() {
     return {
+        id: utilService.makeId(),
         type: "noteTxt",
         isPinned: true,
         info: {

@@ -1,4 +1,4 @@
-import { keepService } from '../services/keep-service.js'
+// import { keepService } from '../services/keep-service.js'
 import notePreview from './note-preview.js'
 
 export default {
