@@ -1,15 +1,21 @@
 // import componentName from 'url'
 
 export default {
-    props: ['categories'],
+    props: ['categories', 'mainCounter'],
     template: `
         <aside>
             <div
             v-if="categories" 
-            v-for="category in categories" 
+            v-for="(category,idx) in categories" 
             @click="filterBy(category)"   
             >
                 <span >
+                    <span class="main-counter"
+                    v-if="mainCounter && idx===1"
+                    >
+                        {{mainCounter}}
+                    </span>
+                    
                     <span class="capitalize"> {{category}}</span>
                 </span>
             </div>

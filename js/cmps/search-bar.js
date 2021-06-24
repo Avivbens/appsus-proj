@@ -4,7 +4,10 @@ import { utilService } from "../services/utils-service.js"
 export default {
     props: [],
     template: `
-        <div class="search-bar">
+        <div 
+        class="search-bar"
+        v-if="siteName"
+        >
             <input type="text" 
             :placeholder="placeHolder"
             ref="input"
@@ -41,7 +44,8 @@ export default {
                 const root = this.$route.path
                 this.searchTxt = ''
                 if (root.includes('Email')) this.siteName = 'Mail'
-                if (root.includes('Keep')) this.siteName = 'Keep'
+                else if (root.includes('Keep')) this.siteName = 'Keep'
+                else this.siteName = ''
             }
         }
     },

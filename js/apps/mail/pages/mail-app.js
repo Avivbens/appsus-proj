@@ -21,6 +21,7 @@ export default {
                 <side-bar
                 class="mail-side-bar"
                 :categories="categories"
+                :mainCounter="unreadMails"
                 @setFilter="setFilter"
                 />
 
@@ -54,6 +55,7 @@ export default {
             ],
             filterBy: 'inbox',
             searchBy: '',
+            unreadMails: 0
         }
     },
     methods: {
@@ -107,6 +109,16 @@ export default {
                 return this.mails
             }
             return mailService.getByFilter(this.mails, this.filterBy)
+        },
+        updateUnreadCounter() {
+            const currMails = this.searchMails(this.getMailsByFilter())
+
+            let counter = 0
+            currMails.forEach(mail => {
+                if (!mail.isRead) counter++
+            })
+
+            this.unreadMails = counter
         }
     },
     computed: {
@@ -114,6 +126,7 @@ export default {
             return this.searchMails(this.getMailsByFilter())
         },
         readRatio() {
+            this.updateUnreadCounter()
             const currMails = this.searchMails(this.getMailsByFilter())
 
             let counter = 0
@@ -127,7 +140,6 @@ export default {
 
             return counter / this.mailsToShow.length * 100
         },
-
     },
     created() {
 
