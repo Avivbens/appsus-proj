@@ -1,57 +1,47 @@
+import txtCmp from '../cmps/preview-cmps/txt-cmp.js';
+import todosCmp from '../cmps/preview-cmps/todos-cmp.js';
+import imgCmp from '../cmps/preview-cmps/img-cmp.js';
+import videoCmp from '../cmps/preview-cmps/video-cmp.js';
 import { eventBus } from "../../../services/event-bus.js"
-
 export default {
+    components: {
+        txtCmp,
+        todosCmp,
+        imgCmp,
+        videoCmp
+    },
     props: ['note'],
     template: `
       <section class="border">
-      <button @click="deleteNote">X</button>
-        <li v-if="note.type === 'noteTxt'" class="note-preview">
-          <h2>{{note.info.title}}</h2>
-          <p>{{note.info.txt}}</p>
-
-        </li>
-
-        <li v-else-if="note.type === 'noteTodos'" class="note-preview">
-
-        
-          <h2>{{note.info.title}}</h2>
-          <p v-for="(todo,idx) in note.info.txt"
-           :class="isDone(todo)" @click="toggleIsDone(idx)"
-           ><span>□</span> {{todo.txt}}</p>
-
-        </li>
-
-        <li v-else-if="note.type === 'noteImg'" class="note-preview">
-
-          <!-- <h2>{{note.info.title}}</h2> -->
-          <img :src="note.info.imgUrl" alt="no img">
-
-        </li>
-
-        <li v-else-if="note.type === 'noteVideo'" class="note-preview">
-
-          <!-- <h2>{{note.info.title}}</h2> -->
-          <!-- <video :src="note.info.videoUrl" alt="no video" controls></video> -->
-          <iframe width="560" height="315" :src="'https://www.youtube.com/embed/'+note.info.videoUrl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-        </li>
+            <button @click="deleteNote">X</button>
+            <button @click="onEditNote">Edit</button>
+            
+            <component 
+            :note="note"
+            :is="cmp"
+            :editMode="editMode"
+            @offEditMode="offEdit"
+                />
 
       </section>
     `,
     data() {
         return {
-
+            cmp: 'txtCmp',
+            editMode: false
         }
     },
     methods: {
-        toggleIsDone(todoIdx) {
-            eventBus.$emit('toggleIsDone', { noteId: this.note.id, todoIdx })
-        },
-        isDone(todo) {
-            return { done: todo.isDone }
-        },
         deleteNote() {
             eventBus.$emit('deleteNote', this.note.id)
+        },
+        onEditNote() {
+            this.editMode = !this.editMode
+            console.log('editNote', this.note);
+            eventBus.$emit('editNote', this.note)
+        },
+        offEdit() {
+            this.editMode = false
         }
     },
     computed: {
@@ -59,7 +49,20 @@ export default {
     },
 
     created() {
-
+        switch (this.note.type) {
+            case 'noteTxt':
+                this.cmp = 'txtCmp'
+                break;
+            case 'noteTodos':
+                this.cmp = 'todosCmp'
+                break;
+            case 'noteImg':
+                this.cmp = 'imgCmp'
+                break;
+            case 'noteVideo':
+                this.cmp = 'videoCmp'
+                break;
+        }
     },
     destroyed() {
 

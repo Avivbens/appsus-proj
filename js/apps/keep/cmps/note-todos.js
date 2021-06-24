@@ -1,3 +1,5 @@
+import { eventBus } from "../../../services/event-bus.js"
+
 export default {
 
     props: [],
@@ -7,46 +9,50 @@ export default {
 
     <section>
 
-         <input v-model="title" placeholder="Title">
+            <input v-model="note.info.title" placeholder="Title" @change="reportVal">
          <br>
-        <div v-for="(line, idx) in val" > 
-            <input type="text" v-model="val[idx].txt" @change="reportVal"
-                @input="addNewLine(idx)" placeholder="write your note here"/>
+         <div v-for="(line, idx) in note.info.todos" > 
+            <input type="text" v-model="note.info.todos[idx].txt" @change="reportVal"
+                @input="addNewLine(idx)" placeholder="□ write your todo here"/>
         </div> 
-          <!-- <div  class="bold" style="font-size:40px">+</div> -->
 
-          {{val}}
     </section>
+
     `,
     data() {
         return {
-            title: '',
-            isPinned: false,
-            val: [{ txt: '', isDone: false }],
-            type: 'noteTodos',
-            category: ['notes', 'todos']
-
-
+            note: {
+                id: null,
+                type: 'noteTodos',
+                isPinned: false,
+                info: {
+                    title: '',
+                    txt: '',
+                    todos: [{ txt: '', isDone: false }],
+                    imgUrl: '',
+                    videoUrl: '',
+                },
+                category: ['notes', 'todos'],
+            },
         }
     },
     methods: {
         reportVal() {
             console.log('reporting....')
-            this.$emit('setVal', {
-                info: {
-                    title: this.title,
-                    txt: this.val,
-                    imgUrl: '',
-                    videoUrl: ''
-                },
-                isPinned: this.isPinned,
-                type: this.type,
-                category: this.category
-            })
-
+            this.$emit('setVal', this.note)
         },
         addNewLine(idx) {
-            if (idx === this.val.length - 1) this.val.push({ txt: '', isDone: false })
-        }
+            if (idx === this.note.info.todos.length - 1) this.note.info.todos.push({ txt: '', isDone: false })
+        },
+        editNote(note) {
+            console.log('note', note)
+            if (note.type !== 'noteTodos') return
+            this.note = JSON.parse(JSON.stringify(note))
+        },
+
+    },
+    created() {
+        eventBus.$on('editNote', this.editNote)
+
     }
 }

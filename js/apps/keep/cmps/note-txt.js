@@ -1,41 +1,53 @@
+import { eventBus } from "../../../services/event-bus.js"
+
 export default {
 
     props: [],
     template: `
-        <section>
+        <section >
             <div>
                 <input
-                    v-model="title" 
-                    placeholder="Title">
+                    v-model="note.info.title" @change="reportVal"
+                    placeholder="Title" >
             </div>
 
             <div>
-                <input type="text" v-model="val[0]" @change="reportVal" placeholder="write your note here"/>
+                <input type="text" v-model="note.info.txt" @change="reportVal" placeholder="write your note here"/>
             </div>
+
+            {{note}}
         </section>
     `,
     data() {
         return {
-            title: '',
-            val: [],
-            type: 'noteTxt',
-            category: ['notes']
+            note: {
+                id: null,
+                type: 'noteTxt',
+                isPinned: false,
+                info: {
+                    title: '',
+                    txt: '',
+                    todos: [],
+                    imgUrl: '',
+                    videoUrl: ''
+                },
+                category: ['notes'],
+            }
+
         }
     },
     methods: {
         reportVal() {
-            this.$emit('setVal', {
-                info: {
-                    title: this.title,
-                    txt: this.val[0],
-                    imgUrl: '',
-                    videoUrl: ''
-                },
-                type: this.type,
-                category: this.category
-            })
+            this.$emit('setVal', this.note)
+        },
+        editNote(note) {
+            if (note.type !== 'noteTxt') return
+            this.note = JSON.parse(JSON.stringify(note))
+        },
 
-            this.val = []
-        }
+    },
+    created() {
+        eventBus.$on('editNote', this.editNote)
+
     }
 }
