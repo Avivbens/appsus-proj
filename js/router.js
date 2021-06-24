@@ -17,12 +17,12 @@ const routes = [{
         component: misterEmail
     },
     {
-        path: '/misterEmail/:id?',
-        component: mailDetails
-    },
-    {
         path: '/misterEmail/newMail',
         component: mailCompose
+    },
+    {
+        path: '/misterEmail/:id?',
+        component: mailDetails
     },
     {
         path: '/missKeep',

@@ -37,14 +37,11 @@ function get(mailId) {
     return storageService.get(MAILS_KEY, mailId)
 }
 
-function getByFilter(filterBy) {
-    return query()
-        .then(mails => {
-            return mails.filter(mail => {
-                return mail.categories.includes(filterBy) &&
-                    (filterBy === 'archived' || !mail.categories.includes('archived'))
-            })
-        })
+function getByFilter(mails, filterBy) {
+    return mails.filter(mail => {
+        return mail.categories.includes(filterBy) &&
+            (filterBy === 'archived' || !mail.categories.includes('archived'))
+    })
 }
 
 function getBySearch(mails, searchWord) {
@@ -164,7 +161,19 @@ function createFirstMails() {
 function save(mail) {
     if (mail.id) {
         return storageService.put(MAILS_KEY, mail)
+            .then(() => {
+                return query()
+                    .then(res => {
+                        return res
+                    })
+            })
     } else {
         return storageService.post(MAILS_KEY, mail)
+            .then(() => {
+                return query()
+                    .then(res => {
+                        return res
+                    })
+            })
     }
 }
