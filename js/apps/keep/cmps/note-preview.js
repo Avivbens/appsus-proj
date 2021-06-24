@@ -1,7 +1,7 @@
-import txtCmp from '../cmps/preview-cmps/txt-cmp.js';
-import todosCmp from '../cmps/preview-cmps/todos-cmp.js';
-import imgCmp from '../cmps/preview-cmps/img-cmp.js';
-import videoCmp from '../cmps/preview-cmps/video-cmp.js';
+import txtCmp from '../cmps/preview-cmps/txt-cmp.js'
+import todosCmp from '../cmps/preview-cmps/todos-cmp.js'
+import imgCmp from '../cmps/preview-cmps/img-cmp.js'
+import videoCmp from '../cmps/preview-cmps/video-cmp.js'
 import { eventBus } from "../../../services/event-bus.js"
 export default {
     components: {
@@ -15,6 +15,9 @@ export default {
       <section class="border">
             <button @click="deleteNote">X</button>
             <button @click="pinNote">Pin</button>
+
+            <button @click="shareNote">Share</button>
+
             <button v-if="isEditable" @click="onEditNote">Edit</button>
             
             <component 
@@ -43,8 +46,43 @@ export default {
             this.editMode = false
         },
         pinNote() {
-            console.log('this.note2222 :>> ', this.note);
             eventBus.$emit('pinNote', this.note)
+        },
+        shareNote() {
+            const url = `/misterEmail/newMail/?note=true&type=${this.note.type}&subject=${this.note.info.title}&body=${this.setShareBody()}`
+            this.$router.push(url)
+        },
+        setShareBody() {
+            const note = this.note.info
+            let str = ''
+
+            switch (this.note.type) {
+                case 'noteTxt':
+                    str = `${note.txt}`
+                    break
+
+                case 'noteTodos':
+                    let todosStr = ''
+                    note.todos.forEach(todo => {
+                        todosStr += '□' + todo.txt + '\n'
+                    })
+                    str = `${todosStr}`
+                    break
+
+                case 'noteImg':
+                    str = `${note.imgUrl}`
+                    break
+
+                case 'noteVideo':
+                    str = `${note.videoUrl}`
+                    break
+
+                default:
+                    str = `${note.txt}`
+                    break
+            }
+
+            return str
         }
     },
     computed: {
@@ -57,16 +95,16 @@ export default {
         switch (this.note.type) {
             case 'noteTxt':
                 this.cmp = 'txtCmp'
-                break;
+                break
             case 'noteTodos':
                 this.cmp = 'todosCmp'
-                break;
+                break
             case 'noteImg':
                 this.cmp = 'imgCmp'
-                break;
+                break
             case 'noteVideo':
                 this.cmp = 'videoCmp'
-                break;
+                break
         }
     },
     destroyed() {

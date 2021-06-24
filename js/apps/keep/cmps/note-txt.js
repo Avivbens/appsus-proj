@@ -1,4 +1,4 @@
-import { eventBus } from '../../../services/event-bus.js';
+import { eventBus } from '../../../services/event-bus.js'
 export default {
 
     props: [],
@@ -48,4 +48,25 @@ export default {
     created() {;
         eventBus.$on('cleanInput', this.cleanInput)
     },
+    // watch: {
+    //     '$route.query': {
+    //         immediate: true,
+    //         handler() {
+    //             const query = this.$route.query
+    //             if (query.mail) {
+    //                 this.note.type = 'noteTxt'
+    //                 this.note.info.title = query.subject
+    //                 this.note.info.txt = `
+    //                 Sender: ${query.sender}
+    //                 To: ${query.to}
+    //                 \n
+    //                 ${query.body}
+    //                 `
+    //             }
+
+    //             console.log('this.note :>> ', this.note)
+    //             this.reportVal()
+    //         }
+    //     }
+    // },
 }

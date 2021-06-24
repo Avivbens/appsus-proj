@@ -96,13 +96,11 @@ export default {
             handler() {
                 const query = this.$route.query
                 if (query.edit) {
-                    console.log('query :>> ', query)
                     this.sender = query.sender
                     this.to = query.to
                     this.subject = query.subject
                     this.body = query.body
                 } else if (query.reply) {
-                    // TODO
                     this.body =
                         `
                         \n\n
@@ -114,6 +112,9 @@ export default {
                         \n
 ${query.body}
 `
+                } else if (query.note) {
+                    this.subject = query.subject
+                    this.body = query.body
                 }
             }
         }

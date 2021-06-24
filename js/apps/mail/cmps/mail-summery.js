@@ -24,6 +24,11 @@ export default {
                 @click.stop="onReply"
                 >Reply</button>
 
+                <button 
+                class="clickable"
+                @click.stop="onShare"
+                >Share</button>
+
             </aside>
 
             <h2 class="summery-title">
@@ -55,6 +60,10 @@ export default {
         },
         onReply() {
             const url = `/misterEmail/newMail/?reply=true&sender=${this.mail.sender}&to=${this.mail.to}&subject=${this.mail.subject}&body=${this.mail.body}`
+            this.$router.push(url)
+        },
+        onShare() {
+            const url = `/missKeep/?mail=true&sender=${this.mail.sender}&to=${this.mail.to}&subject=${this.mail.subject}&body=${this.mail.body}`
             this.$router.push(url)
         }
     },

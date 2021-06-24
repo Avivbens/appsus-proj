@@ -2,7 +2,7 @@ import noteTxt from './note-txt.js'
 import noteImg from './note-img.js'
 import noteVideo from './note-video.js'
 import noteTodos from './note-todos.js'
-import { eventBus } from '../../../services/event-bus.js';
+import { eventBus } from '../../../services/event-bus.js'
 
 export default {
     components: {
@@ -60,5 +60,20 @@ export default {
         // editNote(note) {
         //     this.cmp = note.type
         // }
+    },
+    watch: {
+        '$route.query': {
+            immediate: true,
+            handler() {
+                const query = this.$route.query
+                if (query.mail) {
+                    this.note.type = 'noteTxt'
+                    this.note.info.title = query.subject
+                    this.note.info.txt = "Sender: " + query.sender + " | " + "To: " + query.to + " | " + query.body
+                    this.save()
+                    this.$router.push('/missKeep')
+                }
+            }
+        }
     },
 }
