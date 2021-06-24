@@ -21,7 +21,13 @@
     height: 40px;
 }
 
-.mail-preview .small-prev-container>:first-child {
+.mail-preview .starred-mail-btn {
+    cursor: pointer;
+    padding: 5px;
+    margin: 5px;
+}
+
+.mail-preview .small-prev-container>:nth-child(2) {
     text-align: left;
     display: flex;
     gap: 80px;

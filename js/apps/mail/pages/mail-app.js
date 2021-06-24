@@ -48,23 +48,24 @@ export default {
                 'drafts'
             ],
             filterBy: 'inbox',
+            searchBy: '',
             readRatio: 100
         }
     },
     methods: {
         loadMails() {
-            mailService.query()
+            this.getMailsByFilter()
                 .then((res) => {
-                    if (res.length) {
-                        this.mailsToShow = res
-                        this.updateReadRatio(res)
-                    } else {
-                        mailService.postMany(mailService.createFirstMails())
-                            .then(res => {
-                                this.mailsToShow = res
-                                this.updateReadRatio(res)
-                            })
-                    }
+                    // if (res.length) {
+                    this.mailsToShow = res
+                    this.updateReadRatio(res)
+                        // } else {
+                        //     mailService.postMany(mailService.createFirstMails())
+                        //         .then(res => {
+                        //             this.mailsToShow = res
+                        //             this.updateReadRatio(res)
+                        //         })
+                        // }
                 })
         },
         updateReadRatio(mails) {
@@ -82,59 +83,95 @@ export default {
         },
         removeMail(mail) {
             mailService.remove(mail)
-                .then((res) => {
-                    this.mailsToShow = res
-                    this.updateReadRatio(res)
+                .then(() => {
+                    this.getMailsByFilter()
+                        .then(res => {
+                            this.mailsToShow = res
+                            this.updateReadRatio(res)
+                        })
                 })
         },
         archiveMail(mail) {
             mailService.toggleArchive(mail.id)
-                .then(res => {
-                    this.mailsToShow = res
-                    this.updateReadRatio(res)
-                })
                 .then(() => {
-                    this.updateMailsToShow()
+                    this.getMailsByFilter()
+                        .then((res) => {
+                            this.mailsToShow = res
+                            this.updateReadRatio(res)
+                        })
+                })
+        },
+        starMail(mail) {
+            mailService.toggleStar(mail.id)
+                .then(() => {
+                    this.getMailsByFilter()
+                        .then((res) => {
+                            this.mailsToShow = res
+                            this.updateReadRatio(res)
+                        })
                 })
         },
         saveMail(mail) {
             mailService.save(mail)
                 .then(() => {
-                    this.updateMailsToShow()
+                    this.getMailsByFilter()
+                    this.updateReadRatio(this.mailsToShow)
                 })
         },
         setFilter(filter) {
             this.filterBy = filter
-            this.updateMailsToShow()
-        },
-        updateMailsToShow() {
-            if (!this.filterBy || this.filterBy === 'all') {
-                mailService.query()
-                    .then(res => {
-                        this.mailsToShow = res
-                        this.updateReadRatio(res)
-                    })
-                return
-            }
-            mailService.getByFilter(this.filterBy)
-                .then(res => {
-                    this.mailsToShow = res
+            this.getMailsByFilter()
+                .then((res) => {
+                    this.searchMails(res)
                     this.updateReadRatio(res)
+                })
+        },
+        onSearch(val) {
+            this.getMailsByFilter()
+                .then(res => {
+                    this.searchMails(res, val)
+                    this.updateReadRatio(this.mailsToShow)
+                })
+        },
+        searchMails(mails, val = this.searchBy) {
+            this.searchBy = val
+            this.mailsToShow = mailService.getBySearch(mails, this.searchBy)
+        },
+        getMailsByFilter() {
+            if (!this.filterBy || this.filterBy === 'all') {
+                return mailService.query()
+                    .then(res => {
+                        return res
+                    })
+            }
+            return mailService.getByFilter(this.filterBy)
+                .then(res => {
+                    return res
                 })
         }
     },
     created() {
         eventBus.$on('removeMail', this.removeMail)
         eventBus.$on('archiveMail', this.archiveMail)
+        eventBus.$on('starMail', this.starMail)
+
         eventBus.$on('saveMail', this.saveMail)
         eventBus.$on('reloadMails', this.loadMails)
+        eventBus.$on('searchInMail', this.onSearch)
 
         this.loadMails()
-        this.updateMailsToShow()
+        this.getMailsByFilter()
+            .then(res => {
+
+                this.mailsToShow = res
+            })
     },
     destroyed() {
         eventBus.$off('removeMail')
         eventBus.$off('archiveMail')
+        eventBus.$off('saveMail')
+        eventBus.$off('reloadMails')
+        eventBus.$off('searchInMail')
     },
     components: {
         mailPreview,

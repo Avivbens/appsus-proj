@@ -6,20 +6,26 @@ const MAILS_KEY = 'mails'
 export const mailService = {
     query,
     get,
+    getByFilter,
+    getBySearch,
     post,
     postMany,
     remove,
     getIndex,
     createMail,
     toggleArchive,
+    toggleStar,
     createSimpleMail,
     createFirstMails,
-    getByFilter,
     save,
 }
 
 function query() {
     return storageService.query(MAILS_KEY)
+}
+
+function get(mailId) {
+    return storageService.get(MAILS_KEY, mailId)
 }
 
 function getByFilter(filterBy) {
@@ -32,8 +38,12 @@ function getByFilter(filterBy) {
         })
 }
 
-function get(mailId) {
-    return storageService.get(MAILS_KEY, mailId)
+function getBySearch(mails, searchWord) {
+    return mails.filter(mail => {
+        return mail.sender.toLowerCase().includes(searchWord) ||
+            mail.subject.toLowerCase().includes(searchWord) ||
+            mail.to.toLowerCase().includes(searchWord)
+    })
 }
 
 function post(mail) {
@@ -81,6 +91,23 @@ function toggleArchive(mailId) {
         })
 }
 
+function toggleStar(mailId) {
+    return query()
+        .then(res => {
+            const targetMail = res.find(mail => mail.id === mailId)
+            targetMail.isStarred = !targetMail.isStarred
+
+            const idx = targetMail.categories.findIndex(c => c === 'starred')
+
+            if (idx === -1) targetMail.categories.push('starred')
+            else targetMail.categories.splice(idx, 1)
+
+            save(targetMail)
+
+            return res
+        })
+}
+
 function getIndex(mailId) {
     return query()
         .then(mails => {
@@ -97,6 +124,7 @@ function createMail(sender, subject, body, category, to = 'you', isRead = false,
         to,
         isRead,
         sentAt,
+        isStarred: false
     }
 }
 
@@ -105,9 +133,11 @@ function createSimpleMail() {
         sender: 'You',
         subject: 'Wassap?',
         body: utilService.makeLorem(200),
+        categories: ['inbox'],
+        to: 'you',
         isRead: false,
         sentAt: Date.now(),
-        categories: ['inbox']
+        isStarred: false
     }
 }
 
