@@ -69,9 +69,10 @@ function sendMailToMe(mail) {
     newMail.to = 'You'
 
     mail.isRead = true
+    mail.categories = ['sent mails']
     return storageService.post(MAILS_KEY, newMail)
         .then(() => {
-            storageService.post(MAILS_KEY, mail)
+            return storageService.post(MAILS_KEY, mail)
         })
 }
 
