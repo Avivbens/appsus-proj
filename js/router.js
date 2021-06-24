@@ -17,7 +17,7 @@ const routes = [{
         component: misterEmail
     },
     {
-        path: '/misterEmail/?:id',
+        path: '/misterEmail/:id?',
         component: mailDetails
     },
     {

@@ -73,7 +73,6 @@ export default {
             hoverBody: false,
             bodyToShow: '',
             summery: null,
-
         }
     },
     methods: {

@@ -34,11 +34,12 @@ export default {
             'input', utilService.debounce(this.search, 1000))
     },
     watch: {
-        '$route': {
+        '$route.path': {
             immediate: true,
             deep: true,
             handler() {
                 const root = this.$route.path
+                this.searchTxt = ''
                 if (root.includes('Email')) this.siteName = 'Mail'
                 if (root.includes('Keep')) this.siteName = 'Keep'
             }

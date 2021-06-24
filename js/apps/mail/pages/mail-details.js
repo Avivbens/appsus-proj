@@ -66,6 +66,7 @@ export default {
             immediate: true,
             handler() {
                 const id = this.$route.params.id
+                console.log('id :>> ', id)
                 mailService.get(id)
                     .then(mail => this.mail = mail)
             }
