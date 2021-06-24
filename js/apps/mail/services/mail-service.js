@@ -9,6 +9,7 @@ export const mailService = {
     getByFilter,
     getBySearch,
     post,
+    postDraft,
     postMany,
     remove,
     getIndex,
@@ -54,6 +55,11 @@ function getBySearch(mails, searchWord) {
 
 function post(mail) {
     if (mail.to !== 'You') return sendMailToMe(mail)
+    return storageService.post(MAILS_KEY, mail)
+}
+
+function postDraft(mail) {
+    mail.categories = ['drafts']
     return storageService.post(MAILS_KEY, mail)
 }
 

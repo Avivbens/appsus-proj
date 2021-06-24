@@ -19,12 +19,23 @@ export default {
                 <div class="compose-buttons-area">
                     <button
                     @click="onSendMail"
-                    >Send</button>
+                    >
+                    Send
+                    </button>
 
 
-                    <button
-                    @click.prevent="onDeclareChanges"
-                    >✖</button>
+                    <span>
+                        <button
+                        @click.prevent="onDeclareChanges"
+                    
+                        >✖</button>
+
+                        <button
+                        @click="onSaveAsDraft"
+                        >
+                        Draft
+                        </button>
+                    </span>
                 </div>
             </form>
         </main> 
@@ -36,7 +47,7 @@ export default {
                 to: '',
                 subject: '',
                 body: '',
-                category: 'sent mails'
+                categories: ['sent mails']
             }
         }
     },
@@ -45,15 +56,7 @@ export default {
             if (confirm('Are you sure?')) this.$router.push('/misterEmail')
         },
         onSendMail() {
-            const mail = mailService.createMail(
-                this.newMail.sender,
-                this.newMail.subject,
-                this.newMail.body,
-                this.newMail.category,
-                this.newMail.to,
-            )
-
-            this.$router.push('/misterEmail')
+            const mail = this.createMail()
 
             // Set delay when sending mail
             setTimeout(() => {
@@ -62,6 +65,23 @@ export default {
                         eventBus.$emit('reloadMails')
                     })
             }, 3500)
+
+            this.$router.push('/misterEmail')
+        },
+        onSaveAsDraft() {
+            let mail = this.createMail()
+
+            eventBus.$emit('saveAsDraft', mail)
+            this.$router.push('/misterEmail')
+        },
+        createMail() {
+            return mailService.createMail(
+                this.newMail.sender,
+                this.newMail.subject,
+                this.newMail.body,
+                this.newMail.categories,
+                this.newMail.to,
+            )
         }
     },
     computed: {

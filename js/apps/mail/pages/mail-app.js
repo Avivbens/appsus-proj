@@ -81,6 +81,12 @@ export default {
                     this.mails = res
                 })
         },
+        saveDraft(mail) {
+            mailService.postDraft(mail)
+                .then(() => {
+                    this.loadMails()
+                })
+        },
         saveMail(mail) {
             mailService.save(mail)
                 .then((res) => {
@@ -126,12 +132,16 @@ export default {
     created() {
 
         eventBus.$on('reloadMails', this.loadMails)
+
+        eventBus.$on('saveAsDraft', this.saveDraft)
         eventBus.$on('searchInMail', this.onSearch)
 
         this.loadMails()
     },
     destroyed() {
         eventBus.$off('reloadMails')
+
+        eventBus.$off('saveDraft', this.saveDraft)
         eventBus.$off('searchInMail')
     },
     components: {
