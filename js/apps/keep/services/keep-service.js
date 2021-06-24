@@ -12,14 +12,23 @@ export const keepService = {
     save,
     getById,
     getByFilter,
+    // getBySearch,
     createNote,
     createSimpleNote,
     createFirstNotes,
-    toggleIsDone
+    toggleIsDone,
 }
 
 function query() {
     return storageService.query(NOTES_KEY)
+        .then(res => {
+            if (res.length) {
+                return res
+            } else {
+                postMany(createFirstNotes())
+                    .then(res => res)
+            }
+        })
 }
 
 function get(noteId) {
@@ -59,6 +68,14 @@ function getByFilter(filterBy) {
         })
 }
 
+// function getBySearch(notes, searchWord) {
+//     return notes.filter(note => {
+//         return note.info.txt.some(line=>).toLowerCase().includes(searchWord) //||
+//             // note.subject.toLowerCase().includes(searchWord) ||
+//             // note.to.toLowerCase().includes(searchWord)
+//     })
+// }
+
 function createNote(type, isPinned, info) {
     return {
         type,
@@ -94,7 +111,7 @@ function toggleIsDone({ noteId, todoIdx }) {
     return query()
         .then(res => {
             const note = res.find(note => (note.id === noteId))
-            note.info.txt[todoIdx].isDone = !(note.info.txt[todoIdx].isDone)
+            note.info.todos[todoIdx].isDone = !(note.info.todos[todoIdx].isDone)
             save(note)
             return res
         })

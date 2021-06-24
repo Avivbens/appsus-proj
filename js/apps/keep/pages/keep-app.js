@@ -4,7 +4,6 @@ import sideBar from '../../../cmps/side-bar.js'
 import { keepService } from '../services/keep-service.js'
 import { eventBus } from "../../../services/event-bus.js"
 
-
 export default {
     props: [],
     template: `
@@ -16,13 +15,13 @@ export default {
             @setFilter="setFilter"
             />
             <note-add @save="saveNote"/>
-            <note-list :notes="notes"/>
+            <note-list :notes="notes"/> //will be get from the compouted
         </section>
     `,
     data() {
         return {
             notes: [],
-            filterBy: '',
+            searchBy: '',
             categories: [
                 'notes',
                 'todos',
@@ -36,14 +35,7 @@ export default {
     methods: {
         loadNotes() {
             keepService.query()
-                .then(res => {
-                    if (res.length) {
-                        this.notes = res
-                    } else {
-                        keepService.postMany(keepService.createFirstNotes())
-                            .then(res => this.notes = res)
-                    }
-                })
+                .then(res => this.notes = res)
         },
         saveNote(note) {
             keepService.save(note)
@@ -65,6 +57,10 @@ export default {
         deleteNote(noteId) {
             keepService.remove(noteId)
                 .then(() => this.loadNotes())
+        },
+        setSearch(search) {
+            console.log('here', search);
+            // this.notes = keepService.getBySearch(this.notes, this.searchBy)
         }
     },
     computed: {
@@ -73,11 +69,14 @@ export default {
     created() {
         this.loadNotes(),
             eventBus.$on('toggleIsDone', this.toggleIsDone),
-            eventBus.$on('deleteNote', this.deleteNote)
-
-
+            eventBus.$on('deleteNote', this.deleteNote),
+            eventBus.$on('searchInKeep', this.setSearch),
+            eventBus.$on('onSaveNote', this.saveNote)
     },
     destroyed() {
+        eventBus.$off('toggleIsDone', this.toggleIsDone),
+            eventBus.$off('deleteNote', this.deleteNote),
+            eventBus.$off('searchInKeep', this.setSearch)
 
     },
     components: {
