@@ -30,6 +30,7 @@ export default {
         >
             <h2>{{newNote.info.title}}</h2>
             <p>{{newNote.info.txt}}</p>
+            <p>{{newNote.isPinned}}</p>
         </li>
 
     </section>

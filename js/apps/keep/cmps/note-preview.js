@@ -14,6 +14,7 @@ export default {
     template: `
       <section class="border">
             <button @click="deleteNote">X</button>
+            <button @click="pinNote">Pin</button>
             <button v-if="isEditable" @click="onEditNote">Edit</button>
             
             <component 
@@ -40,6 +41,10 @@ export default {
         },
         offEdit() {
             this.editMode = false
+        },
+        pinNote() {
+            console.log('this.note2222 :>> ', this.note);
+            eventBus.$emit('pinNote', this.note)
         }
     },
     computed: {
