@@ -56,16 +56,8 @@ export default {
         loadMails() {
             this.getMailsByFilter()
                 .then((res) => {
-                    // if (res.length) {
                     this.mailsToShow = res
                     this.updateReadRatio(res)
-                        // } else {
-                        //     mailService.postMany(mailService.createFirstMails())
-                        //         .then(res => {
-                        //             this.mailsToShow = res
-                        //             this.updateReadRatio(res)
-                        //         })
-                        // }
                 })
         },
         updateReadRatio(mails) {
