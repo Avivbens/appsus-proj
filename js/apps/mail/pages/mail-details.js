@@ -12,14 +12,29 @@ export default {
             <aside class="details-buttons-area">
                 <button 
                 class="clickable"
-                @click.stop="onDeleteMail(mail)"
+                @click="onDeleteMail(mail)"
                 >✖</button>
 
 
                 <button 
                 class="clickable"
-                @click.stop="onExitFullSize"
+                @click="onExitFullSize"
                 >➡</button>
+
+
+                <button 
+                v-if="draftEdit"
+                class="clickable"
+                @click="onEditDraft"
+                >Edit</button>
+
+
+                <button 
+                v-else
+                class="clickable"
+                @click="onReplay"
+                >Replay</button>
+
 
             </aside>
 
@@ -50,31 +65,29 @@ export default {
         },
         onExitFullSize() {
             this.$router.push('/misterEmail')
+        },
+        onEditDraft() {
+            const url = `/misterEmail/newMail/?edit=true&sender=${this.mail.sender}&to=${this.mail.to}&subject=${this.mail.subject}&body=${this.mail.body}`
+            this.$router.push(url)
+        },
+        onReplay() {
+            const url = `/misterEmail/newMail/?reply=true&sender=${this.mail.sender}&to=${this.mail.to}&subject=${this.mail.subject}&body=${this.mail.body}`
+            this.$router.push(url)
         }
     },
     computed: {
-
-    },
-    created() {
-
-    },
-    destroyed() {
-
+        draftEdit() {
+            return this.mail.categories.includes('drafts')
+        }
     },
     watch: {
         '$route.params.id': {
             immediate: true,
             handler() {
                 const id = this.$route.params.id
-                console.log('id :>> ', id)
                 mailService.get(id)
                     .then(mail => this.mail = mail)
             }
-        }
-
-    },
-    components: {
-        // componentName
-
+        },
     },
 }

@@ -8,14 +8,21 @@ export default {
             <aside class="summery-buttons-area">
                 <button 
                 class="clickable"
-                @click.stop="onDeleteMail(mail)"
+                @click.stop="onDeleteMail"
                 >✖</button>
 
 
                 <button 
                 class="clickable"
-                @click.stop="onFullSize(mail)"
+                @click.stop="onFullSize"
                 >🔲</button>
+
+
+                <button 
+                v-if="!draftEdit"
+                class="clickable"
+                @click.stop="onReply"
+                >Reply</button>
 
             </aside>
 
@@ -39,15 +46,22 @@ export default {
         }
     },
     methods: {
-        onDeleteMail(mail) {
-            eventBus.$emit('removeMail', mail)
+        onDeleteMail() {
+            eventBus.$emit('removeMail', this.mail)
             this.$emit('existSummery')
         },
-        onFullSize(mail) {
-            this.$router.push('/misterEmail/' + mail.id)
+        onFullSize() {
+            this.$router.push('/misterEmail/' + this.mail.id)
+        },
+        onReply() {
+            const url = `/misterEmail/newMail/?reply=true&sender=${this.mail.sender}&to=${this.mail.to}&subject=${this.mail.subject}&body=${this.mail.body}`
+            this.$router.push(url)
         }
     },
     computed: {
-
+        draftEdit() {
+            return this.mail.categories.includes('drafts')
+        }
     },
+
 }

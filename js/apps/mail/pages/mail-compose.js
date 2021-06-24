@@ -9,12 +9,20 @@ export default {
         <h4>New Message</h4>
 
             <form>
-                <input v-model="newMail.to" type="text" placeholder="To:">
+                <input v-model="to" type="text" placeholder="To:">
                 <input type="text" placeholder="Cc:">
                 <input type="text" placeholder="Bcc:">
-                <input v-model="newMail.subject" type="text" placeholder="Subject:">
+                <input v-model="subject" type="text" placeholder="Subject:">
             
-                <textarea v-model="newMail.body" name="mailBody" cols="30" rows="10" placeholder="Your Message"></textarea>
+                <textarea 
+                v-model="body" 
+                name="mailBody" cols="30" 
+                rows="10" placeholder="Your Message"
+                >
+                </textarea>
+
+
+
 
                 <div class="compose-buttons-area">
                     <button
@@ -42,13 +50,11 @@ export default {
     `,
     data() {
         return {
-            newMail: {
-                sender: 'You',
-                to: '',
-                subject: '',
-                body: '',
-                categories: ['sent mails']
-            }
+            sender: 'You',
+            to: '',
+            subject: '',
+            body: '',
+            categories: ['sent mails'],
         }
     },
     methods: {
@@ -76,30 +82,39 @@ export default {
         },
         createMail() {
             return mailService.createMail(
-                this.newMail.sender,
-                this.newMail.subject,
-                this.newMail.body,
-                this.newMail.categories,
-                this.newMail.to,
+                this.sender,
+                this.subject,
+                this.body,
+                this.categories,
+                this.to,
             )
-        }
-    },
-    computed: {
-
-    },
-    created() {
-
-    },
-    destroyed() {
-
+        },
     },
     watch: {
-        data: {
+        '$route.query': {
             immediate: true,
-            deep: true,
-            handler(newValue, oldValue) {
-
+            handler() {
+                const query = this.$route.query
+                if (query.edit) {
+                    console.log('query :>> ', query)
+                    this.sender = query.sender
+                    this.to = query.to
+                    this.subject = query.subject
+                    this.body = query.body
+                } else if (query.reply) {
+                    // TODO
+                    this.body =
+                        `
+                        \n\n
+------------------------------------------
+        ${query.subject}
+        from: ${query.sender}
+------------------------------------------
+                        \n
+${query.body}
+`
+                }
             }
         }
-    },
+    }
 }

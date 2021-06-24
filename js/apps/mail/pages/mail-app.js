@@ -134,6 +134,7 @@ export default {
         eventBus.$on('reloadMails', this.loadMails)
 
         eventBus.$on('saveAsDraft', this.saveDraft)
+        eventBus.$on('removeMail', this.removeMail)
         eventBus.$on('searchInMail', this.onSearch)
 
         this.loadMails()
@@ -142,6 +143,7 @@ export default {
         eventBus.$off('reloadMails')
 
         eventBus.$off('saveDraft', this.saveDraft)
+        eventBus.$off('removeMail', this.removeMail)
         eventBus.$off('searchInMail')
     },
     components: {
