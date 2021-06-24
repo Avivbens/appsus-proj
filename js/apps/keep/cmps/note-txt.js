@@ -31,6 +31,7 @@ export default {
                     videoUrl: ''
                 },
                 category: ['notes'],
+                bgc: '#ffffff'
             }
 
         }

@@ -12,16 +12,21 @@ export default {
     },
     props: ['note'],
     template: `
-      <section class="border">
+      <section class="border" :style="{backgroundColor: bgc}">
             <button @click="deleteNote">X</button>
             <button @click="pinNote">Pin</button>
 
             <button @click="shareNote">Share</button>
+            <button> paint 
+            <input v-model="bgc" type="color">
+            </button>
+
 
             <button v-if="isEditable" @click="onEditNote">Edit</button>
             
             <component 
             :note="note"
+            :bgc="bgc"
             :is="cmp"
             :editMode="editMode"
             @offEditMode="offEdit"
@@ -32,7 +37,8 @@ export default {
     data() {
         return {
             cmp: 'txtCmp',
-            editMode: false
+            editMode: false,
+            bgc: '000000'
         }
     },
     methods: {
@@ -88,6 +94,9 @@ export default {
     computed: {
         isEditable() {
             return this.note.type === 'noteTxt' || this.note.type === 'noteTodos'
+        },
+        onUpdateColor(ev) {
+            this.bgc = ev.value
         }
     },
 
@@ -106,9 +115,16 @@ export default {
                 this.cmp = 'videoCmp'
                 break
         }
+        this.bgc = this.note.bgc
     },
     destroyed() {
 
     },
+    watch: {
+        bgc() {
+            this.note.bgc = this.bgc
+            eventBus.$emit('onUpdateColor', this.note)
+        }
+    }
 
 }

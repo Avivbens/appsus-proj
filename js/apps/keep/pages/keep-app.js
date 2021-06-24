@@ -74,7 +74,8 @@ export default {
         setSearch(search) {
             console.log('here', search);
             // this.notes = keepService.getBySearch(this.notes, this.searchBy)
-        }
+        },
+
     },
     computed: {
         pinnedNotes() {
@@ -93,6 +94,7 @@ export default {
         eventBus.$on('searchInKeep', this.setSearch)
         eventBus.$on('onSaveNote', this.saveNote)
         eventBus.$on('pinNote', this.pinNote)
+        eventBus.$on('onUpdateColor', this.saveNote)
     },
     destroyed() {
         eventBus.$off('toggleIsDone', this.toggleIsDone)

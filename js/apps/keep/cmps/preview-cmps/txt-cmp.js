@@ -3,9 +3,9 @@ export default {
     components: {
 
     },
-    props: ['note', 'editMode'],
+    props: ['note', 'editMode', 'bgc'],
     template: `
-    <section>
+    <section >
         <li
         v-if="editMode && newNote"
         >
@@ -42,12 +42,16 @@ export default {
             this.$emit('offEditMode', this.newNote)
         }
     },
+    computed: {
+
+    },
     data() {
         return {
             newNote: null,
         }
     },
     created() {
+        console.log('this.note :>> ', this.note);
         this.newNote = JSON.parse(JSON.stringify(this.note))
     },
 }
