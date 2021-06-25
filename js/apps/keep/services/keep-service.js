@@ -17,7 +17,8 @@ export const keepService = {
     createSimpleNote,
     createFirstNotes,
     toggleIsDone,
-    togglePinNode
+    togglePinNode,
+    getNotesToShow
 }
 
 function query() {
@@ -74,7 +75,7 @@ function getByFilter(filterBy) {
     return query()
         .then(notes => {
             return notes.filter(note => {
-                return note.category.includes(filterBy)
+                return note.categories.includes(filterBy)
             })
         })
 }
@@ -98,13 +99,17 @@ function createNote(type, isPinned, info) {
 function createSimpleNote() {
     return {
         id: utilService.makeId(),
-        type: "noteTxt",
+        type: 'noteTxt',
         isPinned: false,
         info: {
-            title: "My Note Title",
-            txt: "Fullstack Me Baby!"
+            title: 'My Note',
+            txt: 'My fullstack baby',
+            todos: [],
+            imgUrl: '',
+            videoUrl: ''
         },
-        category: ['notes', 'work']
+        categories: ['notes'],
+        bgc: '#ffffff'
     }
 
 }
@@ -126,4 +131,15 @@ function toggleIsDone({ noteId, todoIdx }) {
             save(note)
             return res
         })
+}
+
+function getNotesToShow(notes, searchStr, filterStr) {
+    searchStr = searchStr.toLowerCase()
+    filterStr = filterStr.toLowerCase()
+    return notes.filter(note => {
+        return (note.info.title.toLowerCase().includes(searchStr) ||
+                note.info.txt.toLowerCase().includes(searchStr) ||
+                note.info.todos.some(todo => todo.txt.toLowerCase().includes(searchStr))) &&
+            (note.categories.some(category => category.toLowerCase().includes(filterStr)))
+    })
 }

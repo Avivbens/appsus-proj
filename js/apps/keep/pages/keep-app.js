@@ -14,13 +14,11 @@ export default {
             :categories="categories"
             @setFilter="setFilter"
             />
+
             <note-add @save="saveNote"/>
             
-            <note-list :notes="pinnedNotes"
+            <note-list :notes="notesToShow"
             v-if="pinnedNotes"
-            /> 
-            <note-list :notes="restNotes"
-            v-if="restNotes"
             /> 
         </section>
     `,
@@ -28,6 +26,7 @@ export default {
         return {
             notes: [],
             searchBy: '',
+            filterBy: '',
             categories: [
                 'notes',
                 'todos',
@@ -40,8 +39,6 @@ export default {
     },
     methods: {
         loadNotes() {
-            console.log('loaded');
-
             keepService.query()
                 .then(res => this.notes = res)
         },
@@ -51,13 +48,19 @@ export default {
         },
         setFilter(filter) {
             this.filterBy = filter
-            this.updateNotesToShow()
+                // this.updateNotesToShow()
         },
-        updateNotesToShow() {
-            if (!this.filterBy) return
-            keepService.getByFilter(this.filterBy)
-                .then(res => this.notes = res)
+        setSearch(searchStr) {
+            console.log('here', searchStr);
+            this.searchBy = searchStr
+
+            // this.notes = keepService.getBySearch(this.notes, this.searchBy)
         },
+        // updateNotesToShow() {
+        //     if (!this.filterBy) return
+        //     keepService.getByFilter(this.filterBy)
+        //         .then(res => this.notes = res)
+        // },
         toggleIsDone({ noteId, todoIdx }) {
             keepService.toggleIsDone({ noteId, todoIdx })
                 .then(res => this.notes = res)
@@ -67,13 +70,8 @@ export default {
                 .then(() => this.loadNotes())
         },
         pinNote(note) {
-            console.log('note :>> ', note);
             keepService.togglePinNode(note)
                 .then((res) => this.notes = res)
-        },
-        setSearch(search) {
-            console.log('here', search);
-            // this.notes = keepService.getBySearch(this.notes, this.searchBy)
         },
 
     },
@@ -85,6 +83,9 @@ export default {
         restNotes() {
             if (!this.notes) return
             return this.notes.filter(note => !note.isPinned)
+        },
+        notesToShow() {
+            return keepService.getNotesToShow(this.notes, this.searchBy, this.filterBy)
         }
     },
     created() {
@@ -95,6 +96,7 @@ export default {
         eventBus.$on('onSaveNote', this.saveNote)
         eventBus.$on('pinNote', this.pinNote)
         eventBus.$on('onUpdateColor', this.saveNote)
+
     },
     destroyed() {
         eventBus.$off('toggleIsDone', this.toggleIsDone)

@@ -31,7 +31,7 @@ export default {
                     imgUrl: '',
                     videoUrl: '',
                 },
-                category: ['notes', 'todos'],
+                categories: ['notes', 'todos'],
             },
         }
     },

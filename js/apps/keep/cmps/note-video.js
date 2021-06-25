@@ -21,7 +21,7 @@ export default {
                     imgUrl: '',
                     videoUrl: ''
                 },
-                category: ['videos', 'media']
+                categories: ['videos', 'media']
             }
         }
     },

@@ -4,13 +4,25 @@ import notePreview from './note-preview.js'
 export default {
     props: ['notes'],
     template: `
-       <ul class="note-list border" >
-              <note-preview 
-              v-for="note in notes"
-               :key="note.id" class="note-preview-container" 
-               :note="note"/>
-               <!-- :note="note"  @click.native="goToNote(note)"/> -->
-       </ul>
+    <section>
+        <ul class="note-list border" >
+            <note-preview 
+            v-for="note in notes"
+            v-if="note.isPinned"
+            :key="note.id" class="note-preview-container" 
+            :note="note"/>
+            <!-- :note="note"  @click.native="goToNote(note)"/> -->
+        </ul>
+        <!-- --------------------- -->
+        <ul class="note-list border" >
+            <note-preview 
+            v-for="note in notes"
+            v-if="!note.isPinned"
+            :key="note.id" class="note-preview-container" 
+            :note="note"/>
+            <!-- :note="note"  @click.native="goToNote(note)"/> -->
+        </ul>
+    </section>
     `,
     data() {
         return {

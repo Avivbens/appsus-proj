@@ -37,7 +37,6 @@ export default {
     `,
     methods: {
         onSave() {
-            console.log('this.newNote :>> ', this.newNote);
             eventBus.$emit('onSaveNote', this.newNote)
             this.$emit('offEditMode', this.newNote)
         }
@@ -51,7 +50,6 @@ export default {
         }
     },
     created() {
-        console.log('this.note :>> ', this.note);
         this.newNote = JSON.parse(JSON.stringify(this.note))
     },
 }
