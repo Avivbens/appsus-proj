@@ -10,7 +10,6 @@
 
 * {
     box-sizing: border-box;
-    font-family: google-sans;
 }
 
 body {
@@ -30,6 +29,16 @@ body {
 @font-face {
     font-family: google-sans-light;
     src: url(../fonts/ProductSans-Light.ttf);
+}
+
+@font-face {
+    font-family: roboto;
+    src: url(../fonts/Roboto-Regular.ttf);
+}
+
+@font-face {
+    font-family: roboto-bold;
+    src: url(../fonts/Roboto-Bold.ttf);
 }
 
 @font-face {

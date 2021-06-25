@@ -15,7 +15,7 @@ export default {
                 class="mail-compose-btn"
                 to="/misterEmail/newMail"
                 >
-                    ➕ Compose
+                    <img src="../../../../img/compose.png" class="inline">
                 </router-link>
 
                 <side-bar

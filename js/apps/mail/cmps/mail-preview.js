@@ -36,7 +36,8 @@ export default {
                         <span>{{timeToShow}}</span>
 
                         <span
-                        v-if="hoverBody">
+                        v-if="hoverBody"
+                        >
 
                             <button 
                                 class="clickable"
@@ -51,10 +52,11 @@ export default {
                             </button>
                             
                             <button 
-                            class="clickable"
-                            @click.stop="onDeleteMail"
-                            
-                            >✖</button>
+                                class="clickable"
+                                @click.stop="onDeleteMail"
+                                >
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
                         </span>
                     </span>
                 </section>
@@ -77,7 +79,7 @@ export default {
     },
     methods: {
         updateBodyToShow() {
-            const minusButtons = (this.hoverBody) ? 160 : 20
+            const minusButtons = (this.hoverBody) ? 160 : 60
 
             let allText = this.mail.body
             if (!allText) return
@@ -88,7 +90,7 @@ export default {
                 stringToShow += allText.charAt(0)
                 allText = allText.substr(1)
 
-                const fontSize = (this.mail.isRead) ? 16 : 17
+                const fontSize = (this.mail.isRead) ? 16 : 18.5
                 stringWidth = this.measureText(stringToShow, fontSize)
                 if (!allText) {
                     this.bodyToShow = stringToShow

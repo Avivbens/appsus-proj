@@ -1,6 +1,7 @@
 .mail-app {
     display: flex;
     margin-top: 10px;
+    font-family: roboto;
 }
 
 .mail-side-bar-container {
@@ -14,9 +15,9 @@
 
 .mail-compose-btn {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 10px;
     color: rgb(65, 65, 65);
     border: 2px solid rgb(53, 53, 53);
     border-radius: 3em;

@@ -9,6 +9,7 @@
 .note-add .modes-btns-container {
     display: flex;
     align-items: center;
+    align-self: start;
     gap: 10px;
     width: 40%;
 }

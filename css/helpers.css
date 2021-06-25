@@ -9,7 +9,7 @@ i {
 }
 
 .bold * {
-    font-family: google-sans-bold;
+    font-family: roboto-bold;
     font-size: 1.1rem;
     color: black !important;
 }
@@ -20,6 +20,10 @@ i {
 
 .capitalize {
     text-transform: capitalize;
+}
+
+.inline {
+    display: inline;
 }
 
 .router-link {

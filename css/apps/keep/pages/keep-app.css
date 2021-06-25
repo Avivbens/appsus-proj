@@ -1,6 +1,7 @@
 .keep-app {
     display: flex;
     width: 100%;
+    font-family: google-sans;
 }
 
 .keep-app>main {
