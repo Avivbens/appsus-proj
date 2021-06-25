@@ -3,6 +3,11 @@
     filter: contrast(130%);
 }
 
+button,
+i {
+    cursor: pointer;
+}
+
 .bold {
     font-weight: bold;
 }

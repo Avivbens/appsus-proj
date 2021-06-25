@@ -1,0 +1,17 @@
+close - <i class="fas fa-times"></i>
+
+delete - <i class="fas fa-trash-alt"></i>
+
+todo- <i class="fas fa-list"></i>
+
+save - <i class="fas fa-save"></i>
+
+youtube - <i class="fab fa-youtube"></i>
+
+photo - <i class="fas fa-image"></i>
+
+note - <i class="far fa-sticky-note"></i>
+
+edit - <i class="fas fa-edit"></i>
+
+

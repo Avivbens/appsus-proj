@@ -1,46 +1,48 @@
-// import componentName from 'url'
-
 export default {
-    props: ['categories', 'mainCounter'],
+    props: ['categories', 'mainCounter', 'mainCounterIdx', 'isHovered'],
     template: `
-        <aside>
+        <aside
+        @mouseover="toggleHover(true)"   
+        @mouseleave="toggleHover(false)"   
+        >
+        
             <div
             v-if="categories" 
             v-for="(category,idx) in categories" 
-            @click="filterBy(category)"   
+            @click="filterBy(category)"
             >
                 <span >
                     <span class="main-counter"
-                    v-if="mainCounter && idx===1"
+                    v-if="mainCounter && idx===mainCounterIdx"
                     >
                         {{mainCounter}}
                     </span>
                     
-                    <span class="capitalize"> {{category}}</span>
+                    <i class="capitalize"> {{category.icon}}</i>
+                    <span class="capitalize" v-if="hover"> {{category.text}}</span>
                 </span>
             </div>
-
-
         </aside>
     `,
     data() {
         return {
-
+            hover: false
         }
     },
     methods: {
         filterBy(category) {
             this.$emit('setFilter', category)
+        },
+        toggleHover(hovering) {
+            if (!this.isHovered) {
+                this.hover = true
+                return
+            }
+            this.hover = hovering
         }
     },
-    computed: {
-
-    },
     created() {
-
-    },
-    destroyed() {
-
+        this.toggleHover()
     },
     watch: {
         data: {
@@ -50,9 +52,5 @@ export default {
 
             }
         }
-    },
-    components: {
-        // componentName
-
     },
 }

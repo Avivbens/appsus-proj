@@ -12,14 +12,16 @@ export default {
             <side-bar 
             class="keep-side-bar"
             :categories="categories"
+            :isHovered="true"
             @setFilter="setFilter"
             />
-
-            <note-add @save="saveNote"/>
-            
-            <note-list :notes="notesToShow"
-            v-if="pinnedNotes"
-            /> 
+            <main>
+                <note-add @save="saveNote"/>
+                
+                <note-list :notes="notesToShow"
+                v-if="pinnedNotes"
+                /> 
+            </main>
         </section>
     `,
     data() {
@@ -27,13 +29,30 @@ export default {
             notes: [],
             searchBy: '',
             filterBy: '',
-            categories: [
-                'notes',
-                'todos',
-                'alerts',
-                'work',
-                'personal',
-                'trash',
+            categories: [{
+                    text: 'notes',
+                    icon: '-'
+                },
+                {
+                    text: 'todos',
+                    icon: '-'
+                },
+                {
+                    text: 'alerts',
+                    icon: '-'
+                },
+                {
+                    text: 'work',
+                    icon: '-'
+                },
+                {
+                    text: 'personal',
+                    icon: '-'
+                },
+                {
+                    text: 'trash',
+                    icon: '-'
+                },
             ],
         }
     },
@@ -47,20 +66,13 @@ export default {
                 .then(() => this.loadNotes())
         },
         setFilter(filter) {
-            this.filterBy = filter
+            this.filterBy = filter.text
                 // this.updateNotesToShow()
         },
         setSearch(searchStr) {
-            console.log('here', searchStr);
+            console.log('here', searchStr)
             this.searchBy = searchStr
-
-            // this.notes = keepService.getBySearch(this.notes, this.searchBy)
         },
-        // updateNotesToShow() {
-        //     if (!this.filterBy) return
-        //     keepService.getByFilter(this.filterBy)
-        //         .then(res => this.notes = res)
-        // },
         toggleIsDone({ noteId, todoIdx }) {
             keepService.toggleIsDone({ noteId, todoIdx })
                 .then(res => this.notes = res)

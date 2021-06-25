@@ -11,23 +11,57 @@ export default {
         noteImg,
         noteVideo
     },
+
+    /* 
+    close - <i class="fas fa-times"></i>
+    
+    delete - <i class="fas fa-trash-alt"></i>
+    
+    todo- 
+    
+    youtube - 
+    
+    photo - 
+    
+    note - 
+    
+    edit - 
+    
+    
+    */
     props: [],
     template: `
+        <section class="note-add">
+            <div class="modes-btns-container">
+                <button @click = "cmp = 'noteTxt'">
+                    <i class="far fa-sticky-note"></i>
+                </button>
 
-        <section class="border">
-            <div class="btn-mode">
-                  <span  class="bold" style="font-size:40px" @click="cmp = 'noteTxt'">text | </span> 
-                  <span  class="bold" style="font-size:40px" @click="cmp = 'noteTodos'">list | </span>
-                  <span  class="bold" style="font-size:40px" @click="cmp = 'noteImg'">img |</span>
-                  <span  class="bold" style="font-size:40px" @click="cmp = 'noteVideo'">video</span>
+                <button @click = "cmp = 'noteTodos'">
+                    <i class="fas fa-list"></i>
+                </button>
+                
+                <button @click = "cmp = 'noteImg'">
+                    <i class="fas fa-image"></i>
+                </button>
+                
+                <button @click = "cmp = 'noteVideo'">
+                    <i class="fab fa-youtube"></i>
+                </button>
             </div>
 
-            <form @submit.prevent="save" class="border">
+            <form
+            @submit.prevent="save" 
+            >
 
                 <component :is="cmp" @setVal="setAns"/>
 
-                <button >Save</button>
-
+                <button
+                class="save-btn"
+                >
+                    <i class="fas fa-save"></i>    
+                </button>
+                
             </form>
         </section>
     `,

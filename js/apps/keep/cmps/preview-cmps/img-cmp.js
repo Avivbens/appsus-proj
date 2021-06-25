@@ -5,7 +5,7 @@ export default {
     props: ['note'],
     template: `
     <section>
-        <li class="note-preview">
+        <li>
             <img :src="note.info.imgUrl" alt="no img">
         </li>
     </section>

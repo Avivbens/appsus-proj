@@ -1,4 +1,4 @@
-import { eventBus } from '../../../../services/event-bus.js';
+import { eventBus } from '../../../../services/event-bus.js'
 export default {
     components: {
 
@@ -25,12 +25,11 @@ export default {
 
 
         <li 
-        class="note-preview"
+       
         v-else
         >
             <h2>{{newNote.info.title}}</h2>
             <p>{{newNote.info.txt}}</p>
-            <p>{{newNote.isPinned}}</p>
         </li>
 
     </section>

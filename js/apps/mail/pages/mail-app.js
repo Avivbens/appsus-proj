@@ -22,6 +22,7 @@ export default {
                 class="mail-side-bar"
                 :categories="categories"
                 :mainCounter="unreadMails"
+                :mainCounterIdx="1"
                 @setFilter="setFilter"
                 />
 
@@ -45,13 +46,30 @@ export default {
     data() {
         return {
             mails: null,
-            categories: [
-                'all',
-                'inbox',
-                'sent mails',
-                'starred',
-                'archived',
-                'drafts'
+            categories: [{
+                    text: 'all',
+                    icon: '*'
+                },
+                {
+                    text: 'inbox',
+                    icon: '*'
+                },
+                {
+                    text: 'sent mails',
+                    icon: '*'
+                },
+                {
+                    text: 'starred',
+                    icon: '*'
+                },
+                {
+                    text: 'archived',
+                    icon: '*'
+                },
+                {
+                    text: 'drafts',
+                    icon: '*'
+                }
             ],
             filterBy: 'inbox',
             searchBy: '',
@@ -96,7 +114,7 @@ export default {
                 })
         },
         setFilter(filter) {
-            this.filterBy = filter
+            this.filterBy = filter.text
         },
         onSearch(val) {
             this.searchBy = val

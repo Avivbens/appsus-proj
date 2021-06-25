@@ -12,17 +12,34 @@ export default {
     },
     props: ['note'],
     template: `
-      <section class="border" :style="{backgroundColor: bgc}">
-            <button @click="deleteNote">X</button>
-            <button @click="pinNote">Pin</button>
+        <section 
+        class="note-preview" 
+        :class="note.type"
+        :style="{backgroundColor: bgc}">
+        
+            <button @click="deleteNote">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+            <button @click="pinNote">
+                <i class="fas fa-thumbtack"></i>
+            </button>
 
-            <button @click="shareNote">Share</button>
-            <button> paint 
-            <input v-model="bgc" type="color">
+            <button @click="shareNote">
+                <i class="fas fa-share-alt"></i>
+            </button>
+            
+            <button
+            class="color-btn"
+            > 
+                <i class="fas fa-palette">
+                    <input v-model="bgc" type="color">
+                </i> 
             </button>
 
 
-            <button v-if="isEditable" @click="onEditNote">Edit</button>
+            <button v-if="isEditable" @click="onEditNote">
+                <i class="fas fa-edit"></i>
+            </button>
             
             <component 
             :note="note"
@@ -32,7 +49,7 @@ export default {
             @offEditMode="offEdit"
                 />
 
-      </section>
+        </section>
     `,
     data() {
         return {

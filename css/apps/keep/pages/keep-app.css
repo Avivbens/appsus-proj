@@ -1,24 +1,17 @@
-.note-list {
-    padding: 0;
-    column-count: 4;
-    margin: 0 auto 2em;
-    column-gap: 1.5em;
+.keep-app {
+    display: flex;
+    width: 100%;
 }
 
-.note-list>* {
-    list-style: none;
-    break-inside: avoid;
-    background: #fff;
-    padding: 1em;
-    margin: 0 0 1.5em;
-    border-radius: 2px;
-    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+.keep-app>main {
+    width: 100%;
 }
 
-.done {
-    text-decoration: line-through
+.keep-app i {
+    font-size: 1.5rem;
 }
 
-.note-list img {
-    width: 150px
+.keep-app button {
+    background-color: transparent;
+    border: none;
 }

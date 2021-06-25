@@ -14,7 +14,6 @@ export default {
                 <input type="text" v-model="note.info.txt" @change="reportVal" placeholder="write your note here"/>
             </div>
 
-            {{note}}
         </section>
     `,
     data() {

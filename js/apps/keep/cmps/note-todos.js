@@ -1,16 +1,15 @@
-import { eventBus } from '../../../services/event-bus.js';
+import { eventBus } from '../../../services/event-bus.js'
 export default {
 
     props: [],
     template: `
 
-   
 
     <section>
 
             <input v-model="note.info.title" placeholder="Title" @change="reportVal">
-         <br>
-         <div v-for="(line, idx) in note.info.todos" > 
+        <br>
+        <div v-for="(line, idx) in note.info.todos" > 
             <input type="text" v-model="note.info.todos[idx].txt" @change="reportVal"
                 @input="addNewLine(idx)" placeholder="□ write your todo here"/>
         </div> 

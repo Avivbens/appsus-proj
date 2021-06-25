@@ -1,26 +1,26 @@
-import { eventBus } from '../../../services/event-bus.js';
+import { eventBus } from '../../../services/event-bus.js'
 export default {
 
     props: [],
     template: `
 
-   
 
     <section>
 
-         <!-- <input v-model="title" placeholder="Title"> -->
-         <!-- <br> -->
+        <!-- <input v-model="title" placeholder="Title"> -->
+        <!-- <br> -->
         <!-- <div v-for="(line, idx) in val" >  -->
             <input type="text" v-model="note.info.imgUrl" @change="reportVal"
-                 placeholder="write your note here"/>
+                placeholder="paste URL here"/>
             <input type="file" ref="file"  @change="onFilePicked"/>
         <!-- </div>  -->
-          <!-- <div  class="bold" style="font-size:40px">+</div> -->
+        <!-- <div  class="bold" style="font-size:40px">+</div> -->
     </section>
     `,
     data() {
         return {
             note: {
+                id: null,
                 type: 'noteImg',
                 isPinned: false,
                 info: {
@@ -30,7 +30,9 @@ export default {
                     imgUrl: '',
                     videoUrl: '',
                 },
-            },
+                categories: ['img', 'media'],
+                bgc: '#ffffff'
+            }
         }
     },
     methods: {

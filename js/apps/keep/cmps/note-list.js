@@ -4,24 +4,26 @@ import notePreview from './note-preview.js'
 export default {
     props: ['notes'],
     template: `
-    <section>
-        <ul class="note-list border" >
+    <section class="note-list-container">
+        <h3 v-if="pinnedNotes.length">Pinned</h3>   
+        <div class="note-list" >
             <note-preview 
-            v-for="note in notes"
-            v-if="note.isPinned"
-            :key="note.id" class="note-preview-container" 
+            v-for="note in pinnedNotes"
+            v-if="pinnedNotes.length"
+            :key="note.id"
             :note="note"/>
             <!-- :note="note"  @click.native="goToNote(note)"/> -->
-        </ul>
+        </div>
         <!-- --------------------- -->
-        <ul class="note-list border" >
+        <h3 v-if="otherNotes.length && pinnedNotes.length">Notes</h3>   
+        <div class="note-list" >
             <note-preview 
-            v-for="note in notes"
-            v-if="!note.isPinned"
-            :key="note.id" class="note-preview-container" 
+            v-for="note in otherNotes"
+            v-if="otherNotes"
+            :key="note.id"
             :note="note"/>
             <!-- :note="note"  @click.native="goToNote(note)"/> -->
-        </ul>
+        </div>
     </section>
     `,
     data() {
@@ -35,13 +37,12 @@ export default {
         // }
     },
     computed: {
-
-    },
-    created() {
-
-    },
-    destroyed() {
-
+        pinnedNotes() {
+            return this.notes.filter(note => note.isPinned)
+        },
+        otherNotes() {
+            return this.notes.filter(note => !note.isPinned)
+        }
     },
     components: {
         notePreview

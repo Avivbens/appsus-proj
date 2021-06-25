@@ -26,7 +26,7 @@ export default {
         <!-- --------------------------- -->
 
                 <li 
-                class="note-preview"
+                
                 v-else
                 >
                     <h2>{{note.info.title}}</h2>

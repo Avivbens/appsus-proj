@@ -1,4 +1,4 @@
-import { eventBus } from '../../../services/event-bus.js';
+import { eventBus } from '../../../services/event-bus.js'
 
 export default {
 
@@ -6,12 +6,13 @@ export default {
     template: `
     <section>
             <input type="text" v-model="note.info.videoUrl" @change="reportVal"
-                 placeholder="write your note here"/>
+                placeholder="paste URL here"/>
     </section>
     `,
     data() {
         return {
             note: {
+                id: null,
                 type: 'noteVideo',
                 isPinned: false,
                 info: {
@@ -21,7 +22,8 @@ export default {
                     imgUrl: '',
                     videoUrl: ''
                 },
-                categories: ['videos', 'media']
+                categories: ['videos', 'media'],
+                bgc: '#ffffff'
             }
         }
     },
