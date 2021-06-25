@@ -8,8 +8,10 @@ i {
     cursor: pointer;
 }
 
-.bold {
-    font-weight: bold;
+.bold * {
+    font-family: google-sans-bold;
+    font-size: 1.1rem;
+    color: black !important;
 }
 
 .border {
