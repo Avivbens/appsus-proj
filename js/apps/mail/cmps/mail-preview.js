@@ -20,7 +20,7 @@ export default {
                     class="starred-mail-btn"
                     @click.stop="onStarMail"
                     >
-                        {{starred}}
+                    <i :class="starred"></i>
                     </button>
 
                     <span>
@@ -39,16 +39,16 @@ export default {
                         v-if="hoverBody">
 
                             <button 
-                            class="clickable"
-                            @click.stop="onSendToArchive"
-                            
-                            >📩</button>
+                                class="clickable"
+                                @click.stop="onSendToArchive">
+                                <i class="fas fa-archive"></i>
+                            </button>
 
                             <button 
-                            class="clickable"
-                            @click.stop="onToggleMarkAsRead"
-                            
-                            >{{readButton}}</button>
+                                class="clickable"
+                                @click.stop="onToggleMarkAsRead"> 
+                                <i :class="readButton"></i>
+                            </button>
                             
                             <button 
                             class="clickable"
@@ -149,15 +149,17 @@ export default {
 
             return res
         },
+        //<i class="fas fa-envelope-open-text"></i>
+
         readButton() {
-            if (this.mail.isRead) return '💌'
-            return '📧'
+            if (this.mail.isRead) return 'fas fa-envelope-open-text'
+            return 'fas fa-envelope-open'
         },
         isSentMail() {
             return this.mail.categories.includes('sent mails')
         },
         starred() {
-            return (!this.mail.isStarred) ? '⭐' : '🌟'
+            return (!this.mail.isStarred) ? 'far fa-star' : 'fas fa-star'
         }
     },
     created() {
