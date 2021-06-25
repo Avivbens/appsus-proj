@@ -4,6 +4,10 @@
     font-family: google-sans;
 }
 
+.keep-app i {
+    color: #3a3a3a;
+}
+
 .keep-app>main {
     width: 100%;
 }

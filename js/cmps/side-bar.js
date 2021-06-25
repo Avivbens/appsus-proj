@@ -3,7 +3,8 @@ export default {
     template: `
         <aside
         @mouseover="toggleHover(true)"   
-        @mouseleave="toggleHover(false)"   
+        @mouseleave="toggleHover(false)"
+        class="side-bar"   
         >
         
             <div
@@ -11,14 +12,14 @@ export default {
             v-for="(category,idx) in categories" 
             @click="filterBy(category)"
             >
-                <span >
+                <span class="side-bar-category">
                     <span class="main-counter"
                     v-if="mainCounter && idx===mainCounterIdx"
                     >
                         {{mainCounter}}
                     </span>
                     
-                    <i class="capitalize"> {{category.icon}}</i>
+                    <i :class="category.icon" class="side-bar-icons"> </i>
                     <span class="capitalize" v-if="hover"> {{category.text}}</span>
                 </span>
             </div>

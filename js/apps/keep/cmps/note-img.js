@@ -30,7 +30,7 @@ export default {
                     imgUrl: '',
                     videoUrl: '',
                 },
-                categories: ['img', 'media'],
+                categories: ['photos', 'media'],
                 bgc: '#ffffff'
             }
         }
