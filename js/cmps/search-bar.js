@@ -5,14 +5,15 @@ export default {
     props: [],
     template: `
         <div 
-        class="search-bar"
         v-if="siteName"
+        :class="className"
         >
             <input type="text" 
             :placeholder="placeHolder"
             ref="input"
             v-model="searchTxt"
             >
+            <img src="../../img/loupe.png">
         </div>
     `,
     data() {
@@ -30,9 +31,14 @@ export default {
     computed: {
         placeHolder() {
             return 'Search ' + this.siteName
+        },
+        className() {
+            return `search-bar-${this.siteName.toLowerCase()} `
+
         }
     },
     mounted() {
+        if (!this.siteName) return
         this.$refs.input.addEventListener(
             'input', utilService.debounce(this.search, 1000))
     },

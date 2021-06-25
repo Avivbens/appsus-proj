@@ -7,10 +7,12 @@ export default {
             <div class="container">
 
                 <div class="logo">
-                    <img src="" alt="no img">
+                    <img src="/img/logo.gif" alt="no img">
                 </div>
 
-                <search-bar />
+                <search-bar
+                class="search-bar"
+                />
                 
                 <app-nav />
             </div>

@@ -6,10 +6,18 @@ const options = {
     router,
     template: `
         <main>
-            <app-header/>
+            <app-header
+            :class="headerClass"
+            />
             <router-view />
         </main>
     `,
+    computed: {
+        headerClass() {
+            if (this.$route.path === "/")
+                return 'app-header-home'
+        }
+    },
     components: {
         appHeader
     },

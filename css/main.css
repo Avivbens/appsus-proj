@@ -1,4 +1,8 @@
 @import url(./helpers.css);
+@import url(./app-header.css);
+@import url(./search-bar.css);
+@import url(./app-nav.css);
+@import url(./home-page.css);
 @import url(./apps/mail/mail-style.css);
 @import url(./apps/keep/keep-style.css);
 
@@ -6,29 +10,29 @@
 
 * {
     box-sizing: border-box;
+    font-family: google-sans;
 }
 
 body {
     margin: 0;
 }
 
-.app-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /*  */
-    background-color: lightblue;
-    width: 100%;
+@font-face {
+    font-family: google-sans;
+    src: url(../fonts/ProductSans-Regular.ttf);
 }
 
-.app-header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 90%;
-    padding: 10px;
+@font-face {
+    font-family: google-sans-bold;
+    src: url(../fonts/ProductSans-Bold.ttf);
 }
 
-.app-header img {
-    width: 30px;
+@font-face {
+    font-family: google-sans-light;
+    src: url(../fonts/ProductSans-Light.ttf);
+}
+
+@font-face {
+    font-family: awsome;
+    src: url(../fonts/fa-brands-400.ttf);
 }

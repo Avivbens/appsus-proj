@@ -14,3 +14,7 @@
 .capitalize {
     text-transform: capitalize;
 }
+
+.router-link {
+    text-decoration: none;
+}

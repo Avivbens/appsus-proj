@@ -1,29 +1,95 @@
+import appNavItem from './app-nav-item.js'
+
 export default {
     props: [],
     template: `
-        <nav>
-            <img
-            class="clickable"
-            @click="onToggleMenu" 
-            src="/img/menu.svg" alt=""/>
+        <nav
+        class="app-nav"
+        >
 
-            <section v-if="isNavOpen">
-                <span @click="onToggleMenu"><router-link to="/">Home</router-link> |</span>
-                <span @click="onToggleMenu"><router-link to="/misterEmail">Email</router-link> |</span>
-                <span @click="onToggleMenu"><router-link to="/missKeep" >Keep</router-link> |</span>
-                <span @click="onToggleMenu"><router-link to="/about" >About</router-link> </span>
+            <i class="menu-icon fas fa-th fa-lg"
+            @click.stop="onToggleMenu" 
+            ></i>
+
+            <section 
+            class="menu-container"
+            @click="onToggleMenu"
+            v-if="isNavOpen">
+
+                <app-nav-item 
+                v-for="item in items"
+                :item="item"
+                />
             </section>
+            
         </nav>
 
     `,
     data() {
         return {
-            isNavOpen: false
+            isNavOpen: false,
+            items: [{
+                    icon: 'fas fa-envelope fa-2x',
+                    title: 'Email',
+                    routerUrl: '/misterEmail',
+                    color: 'black'
+                },
+                {
+                    icon: 'fas fa-sticky-note fa-2x',
+                    title: 'Keep',
+                    routerUrl: '/missKeep',
+                    color: 'black'
+                },
+                {
+                    icon: 'fas fa-info fa-2x',
+                    title: 'About',
+                    routerUrl: '/about',
+                    color: 'black'
+                },
+                {
+                    icon: 'fas fa-map-marker-alt fa-2x',
+                    title: 'Maps',
+                    color: '#bfbfbf'
+                },
+                {
+                    icon: 'fas fa-calendar fa-2x',
+                    title: 'Calendar',
+                    color: '#bfbfbf'
+                },
+                {
+                    icon: 'fab fa-youtube fa-2x',
+                    title: 'Youtube',
+                    color: '#bfbfbf'
+                },
+                {
+                    icon: 'fas fa-user fa-2x',
+                    title: 'Contacts',
+                    color: '#bfbfbf'
+                },
+                {
+                    icon: 'fas fa-images fa-2x',
+                    title: 'Photos',
+                    color: '#bfbfbf'
+                },
+                {
+                    icon: 'fas fa-globe-americas fa-2x',
+                    title: 'Earth',
+                    color: '#bfbfbf'
+                },
+
+            ],
+
         }
     },
     methods: {
         onToggleMenu() {
             this.isNavOpen = !this.isNavOpen
         }
+    },
+    components: {
+        appNavItem,
+    },
+    created() {
+        document.addEventListener('click', () => { this.isNavOpen = false })
     },
 }
