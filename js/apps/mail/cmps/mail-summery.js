@@ -6,28 +6,35 @@ export default {
         <section class="mail-summery">
 
             <aside class="summery-buttons-area">
-                <button 
-                class="clickable"
-                @click.stop="onDeleteMail"
-                >✖</button>
-
-
-                <button 
-                class="clickable"
-                @click.stop="onFullSize"
-                >🔲</button>
-
 
                 <button 
                 v-if="!draftEdit"
                 class="clickable"
                 @click.stop="onReply"
-                >Reply</button>
+                >
+                <i class="fas fa-reply"></i>
+                </button>
 
                 <button 
                 class="clickable"
                 @click.stop="onShare"
-                >Share</button>
+                >
+                <i class="fas fa-share-square"></i>
+                </button>
+
+                <button 
+                class="clickable"
+                @click.stop="onDeleteMail"
+                >
+                <i class="fas fa-trash-alt"></i>
+                </button>
+
+                <button 
+                class="clickable"
+                @click.stop="onFullSize"
+                >
+                <i class="fas fa-expand"></i>
+                </button>
 
             </aside>
 

@@ -28,20 +28,21 @@ export default {
                     <button
                     @click="onSendMail"
                     >
-                    Send
+                    <i class="fas fa-paper-plane"></i>
                     </button>
 
 
                     <span>
                         <button
                         @click.prevent="onDeclareChanges"
-                    
-                        >✖</button>
+                        >
+                        <i class="fas fa-trash-alt"></i>
+                        </button>
 
                         <button
                         @click="onSaveAsDraft"
                         >
-                        Draft
+                        <i class="fas fa-cookie-bite"></i>
                         </button>
                     </span>
                 </div>

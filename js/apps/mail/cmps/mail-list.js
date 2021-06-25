@@ -13,11 +13,11 @@ export default {
             :key="mail.id"
 
 
-            @saveMail="saveMail(mail)"
-            @removeMail="removeMail(mail)"
+            @saveMail="saveMail"
+            @removeMail="removeMail"
             
-            @archiveMail="archiveMail(mail)"
-            @starMail="starMail(mail)"
+            @archiveMail="archiveMail"
+            @starMail="starMail"
             />
 
 

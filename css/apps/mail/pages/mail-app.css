@@ -13,14 +13,28 @@
     gap: 20px;
 }
 
-.mail-compose-btn {
+.mail-app i {
+    font-size: 1.3rem;
+}
+
+.mail-app button {
+    background-color: transparent;
+    border: none;
+}
+
+.mail-app .mail-compose-btn {
+    background-color: transparent;
+    border: 2px solid rgb(53, 53, 53);
+    border-radius: 3em;
+}
+
+.mail-app .mail-compose-btn>* {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
     color: rgb(65, 65, 65);
-    border: 2px solid rgb(53, 53, 53);
-    border-radius: 3em;
     text-decoration: none;
     padding: 5px;
+    font-size: 1.1rem;
 }

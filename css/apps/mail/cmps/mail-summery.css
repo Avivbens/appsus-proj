@@ -9,21 +9,37 @@
     width: 100%;
 }
 
-.summery-title {
+.mail-summery .summery-title {
     margin: 10px 0;
 }
 
-.summery-sender {
+.mail-summery .summery-sender {
     margin: 5px 0;
     font-size: 1.2rem;
 }
 
-.summery-body {
+.mail-summery .summery-body {
     margin: 10px 30px;
 }
 
-.summery-buttons-area {
+.mail-summery .summery-buttons-area {
     position: absolute;
     top: 10px;
     right: 10px;
+}
+
+.mail-summery .summery-buttons-area>button {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    transition: all .4s;
+}
+
+.mail-summery .summery-buttons-area>button:hover {
+    background-color: #0093ff;
+}
+
+.mail-summery .summery-buttons-area>*>i {
+    text-align: center;
+    font-size: 1.2rem;
 }

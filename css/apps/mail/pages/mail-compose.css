@@ -32,12 +32,12 @@
     width: 100%;
 }
 
-textarea {
+.mail-compose textarea {
     padding-bottom: 120px !important;
     resize: none;
 }
 
-.compose-buttons-area {
+.mail-compose .compose-buttons-area {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -47,6 +47,24 @@ textarea {
     bottom: 10px;
 }
 
-.compose-buttons-area>* {
+.mail-compose .compose-buttons-area>* {
     margin: 0 20px;
+}
+
+.mail-compose .compose-buttons-area button {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: none;
+    background-color: transparent;
+    transition: all .4s;
+}
+
+.mail-compose .compose-buttons-area button:hover {
+    background-color: #0093ff;
+}
+
+.mail-compose .compose-buttons-area i {
+    text-align: center;
+    font-size: 1.8rem;
 }

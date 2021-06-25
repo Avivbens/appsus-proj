@@ -19,8 +19,10 @@ export default {
                     <button 
                     class="starred-mail-btn"
                     @click.stop="onStarMail"
+                    :class="starredColor"
                     >
-                    <i :class="starred"></i>
+                    <i :class="starred"
+                    ></i>
                     </button>
 
                     <span>
@@ -37,6 +39,7 @@ export default {
 
                         <span
                         v-if="hoverBody"
+                        class="preview-btns-container"
                         >
 
                             <button 
@@ -162,6 +165,9 @@ export default {
         },
         starred() {
             return (!this.mail.isStarred) ? 'far fa-star' : 'fas fa-star'
+        },
+        starredColor() {
+            return { starred: this.mail.isStarred }
         }
     },
     created() {

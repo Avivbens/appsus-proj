@@ -11,12 +11,23 @@ export default {
             <div
             class="mail-side-bar-container"
             >   
-                <router-link
+
+
+                <button
                 class="mail-compose-btn"
-                to="/misterEmail/newMail"
+                @mouseover="hoverCompose = true"
+                @mouseleave="hoverCompose = false"
                 >
-                    <img src="../../../../img/compose.png" class="inline">
-                </router-link>
+                    <router-link
+                    to="/misterEmail/newMail"
+                    >
+                        <transition-group name="compose-btn">
+                            <img :key="'img'" src="../../../../img/compose.png" class="inline"
+                            >
+                            <!-- <span :key="'word'" v-if="hoverCompose">Compose</span> -->
+                        </transition-group>
+                    </router-link>
+                </button>
 
                 <side-bar
                 class="mail-side-bar"
@@ -48,32 +59,33 @@ export default {
             mails: null,
             categories: [{
                     text: 'all',
-                    icon: '*'
+                    icon: 'asdadas'
                 },
                 {
                     text: 'inbox',
-                    icon: '*'
+                    icon: 'fas fa-inbox'
                 },
                 {
                     text: 'sent mails',
-                    icon: '*'
+                    icon: 'fas fa-paper-plane'
                 },
                 {
                     text: 'starred',
-                    icon: '*'
+                    icon: 'fas fa-star'
                 },
                 {
                     text: 'archived',
-                    icon: '*'
+                    icon: 'fas fa-archive'
                 },
                 {
                     text: 'drafts',
-                    icon: '*'
+                    icon: 'fas fa-cookie-bite'
                 }
             ],
             filterBy: 'inbox',
             searchBy: '',
-            unreadMails: 0
+            unreadMails: 0,
+            hoverCompose: false,
         }
     },
     methods: {
@@ -84,6 +96,7 @@ export default {
                 })
         },
         removeMail(mail) {
+            if (!confirm('Are you sure you want to DELETE that mail?')) return
             mailService.remove(mail)
                 .then((res) => {
                     this.mails = res

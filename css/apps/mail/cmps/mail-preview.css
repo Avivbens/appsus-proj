@@ -27,6 +27,11 @@
     margin: 5px;
 }
 
+.mail-preview .starred-mail-btn.starred {
+    color: #dec930;
+    -webkit-text-stroke: 1px black;
+}
+
 .mail-preview .small-prev-container>:nth-child(2) {
     text-align: left;
     display: flex;
@@ -43,4 +48,20 @@
     border: none;
     font-size: 1.1rem !important;
     background-color: transparent;
+}
+
+.mail-preview .preview-btns-container>button {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    transition: all .4s;
+}
+
+.mail-preview .preview-btns-container>button:hover {
+    background-color: #0093ff;
+}
+
+.mail-preview .preview-btns-container>*>i {
+    text-align: center;
+    font-size: 1.1rem;
 }

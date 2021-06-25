@@ -11,30 +11,36 @@ export default {
 
             <aside class="details-buttons-area">
                 <button 
-                class="clickable"
-                @click="onDeleteMail(mail)"
-                >✖</button>
-
-
-                <button 
-                class="clickable"
-                @click="onExitFullSize"
-                >➡</button>
-
-
-                <button 
                 v-if="draftEdit"
                 class="clickable"
                 @click="onEditDraft"
-                >Edit</button>
+                >
+                <i class="fas fa-edit"></i>
+                </button>
 
 
                 <button 
                 v-else
                 class="clickable"
                 @click="onReply"
-                >Reply</button>
+                >
+                <i class="fas fa-reply"></i>
+                </button>
 
+                <button 
+                class="clickable"
+                @click="onDeleteMail(mail)"
+                >
+                <i class="fas fa-trash-alt"></i>
+                </button>
+
+
+                <button 
+                class="clickable"
+                @click="onExitFullSize"
+                >
+                <i class="fas fa-inbox"></i>
+                </button>
 
             </aside>
 

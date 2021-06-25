@@ -3,8 +3,25 @@
     position: relative;
 }
 
-.details-buttons-area {
+.mail-details .details-buttons-area {
     position: absolute;
     top: 0;
     right: 20px;
+}
+
+.mail-details .details-buttons-area>button {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    transition: all .4s;
+}
+
+.mail-details .details-buttons-area>button:hover {
+    background-color: #0093ff;
+}
+
+.mail-details .details-buttons-area>button i {
+    text-align: center;
+    font-size: 1.4rem;
 }

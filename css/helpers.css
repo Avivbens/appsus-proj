@@ -8,10 +8,10 @@ i {
     cursor: pointer;
 }
 
-.bold * {
+.bold * :not(i) {
     font-family: roboto-bold;
     font-size: 1.1rem;
-    color: black !important;
+    color: black;
 }
 
 .border {
