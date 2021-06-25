@@ -59,7 +59,7 @@ export default {
             this.$router.push('/misterEmail/' + this.mail.id)
         },
         onReply() {
-            const url = `/misterEmail/newMail/?reply=true&sender=${this.mail.sender}&to=${this.mail.to}&subject=${this.mail.subject}&body=${this.mail.body}`
+            const url = `/misterEmail/newMail/?reply=true&sender=${this.mail.sender}&to=${this.mail.to}&subject=RE: ${this.mail.subject}&body=${this.mail.body}`
             this.$router.push(url)
         },
         onShare() {

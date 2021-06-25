@@ -101,11 +101,11 @@ export default {
                     this.subject = query.subject
                     this.body = query.body
                 } else if (query.reply) {
+                    this.subject = query.subject
                     this.body =
                         `
                         \n\n
 ------------------------------------------
-:RE
         ${query.subject}
         from: ${query.sender}
 ------------------------------------------
