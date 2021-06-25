@@ -31,27 +31,23 @@ export default {
             filterBy: '',
             categories: [{
                     text: 'notes',
-                    icon: '-'
+                    icon: 'far fa-sticky-note'
                 },
                 {
                     text: 'todos',
-                    icon: '-'
+                    icon: 'fas fa-list'
                 },
                 {
-                    text: 'alerts',
-                    icon: '-'
+                    text: 'photos',
+                    icon: 'fas fa-image'
                 },
                 {
-                    text: 'work',
-                    icon: '-'
+                    text: 'videos',
+                    icon: 'fab fa-youtube'
                 },
                 {
-                    text: 'personal',
-                    icon: '-'
-                },
-                {
-                    text: 'trash',
-                    icon: '-'
+                    text: 'media',
+                    icon: 'fas fa-photo-video'
                 },
             ],
         }
