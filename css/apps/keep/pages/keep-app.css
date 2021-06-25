@@ -4,8 +4,10 @@
     font-family: google-sans;
 }
 
-.keep-app i {
-    color: #3a3a3a;
+.keep-app i,
+h2,
+p {
+    color: #1F1F1F;
 }
 
 .keep-app>main {

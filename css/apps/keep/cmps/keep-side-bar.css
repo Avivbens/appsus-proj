@@ -12,7 +12,6 @@
 
 .keep-app .side-bar-category {
     display: flex;
-    justify-content: center;
     align-items: center;
 }
 
