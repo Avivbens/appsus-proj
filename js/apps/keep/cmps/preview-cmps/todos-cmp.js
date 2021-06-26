@@ -1,44 +1,18 @@
 import { eventBus } from "../../../../services/event-bus.js"
 export default {
-    props: ['note', 'editMode'],
+    props: ['note'],
     template: `
         <section>
-
-                <li
-                v-if="editMode"
-                >
-                    <button 
-                    class="save-changes"
-                    @click="onSave"
-                    >
-                    Save
-                    </button>
-
-
-                    <input v-model="newNote.info.title" placeholder="Title">
+                <li @click.stop="addNewLine('li')">
+                    <input class="title-input" v-model="note.info.title" placeholder="Title" @input="onSave">
                     <br>
-                    <div v-for="(line, idx) in newNote.info.todos" > 
-                        <input type="text" v-model="newNote.info.todos[idx].txt"
-                            @input="addNewLine(idx)" placeholder="□ write your todo here"/>
-                    </div> 
+                    <div v-for="(line, idx) in note.info.todos" > 
+                        <span class="delete-todo" @click.stop="deleteTodo(idx)"><i class="fas fa-trash-alt"></i></span> 
+                        <span :class="{done: line.isDone}" @click.stop="toggleIsDone(idx)">O</span>
+                        <input :class="{done: line.isDone}" class="txt-input"  type="text" v-model="note.info.todos[idx].txt"
+                            @input.stop="addNewLine(idx),onSave()" @change="cleanLastLine" placeholder="write your todo"/>
+                    </div>
                 </li>
-
-        <!-- --------------------------- -->
-
-                <li 
-                
-                v-else
-                >
-                    <h2>{{note.info.title}}</h2>
-                    <p
-                        v-for="(todo,idx) in note.info.todos"
-                        :class="isDone(todo)" @click="toggleIsDone(idx)">
-                        <span>□</span> 
-                        {{todo.txt}}
-                    </p>
-                </li>
-
-                
         </section>
     `,
     methods: {
@@ -46,25 +20,30 @@ export default {
             return { done: todo.isDone }
         },
         toggleIsDone(todoIdx) {
-            eventBus.$emit('toggleIsDone', { noteId: this.note.id, todoIdx })
+            this.note.info.todos[todoIdx].isDone = !this.note.info.todos[todoIdx].isDone // taking with the dom because it the only way it works
+                // eventBus.$emit('toggleIsDone', { noteId: this.note.id, todoIdx })
+            this.cleanLastLine()
         },
         onSave() {
-            console.log('this.newNote :>> ', this.newNote);
-            eventBus.$emit('onSaveNote', this.newNote)
-            this.$emit('offEditMode', this.newNote)
+            eventBus.$emit('onSaveNote', this.note)
         },
-        addNewLine(idx) {
-            if (idx === this.note.info.todos.length - 1) this.note.info.todos.push({ txt: '', isDone: false })
+        addNewLine() {
+            if (!this.checkIfLastLineIsEmpty()) this.note.info.todos.push({ txt: '', isDone: false })
         },
-    },
-    data() {
-        return {
-            newNote: null,
+        cleanLastLine() {
+            if (this.checkIfLastLineIsEmpty()) this.note.info.todos.pop()
+            this.onSave();
+        },
+        deleteTodo(idx) {
+            this.note.info.todos.splice(idx, 1)
+            this.onSave()
+        },
+        checkIfLastLineIsEmpty() {
+            if (this.note.info.todos.length === 0) return true
+            return (this.note.info.todos[this.note.info.todos.length - 1].txt === '')
         }
     },
-    watch: {
-        editMode() {
-            this.newNote = JSON.parse(JSON.stringify(this.note))
-        }
+    created() {
+        document.addEventListener('click', this.cleanLastLine)
     },
 }

@@ -1,0 +1,87 @@
+import { eventBus } from "../../../../services/event-bus.js"
+export default {
+    props: ['note', 'editMode'],
+    template: `
+        <section>
+
+                <li
+                v-if="editMode||editModeOn"
+                >
+                    <input class="title-input" v-model="newNote.info.title" placeholder="Title" @input="onSave" @change="changeEditMode">
+                    <br>
+                    <div v-for="(line, idx) in newNote.info.todos" > 
+                    <span class="delete-todo" @click="deleteTodo(idx)"><i class="fas fa-trash-alt"></i></span> 
+
+                        <span :class="{done: line.isDone}" @click="toggleIsDone(idx)">O</span>
+                        <input :class="{done: line.isDone}" class="txt-input"  type="text" v-model="newNote.info.todos[idx].txt"
+                            @input="addNewLine(idx),onSave()" @change="changeEditMode" placeholder="O write your todo here"/>
+                    </div>
+                    <!-- <button 
+                    class="save-changes"
+                    @click="onSave"
+                    >
+                    Save
+                    </button>  -->
+                </li>
+
+        <!-- --------------------------- -->
+
+                <li 
+                
+                v-else
+                >
+                    <h2 @click="changeEditMode">{{note.info.title}}</h2>
+                    <p
+                        v-for="(todo,idx) in note.info.todos"
+                         >
+                        <span class="delete-todo" @click="deleteTodo(idx)"><i class="fas fa-trash-alt"></i></span> 
+                        <span :class="isDone(todo)" class="check-todo" @click="toggleIsDone(idx)">O</span> 
+                       <span :class="isDone(todo)" @click="changeEditMode">{{todo.txt}}</span> 
+                    </p>
+                </li>
+
+                
+        </section>
+    `,
+    methods: {
+        isDone(todo) {
+            return { done: todo.isDone }
+        },
+        toggleIsDone(todoIdx) {
+            console.log('toggling');
+
+            eventBus.$emit('toggleIsDone', { noteId: this.note.id, todoIdx })
+        },
+        onSave() {
+            console.log('saving');
+
+            eventBus.$emit('onSaveNote', this.newNote)
+                // this.$emit('offEditMode', this.newNote)
+        },
+        addNewLine(idx) {
+            if (idx === this.note.info.todos.length - 1) this.note.info.todos.push({ txt: '', isDone: false })
+        },
+        deleteTodo(idx) {
+            console.log('delete todo!');
+        },
+        changeEditMode() {
+            this.editModeOn = !this.editModeOn;
+            this.newNote = JSON.parse(JSON.stringify(this.note))
+        }
+
+    },
+    computed: {
+
+    },
+    data() {
+        return {
+            // newNote: this.note,
+            editModeOn: false
+        }
+    },
+    watch: {
+        editMode() {
+            this.newNote = JSON.parse(JSON.stringify(this.note))
+        }
+    },
+}

@@ -82,6 +82,7 @@ export default {
                 .then((res) => this.notes = res)
         },
 
+
     },
     computed: {
         pinnedNotes() {

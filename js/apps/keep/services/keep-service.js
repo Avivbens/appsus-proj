@@ -109,7 +109,7 @@ function createSimpleNote() {
             videoUrl: ''
         },
         categories: ['notes'],
-        bgc: '#ffffff'
+        bgc: '#ffff88'
     }
 
 }

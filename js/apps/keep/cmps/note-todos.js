@@ -11,7 +11,7 @@ export default {
         <br>
         <div v-for="(line, idx) in note.info.todos" > 
             <input type="text" v-model="note.info.todos[idx].txt" @change="reportVal"
-                @input="addNewLine(idx)" placeholder="□ write your todo here"/>
+                @input="addNewLine(idx)" placeholder="O write your todo here"/>
         </div> 
 
     </section>

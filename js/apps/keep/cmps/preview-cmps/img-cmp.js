@@ -9,6 +9,5 @@ export default {
             <img :src="note.info.imgUrl" alt="no img">
         </li>
     </section>
-
     `
 }
