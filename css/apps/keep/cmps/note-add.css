@@ -22,8 +22,11 @@
 }
 
 .note-add .modes-btns-container>button:hover {
-    color: white;
     background-color: #0092ff;
+}
+
+.note-add .modes-btns-container>button:hover i {
+    color: white;
 }
 
 .note-add form {
@@ -65,9 +68,13 @@
 
 .note-add form .save-btn:hover {
     background-color: #0092ff;
-    color: white;
     align-self: flex-start;
     margin-top: 10px;
+}
+
+.note-add form .save-btn:hover i {
+    transition: all .2s;
+    color: white;
 }
 
 .note-video>iframe {

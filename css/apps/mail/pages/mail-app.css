@@ -63,7 +63,6 @@
     }
     .mail-preview .body-to-show {
         display: none !important;
-        /* visibility: hidden; */
     }
     .mail-app .mail-side-bar-container {
         min-width: 30px;

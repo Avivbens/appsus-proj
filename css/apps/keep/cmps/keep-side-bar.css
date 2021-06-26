@@ -25,6 +25,10 @@
     align-items: center;
 }
 
+.keep-app .side-bar-category:hover *:not(i) {
+    color: white;
+}
+
 .keep-side-bar>* {
     border-radius: 0 3em 3em 0;
     padding: 5px;

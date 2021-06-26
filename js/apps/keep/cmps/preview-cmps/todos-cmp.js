@@ -40,7 +40,7 @@ export default {
     `,
     data() {
         return {
-            rowsNumbers: [1.3]
+            rowsNumbers: [1]
         }
     },
     methods: {
@@ -70,13 +70,13 @@ export default {
             return (this.note.info.todos[this.note.info.todos.length - 1].txt === '')
         },
         textRows(idx) {
-            if (!this.note.info.todos[idx]) return
+            if (!this.note.info.todos[idx]) return 1
             const text = this.note.info.todos[idx].txt
 
             let numberOfLineBreaks = (text.match(/\n/g) || []).length
             let characterCount = text.length + numberOfLineBreaks
 
-            this.rowsNumbers[idx] = numberOfLineBreaks + characterCount / 42 + 1
+            this.rowsNumbers[idx] = numberOfLineBreaks + characterCount / 33.5 + 1
             this.note.info.todosRows = this.rowsNumbers
             this.onSave()
         },
@@ -93,7 +93,7 @@ export default {
     },
     created() {
         document.addEventListener('click', this.cleanLastLine)
-        this.rowsNumbers = (this.note.info.todosRows) ? this.note.info.todosRows : [1.3]
+        this.rowsNumbers = (this.note.info.todosRows) ? this.note.info.todosRows : [1]
     },
     destroyed() {
         document.removeEventListener('click', this.cleanLastLine)

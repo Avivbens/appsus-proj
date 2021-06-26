@@ -1,4 +1,3 @@
-// import { keepService } from '../services/keep-service.js'
 import notePreview from './note-preview.js'
 
 export default {
@@ -12,9 +11,8 @@ export default {
             v-if="pinnedNotes.length"
             :key="note.id"
             :note="note"/>
-            <!-- :note="note"  @click.native="goToNote(note)"/> -->
         </div>
-        <!-- --------------------- -->
+        <!--------- Seperate between Pinned and not Pinned notes -------------- -->
         <h3 v-if="otherNotes.length && pinnedNotes.length">Notes</h3>   
         <div class="note-list" >
             <note-preview 
@@ -22,20 +20,9 @@ export default {
             v-if="otherNotes"
             :key="note.id"
             :note="note"/>
-            <!-- :note="note"  @click.native="goToNote(note)"/> -->
         </div>
     </section>
     `,
-    data() {
-        return {
-
-        }
-    },
-    methods: {
-        // goToNote(note) {
-        //     this.$router.push('/note/' + note.id)
-        // }
-    },
     computed: {
         pinnedNotes() {
             return this.notes.filter(note => note.isPinned)

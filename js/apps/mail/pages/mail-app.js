@@ -98,10 +98,8 @@ export default {
                         txt: `Mail deleted`,
                         type: 'success',
                         action: 'remove mail',
-                        // link: `/keep-/${this.book.id}`,
                     }
                     eventBus.$emit('show-msg', msg)
-                    console.log('emitted by eventbus')
                 })
 
         },

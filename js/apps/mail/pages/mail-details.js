@@ -1,6 +1,5 @@
 import { mailService } from "../services/mail-service.js"
 import { eventBus } from "../../../services/event-bus.js"
-// import componentName from 'url'
 
 export default {
     template: `

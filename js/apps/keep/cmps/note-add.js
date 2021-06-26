@@ -15,6 +15,7 @@ export default {
     template: `
         <section class="note-add">
             <div class="modes-btns-container">
+
                 <button title="Note" @click = "cmp = 'noteTxt'">
                     <i class="far fa-sticky-note"></i>
                 </button>
@@ -32,9 +33,7 @@ export default {
                 </button>
             </div>
 
-            <form
-            @submit.prevent="save" 
-            >
+            <form @submit.prevent="save">
 
                 <component :is="cmp" @setVal="setAns"/>
 
@@ -72,17 +71,12 @@ export default {
                 txt: `New note added`,
                 type: 'success',
                 action: 'add note',
-                // link: `/keep-/${this.book.id}`,
             }
             eventBus.$emit('show-msg', msg)
-            console.log('emitted by eventbus')
         },
         setAns(val) {
             this.note = JSON.parse(JSON.stringify(val))
         },
-        // editNote(note) {
-        //     this.cmp = note.type
-        // }
     },
     watch: {
         '$route.query': {

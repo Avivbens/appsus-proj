@@ -12,50 +12,46 @@ export default {
     },
     props: ['note'],
     template: `
-        <section 
-        class="note-preview" 
-        :class="note.type"
-        :style="{backgroundColor: bgc}"
-        draggable="true">
-        
-            <button title="Delete" @click="deleteNote">
-                <i class="fas fa-trash-alt"></i>
-            </button>
-            <button title="Pin" @click="pinNote">
-                <i class="fas fa-thumbtack"
-                :style="pinNoteColor"
-                ></i>
-            </button>
+        <transition
+            enter-active-class="animate__animated animate__fadeInDownBig"
+            leave-active-class="animate__animated animate__fadeOut"
+            >
+                <section 
+                class="note-preview" 
+                :class="note.type"
+                :style="{backgroundColor: bgc}"
+                draggable="true">
+                
+                    <button title="Delete" @click="deleteNote">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
 
-            <button title="Share" @click="shareNote">
-                <i class="fas fa-share-alt"></i>
-            </button>
-            
+                    <button title="Pin" @click="pinNote">
+                        <i class="fas fa-thumbtack" :style="pinNoteColor"></i>
+                    </button>
 
+                    <button title="Share" @click="shareNote">
+                        <i class="fas fa-share-alt"></i>
+                    </button>
 
-       
-                <i class="fas fa-palette color-btn" title="Color" @mouseover="showColors" @mouseleave="hideColors">
-                    <!-- <input v-model="bgc" type="color"> -->
-                    <div class="color-btns" v-if="isShowingColors">
-                        <span class="color-opt" style="background-color: rgb(255, 136, 136);" @click="setColor('rgb(255, 136, 136)')"></span>
-                        <span class="color-opt" style="background-color: rgb(255, 204, 136);" @click="setColor('rgb(255, 204, 136)')"></span>
-                        <span class="color-opt" style="background-color: rgb(204, 255, 153);" @click="setColor('rgb(204, 255, 153)')"></span>
-                        <span class="color-opt" style="background-color: rgb(170, 255, 238);" @click="setColor('rgb(170, 255, 238)')"></span>
-                        <span class="color-opt" style="background-color: rgb(136, 187, 255);" @click="setColor('rgb(136, 187, 255)')"></span>
-                        <span class="color-opt" style="background-color: rgb(255, 255, 136);" @click="setColor('rgb(255, 255, 136)')"></span>
-                        <span class="color-opt" style="background-color: rgb(255, 255, 255);" @click="setColor('rgb(255, 255, 255)')"></span>
-                    </div>
-                </i>
-            
-            <component 
-            :note="note"
-            :bgc="bgc"
-            :is="cmp"
-            @offEditMode="offEdit"
-                />
+                    <i class="fas fa-palette color-btn" title="Color" @mouseover="showColors" @mouseleave="hideColors">
+                        <!-- <input v-model="bgc" type="color"> -->
+                        <div class="color-btns" v-if="isShowingColors">
+                            <span class="color-opt" style="background-color: rgb(255, 136, 136);" @click="setColor('rgb(255, 136, 136)')"></span>
+                            <span class="color-opt" style="background-color: rgb(255, 204, 136);" @click="setColor('rgb(255, 204, 136)')"></span>
+                            <span class="color-opt" style="background-color: rgb(204, 255, 153);" @click="setColor('rgb(204, 255, 153)')"></span>
+                            <span class="color-opt" style="background-color: rgb(170, 255, 238);" @click="setColor('rgb(170, 255, 238)')"></span>
+                            <span class="color-opt" style="background-color: rgb(136, 187, 255);" @click="setColor('rgb(136, 187, 255)')"></span>
+                            <span class="color-opt" style="background-color: rgb(255, 255, 136);" @click="setColor('rgb(255, 255, 136)')"></span>
+                            <span class="color-opt" style="background-color: rgb(255, 255, 255);" @click="setColor('rgb(255, 255, 255)')"></span>
+                        </div>
+                    </i>
 
-        </section>
-    `,
+                    <component :note="note" :bgc="bgc" :is="cmp" @offEditMode="offEdit"/>
+                </section>
+
+        </transition>
+        `,
     data() {
         return {
             cmp: 'txtCmp',
@@ -71,10 +67,8 @@ export default {
                 txt: `Note deleted`,
                 type: 'success',
                 action: 'remove note',
-                // link: `/keep-/${this.book.id}`,
             }
             eventBus.$emit('show-msg', msg)
-            console.log('emitted by eventbus')
         },
         onEditNote() {
             this.editMode = !this.editMode
@@ -89,7 +83,7 @@ export default {
             const url = `/misterEmail/newMail/?note=true&type=${this.note.type}&subject=${this.note.info.title}&body=${this.setShareBody()}`
             this.$router.push(url)
         },
-        setShareBody() {
+        setShareBody() { //Share Note with Email
             const note = this.note.info
             let str = ''
 
@@ -201,5 +195,4 @@ export default {
             this.updateFilterByColor()
         }
     }
-
 }

@@ -25,6 +25,13 @@ export default {
 
 
                 <div class="compose-buttons-area">
+                    <button title="Exit"
+                        @click.prevent="onDeclareChanges"
+                        >
+                        <i class="fas fa-times"></i>
+                    </button>
+
+
                     <button title="Send"
                     @click="onSendMail"
                     >

@@ -4,7 +4,7 @@ export default {
     props: [],
     template: `
         <section >
-            <div >
+           
                 <textarea class="note-title text-area-input"
                 v-model="note.info.title" 
                 @change="reportVal"
@@ -14,10 +14,6 @@ export default {
                 placeholder="Title"
                 ></textarea>            
 
-            </div>
-
-            <div>
-
                 <textarea class="text-area-input"
                 v-model="note.info.txt" 
                 @change="reportVal"
@@ -26,8 +22,6 @@ export default {
                 :rows="textRows"
                 placeholder="write your note here"
                 ></textarea>            
-
-            </div>
 
         </section>
     `,
@@ -47,19 +41,16 @@ export default {
                 categories: ['notes'],
                 bgc: '#ffff88'
             }
-
         }
     },
     methods: {
         reportVal() {
             this.$emit('setVal', this.note)
-
         },
         cleanInput() {
             this.note.info.title = ''
             this.note.info.txt = ''
         },
-
     },
     computed: {
         textRows() {

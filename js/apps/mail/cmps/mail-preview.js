@@ -3,6 +3,12 @@ import mailSummery from './mail-summery.js'
 export default {
     props: ['mail'],
     template: `
+
+    <transition
+        enter-active-class="animate__animated animate__fadeInDownBig"
+        leave-active-class="animate__animated animate__fadeOutLeft"
+        >
+
         <article 
             class="mail-preview"
             :class="boldText"
@@ -75,6 +81,9 @@ export default {
                 />
 
         </article>
+
+    </transition>
+
     `,
     data() {
         return {
@@ -121,7 +130,6 @@ export default {
 
             return res
         },
-        //<i class="fas fa-envelope-open-text"></i>
 
         readButton() {
             if (this.mail.isRead) return 'fas fa-envelope-open-text'

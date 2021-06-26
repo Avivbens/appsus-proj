@@ -12,9 +12,6 @@
 }
 
 .note-list {
-    /* display: flex;
-    align-items: center;
-    flex-wrap: wrap; */
     column-count: 3;
     column-gap: 1.5rem;
     width: 100%;
@@ -25,15 +22,4 @@
 .note-list .note-preview .done {
     text-decoration: line-through;
     text-decoration-thickness: 3px;
-}
-
-
-/* .note-list .note-preview.noteVideo {
-    grid-column: 1 span;
-    grid-row: 1 span;
-}
-
-.note-list .note-preview.noteImg {
-    grid-column: 1span;
-    grid-row: 1 span;
 }
