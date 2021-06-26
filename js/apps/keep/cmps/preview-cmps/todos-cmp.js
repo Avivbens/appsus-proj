@@ -3,7 +3,7 @@ export default {
     props: ['note'],
     template: `
         <section>
-                <li @click.stop="addNewLine('li')">
+                <li @click.stop="addNewLine('li')" class="note-main-area">
                     <input class="title-input" v-model="note.info.title" placeholder="Title" @input="onSave">
                     <br>
                     <div v-for="(line, idx) in note.info.todos" > 

@@ -2,8 +2,16 @@
     display: flex;
     flex-direction: column;
     padding: 10px;
-    width: 150px;
     gap: 20px;
+    margin-top: 3px;
+    position: absolute;
+    transition: all .4s;
+    width: 60px;
+}
+
+.keep-side-bar:hover {
+    width: 150px;
+    background-color: #fbfbfbe8;
 }
 
 .keep-app .side-bar-icons {

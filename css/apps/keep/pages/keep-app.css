@@ -16,6 +16,7 @@ p {
 
 .keep-app>main {
     width: 100%;
+    margin-left: 50px;
 }
 
 .keep-app i {
@@ -25,4 +26,25 @@ p {
 .keep-app button {
     background-color: transparent;
     border: none;
+}
+
+@media (min-width: 625px) {
+    .note-list {
+        column-count: 2 !important;
+    }
+}
+
+@media (max-width: 625px) {
+    .note-list {
+        column-count: 1 !important;
+    }
+    .search-bar>input {
+        width: 120px;
+    }
+}
+
+@media (min-width: 1000px) {
+    .note-list {
+        column-count: 3 !important;
+    }
 }

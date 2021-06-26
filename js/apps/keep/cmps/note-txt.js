@@ -4,7 +4,7 @@ export default {
     props: [],
     template: `
         <section >
-            <div>
+            <div >
                 <input
                     v-model="note.info.title" @change="reportVal"
                     placeholder="Title" >

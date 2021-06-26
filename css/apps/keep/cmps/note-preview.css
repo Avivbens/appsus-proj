@@ -1,6 +1,7 @@
 .note-preview {
     list-style: none;
     break-inside: avoid;
+    max-width: 500px;
     background: rgb(255, 255, 136);
     padding: 1em;
     border-radius: 2px;
@@ -91,4 +92,9 @@
     width: 13px;
     height: 10px;
     text-shadow: 0 0 0 #000;
+}
+
+.note-main-area {
+    display: flex;
+    flex-direction: column;
 }
