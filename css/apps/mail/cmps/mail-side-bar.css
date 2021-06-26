@@ -27,6 +27,7 @@
 
 .mail-side-bar .side-bar-category {
     display: flex;
+    align-items: center;
     gap: 10px;
 }
 

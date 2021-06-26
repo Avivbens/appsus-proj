@@ -53,3 +53,32 @@
     padding: 5px;
     font-size: 1.1rem;
 }
+
+
+/* MAIL APP MEDIA */
+
+@media (max-width: 700px) {
+    .mail-list {
+        flex-grow: 1;
+    }
+    .mail-preview .body-to-show {
+        display: none !important;
+        /* visibility: hidden; */
+    }
+    .mail-app .mail-side-bar-container {
+        min-width: 30px;
+    }
+    .mail-app .mail-compose-btn {
+        height: 40px;
+        width: 40px;
+    }
+    .mail-side-bar .side-bar-category>.capitalize {
+        display: none;
+    }
+    .mail-side-bar .side-bar-category>.main-counter {
+        left: 32px;
+    }
+    .progress-bar {
+        transform: rotate(270deg);
+    }
+}

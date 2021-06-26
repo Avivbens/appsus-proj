@@ -42,7 +42,7 @@ export default {
                         <button
                         @click="onSaveAsDraft"
                         >
-                        <i class="fas fa-cookie-bite"></i>
+                        <i class="fas fa-pencil-ruler"></i>
                         </button>
                     </span>
                 </div>
