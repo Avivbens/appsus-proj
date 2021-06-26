@@ -15,17 +15,12 @@ export default {
 
                 <button
                 class="mail-compose-btn"
-                @mouseover="hoverCompose = true"
-                @mouseleave="hoverCompose = false"
                 >
                     <router-link
                     to="/misterEmail/newMail"
                     >
-                        <transition-group name="compose-btn">
-                            <img :key="'img'" src="../../../../img/compose.png" class="inline"
-                            >
-                            <!-- <span :key="'word'" v-if="hoverCompose">Compose</span> -->
-                        </transition-group>
+                        <img :key="'img'" src="../../../../img/compose.png" class="inline"
+                        >
                     </router-link>
                 </button>
 
@@ -85,7 +80,6 @@ export default {
             filterBy: 'inbox',
             searchBy: '',
             unreadMails: 0,
-            hoverCompose: false,
         }
     },
     methods: {
@@ -105,8 +99,8 @@ export default {
                         type: 'success',
                         action: 'remove mail',
                         // link: `/keep-/${this.book.id}`,
-                    };
-                    eventBus.$emit('show-msg', msg);
+                    }
+                    eventBus.$emit('show-msg', msg)
                     console.log('emitted by eventbus')
                 })
 
@@ -136,7 +130,7 @@ export default {
                 })
         },
         setFilter(filter) {
-            this.filterBy = filter.text
+            this.filterBy = filter
         },
         onSearch(val) {
             this.searchBy = val
@@ -144,14 +138,14 @@ export default {
         searchMails(mails) {
             return mailService.getBySearch(mails, this.searchBy)
         },
-        getMailsByFilter() {
-            if (!this.filterBy || this.filterBy === 'all') {
+        getMailsByFilter(filter = this.filterBy) {
+            if (filter === 'all') {
                 return this.mails
             }
-            return mailService.getByFilter(this.mails, this.filterBy)
+            return mailService.getByFilter(this.mails, filter)
         },
         updateUnreadCounter() {
-            const currMails = this.searchMails(this.getMailsByFilter())
+            const currMails = this.searchMails(this.getMailsByFilter('inbox'))
 
             let counter = 0
             currMails.forEach(mail => {
@@ -182,7 +176,6 @@ export default {
         },
     },
     created() {
-
         eventBus.$on('reloadMails', this.loadMails)
 
         eventBus.$on('saveAsDraft', this.saveDraft)

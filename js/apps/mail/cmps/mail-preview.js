@@ -24,9 +24,9 @@ export default {
                     ></i>
                     </button>
 
-                    <span>
-                        <span class="mailTo" v-if="isSentMail">{{mail.to}}</span>
-                        <span class="mailFrom" v-else>{{mail.sender}}</span>
+                    <span class="mail-info">
+                        <span class="mail-to" v-if="isSentMail">{{mail.to}}</span>
+                        <span class="mail-from" v-else>{{mail.sender}}</span>
 
                         <span>{{mail.subject}}</span>
                     </span>
@@ -43,7 +43,7 @@ export default {
                         >{{timeToShow}}</span>
 
                         <span
-                        v-if="hoverBody"
+                        v-else
                         class="preview-btns-container"
                         >
                             <button 
