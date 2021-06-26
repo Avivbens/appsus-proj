@@ -29,3 +29,21 @@ i {
 .router-link {
     text-decoration: none;
 }
+
+.outer-wrapper {
+    overflow: hidden;
+    height: 1.2em;
+    line-height: 1.2em;
+    border: 1px dotted black;
+    margin: 1em;
+}
+
+.outer-wrapper::before {
+    content: '';
+    display: inline-block;
+}
+
+.inner-wrapper {
+    display: inline-block;
+    white-space: nowrap;
+}

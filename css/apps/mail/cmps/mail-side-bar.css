@@ -1,5 +1,5 @@
 .mail-side-bar-container {
-    width: 250px;
+    min-width: 150px;
 }
 
 .mail-side-bar {
@@ -8,7 +8,7 @@
     justify-content: center;
     padding: 10px 0;
     width: 100%;
-    gap: 20px;
+    gap: 10px;
     position: relative;
 }
 
@@ -37,5 +37,4 @@
     height: 20px;
     font-weight: bold;
     right: 15px;
-    margin-top: 2px;
 }

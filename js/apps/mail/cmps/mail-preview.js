@@ -1,5 +1,4 @@
 import mailSummery from './mail-summery.js'
-import { eventBus } from "../../../services/event-bus.js"
 
 export default {
     props: ['mail'],
@@ -33,15 +32,21 @@ export default {
                         <span>{{mail.subject}}</span>
                     </span>
 
-                    <span ref="bodyContainer">
-                        <span>{{bodyToShow}}</span>
-                        <span>{{timeToShow}}</span>
+                        <div
+                        class="body-to-show"
+                        :class="{hovered: isHovered}"
+                        >
+                            {{mail.body}}
+                        </div>
+
+                        <span
+                        v-if="!hoverBody"
+                        >{{timeToShow}}</span>
 
                         <span
                         v-if="hoverBody"
                         class="preview-btns-container"
                         >
-
                             <button 
                                 class="clickable"
                                 @click.stop="onSendToArchive">
@@ -61,7 +66,6 @@ export default {
                                 <i class="fas fa-trash-alt"></i>
                             </button>
                         </span>
-                    </span>
                 </section>
 
 
@@ -76,48 +80,12 @@ export default {
     data() {
         return {
             hoverBody: false,
-            bodyToShow: '',
             summery: null,
         }
     },
     methods: {
-        updateBodyToShow() {
-            const minusButtons = (this.hoverBody) ? 160 : 60
-
-            let allText = this.mail.body
-            if (!allText) return
-
-            let stringWidth = 0
-            let stringToShow = ''
-            while (stringWidth < (window.innerWidth * 0.55 - minusButtons) - 20) {
-                stringToShow += allText.charAt(0)
-                allText = allText.substr(1)
-
-                const fontSize = (this.mail.isRead) ? 16 : 18.5
-                stringWidth = this.measureText(stringToShow, fontSize)
-                if (!allText) {
-                    this.bodyToShow = stringToShow
-                    return
-                }
-            }
-
-            this.bodyToShow = stringToShow + '...'
-
-            // const minusButtons = (this.hoverBody) ? 160 : 20
-            // const screenW = (window.innerWidth * 0.7 - minusButtons) / 9
-            // this.bodyToShow = this.mail.body.substr(0, screenW) + '...'
-        },
-        measureText(str, fontSize = 16) {
-            const widths = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.2796875, 0.2765625, 0.3546875, 0.5546875, 0.5546875, 0.8890625, 0.665625, 0.190625, 0.3328125, 0.3328125, 0.3890625, 0.5828125, 0.2765625, 0.3328125, 0.2765625, 0.3015625, 0.5546875, 0.5546875, 0.5546875, 0.5546875, 0.5546875, 0.5546875, 0.5546875, 0.5546875, 0.5546875, 0.5546875, 0.2765625, 0.2765625, 0.584375, 0.5828125, 0.584375, 0.5546875, 1.0140625, 0.665625, 0.665625, 0.721875, 0.721875, 0.665625, 0.609375, 0.7765625, 0.721875, 0.2765625, 0.5, 0.665625, 0.5546875, 0.8328125, 0.721875, 0.7765625, 0.665625, 0.7765625, 0.721875, 0.665625, 0.609375, 0.721875, 0.665625, 0.94375, 0.665625, 0.665625, 0.609375, 0.2765625, 0.3546875, 0.2765625, 0.4765625, 0.5546875, 0.3328125, 0.5546875, 0.5546875, 0.5, 0.5546875, 0.5546875, 0.2765625, 0.5546875, 0.5546875, 0.221875, 0.240625, 0.5, 0.221875, 0.8328125, 0.5546875, 0.5546875, 0.5546875, 0.5546875, 0.3328125, 0.5, 0.2765625, 0.5546875, 0.5, 0.721875, 0.5, 0.5, 0.5, 0.3546875, 0.259375, 0.353125, 0.5890625]
-            const avg = 0.5279276315789471
-            return str
-                .split('')
-                .map(c => c.charCodeAt(0) < widths.length ? widths[c.charCodeAt(0)] : avg)
-                .reduce((cur, acc) => acc + cur) * fontSize
-        },
         onHover(hover) {
             this.hoverBody = hover
-            this.updateBodyToShow()
         },
         openSummery() {
             this.mail.isRead = true
@@ -168,19 +136,10 @@ export default {
         },
         starredColor() {
             return { starred: this.mail.isStarred }
-        }
-    },
-    created() {
-        this.updateBodyToShow()
-    },
-    mounted() {
-        window.addEventListener('resize', this.updateBodyToShow)
-    },
-    watch: {
-        mail() {
-            this.updateBodyToShow()
-            this.hoverBody = false
         },
+        isHovered() {
+            return this.hoverBody
+        }
     },
     components: {
         mailSummery,
