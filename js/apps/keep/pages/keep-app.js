@@ -90,8 +90,6 @@ export default {
             keepService.query()
                 .then(res => {
                     this.notes = res
-                    console.log('this.notes :>> ', this.notes)
-
                 })
         },
         saveNote(note) {

@@ -6,12 +6,30 @@ export default {
 
 
     <section>
+            <textarea class="note-title text-area-input"
+            v-model="note.info.title" 
+            @change="reportVal"
+            name="note-input" 
+            cols="50" 
+            :rows="textRowsTitle"
+            placeholder="Title"
+            ></textarea>            
 
-            <input v-model="note.info.title" placeholder="Title" @change="reportVal">
         <br>
         <div v-for="(line, idx) in note.info.todos" > 
-            <input type="text" v-model="note.info.todos[idx].txt" @change="reportVal"
-                @input="addNewLine(idx)" placeholder="O write your todo here"/>
+            <!-- <input type="text" v-model="note.info.todos[idx].txt" @change="reportVal"
+                @input="addNewLine(idx)" placeholder="O write your todo here"/> -->
+
+                <textarea class="note-txt text-area-input"
+                v-model="note.info.todos[idx].txt" 
+                @input="addNewLine(idx);  updateIdx(idx)"
+                @change="reportVal"
+                name="note-input" 
+                cols="50" 
+                :rows="rowsNumbers[idx]"
+                placeholder="O write your todo here"
+                ></textarea>            
+
         </div> 
 
     </section>
@@ -32,21 +50,51 @@ export default {
                 },
                 categories: ['notes', 'todos'],
             },
+            currLineIdx: 0,
+            rowsNumbers: [1.3]
         }
     },
     methods: {
         reportVal() {
-            console.log('reporting....')
+            console.log('reporting....', this.note)
             this.$emit('setVal', this.note)
         },
         addNewLine(idx) {
-            if (idx === this.note.info.todos.length - 1) this.note.info.todos.push({ txt: '', isDone: false })
+            if (!this.checkIfLastLineIsEmpty()) this.note.info.todos.push({ txt: '', isDone: false })
         },
         cleanInput() {
             this.note.info.title = ''
             this.note.info.txt = ''
             this.note.info.todos = [{ txt: '', isDone: false }]
+        },
+        checkIfLastLineIsEmpty() {
+            if (this.note.info.todos.length === 0) return true
+            return (this.note.info.todos[this.note.info.todos.length - 1].txt === '')
+        },
+        updateIdx(idx) {
+            if (idx) return
+            this.currLineIdx = idx
         }
+    },
+    computed: {
+        textRowsTitle() {
+            const text = this.note.info.title
+
+            let numberOfLineBreaks = (text.match(/\n/g) || []).length
+            let characterCount = text.length + numberOfLineBreaks
+
+            return numberOfLineBreaks + characterCount / 37 + 1
+        },
+        textRows() {
+            const text = this.note.info.todos[this.currLineIdx].txt
+
+            let numberOfLineBreaks = (text.match(/\n/g) || []).length
+            let characterCount = text.length + numberOfLineBreaks
+
+            this.rowsNumbers[idx] = numberOfLineBreaks + characterCount / 42 + 1
+            this.note.info.todosRows = this.rowsNumbers
+            this.onSave()
+        },
     },
     created() {
         eventBus.$on('cleanInput', this.cleanInput)

@@ -98,3 +98,27 @@
     display: flex;
     flex-direction: column;
 }
+
+.keep-app .text-area-input {
+    resize: none;
+    background-color: transparent;
+    font-family: google-sans;
+    font-size: 1.1rem !important;
+    border: none;
+    outline: none;
+    width: 100% !important;
+    overflow: hidden;
+}
+
+.note-title.text-area-input {
+    font-size: 1.2rem !important;
+    font-weight: bold;
+}
+
+.note-main-area .todos-container {
+    display: flex;
+}
+
+.note-main-area .todos-container>*:not(:last-child) {
+    margin-top: 5px;
+}

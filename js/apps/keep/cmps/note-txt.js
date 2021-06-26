@@ -5,13 +5,28 @@ export default {
     template: `
         <section >
             <div >
-                <input
-                    v-model="note.info.title" @change="reportVal"
-                    placeholder="Title" >
+                <textarea class="note-title text-area-input"
+                v-model="note.info.title" 
+                @change="reportVal"
+                name="note-input" 
+                cols="50" 
+                :rows="textRowsTitle"
+                placeholder="Title"
+                ></textarea>            
+
             </div>
 
             <div>
-                <input type="text" v-model="note.info.txt" @change="reportVal" placeholder="write your note here"/>
+
+                <textarea class="text-area-input"
+                v-model="note.info.txt" 
+                @change="reportVal"
+                name="note-input" 
+                cols="50" 
+                :rows="textRows"
+                placeholder="write your note here"
+                ></textarea>            
+
             </div>
 
         </section>
@@ -43,30 +58,28 @@ export default {
         cleanInput() {
             this.note.info.title = ''
             this.note.info.txt = ''
-        }
+        },
+
+    },
+    computed: {
+        textRows() {
+            const text = this.note.info.txt
+
+            let numberOfLineBreaks = (text.match(/\n/g) || []).length
+            let characterCount = text.length + numberOfLineBreaks
+
+            return numberOfLineBreaks + characterCount / 50 + 2
+        },
+        textRowsTitle() {
+            const text = this.note.info.title
+
+            let numberOfLineBreaks = (text.match(/\n/g) || []).length
+            let characterCount = text.length + numberOfLineBreaks
+
+            return numberOfLineBreaks + characterCount / 37 + 1
+        },
     },
     created() {;
         eventBus.$on('cleanInput', this.cleanInput)
     },
-    // watch: {
-    //     '$route.query': {
-    //         immediate: true,
-    //         handler() {
-    //             const query = this.$route.query
-    //             if (query.mail) {
-    //                 this.note.type = 'noteTxt'
-    //                 this.note.info.title = query.subject
-    //                 this.note.info.txt = `
-    //                 Sender: ${query.sender}
-    //                 To: ${query.to}
-    //                 \n
-    //                 ${query.body}
-    //                 `
-    //             }
-
-    //             console.log('this.note :>> ', this.note)
-    //             this.reportVal()
-    //         }
-    //     }
-    // },
 }

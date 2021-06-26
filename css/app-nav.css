@@ -1,6 +1,6 @@
 .app-nav {
     align-self: start;
-    position: fixed;
+    position: absolute;
     z-index: 100;
     top: 20px;
     right: 30px;
@@ -11,9 +11,9 @@
     margin-top: 20px;
     cursor: pointer;
     z-index: 200;
-    position: fixed;
-    top: 5px;
-    right: 20px;
+    position: absolute;
+    top: -15px;
+    right: 10px;
 }
 
 .app-nav-item {
