@@ -30,7 +30,7 @@ export default {
                     videoUrl: ''
                 },
                 categories: ['notes'],
-                bgc: '#ffffff'
+                bgc: '#ffff88'
             }
 
         }

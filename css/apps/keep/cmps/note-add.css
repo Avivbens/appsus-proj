@@ -66,3 +66,9 @@
     align-self: flex-start;
     margin-top: 10px;
 }
+
+.note-img>img,
+.note-video>iframe {
+    width: 300px;
+    height: 200px;
+}

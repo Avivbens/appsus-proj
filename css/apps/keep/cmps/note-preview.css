@@ -42,3 +42,44 @@
     opacity: 0;
     cursor: pointer;
 }
+
+.color-btn {
+    position: relative;
+    height: 30px;
+    width: 30px;
+}
+
+.color-btns {
+    display: flex;
+    position: absolute;
+    left: -10px;
+}
+
+.color-opt {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 1px solid #eee;
+}
+
+.note-preview input {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: google-sans;
+    max-width: 200px;
+    margin-bottom: 16px;
+}
+
+.note-preview .title-input {
+    margin-top: 16px;
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.note-preview .txt-input {
+    background: transparent;
+    font-size: 16px;
+}

@@ -4,9 +4,11 @@ export default {
 
     props: [],
     template: `
-    <section>
-            <input type="text" v-model="note.info.videoUrl" @change="reportVal"
+    <section class="note-video">
+        <iframe v-if="note.info.videoUrl" width="200" height="100" :src="'https://www.youtube.com/embed/'+note.info.videoUrl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <input v-else type="text" v-model="note.info.videoUrl" @change="reportVal"
                 placeholder="paste URL here"/>
+
     </section>
     `,
     data() {
@@ -23,7 +25,7 @@ export default {
                     videoUrl: ''
                 },
                 categories: ['videos', 'media'],
-                bgc: '#ffffff'
+                bgc: '#ffff88'
             }
         }
     },

@@ -1,20 +1,13 @@
 import { eventBus } from '../../../services/event-bus.js'
 export default {
-
-    props: [],
     template: `
-
-
-    <section>
-
-        <!-- <input v-model="title" placeholder="Title"> -->
-        <!-- <br> -->
-        <!-- <div v-for="(line, idx) in val" >  -->
-            <input type="text" v-model="note.info.imgUrl" @change="reportVal"
-                placeholder="paste URL here"/>
-            <input type="file" ref="file"  @change="onFilePicked"/>
-        <!-- </div>  -->
-        <!-- <div  class="bold" style="font-size:40px">+</div> -->
+    <section class="note-img">
+            <img v-if="note.info.imgUrl" :src="note.info.imgUrl" alt="no img">
+            <div v-else>
+                <input  type="text" v-model="note.info.imgUrl" @input="reportVal"
+                    placeholder="paste URL here"/>
+                <input  type="file" ref="file"  @change="onFilePicked"/>
+            </div>
     </section>
     `,
     data() {
@@ -31,7 +24,7 @@ export default {
                     videoUrl: '',
                 },
                 categories: ['photos', 'media'],
-                bgc: '#ffffff'
+                bgc: '#ffff88'
             }
         }
     },

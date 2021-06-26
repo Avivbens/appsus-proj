@@ -1,54 +1,19 @@
 import { eventBus } from '../../../../services/event-bus.js'
 export default {
-    components: {
-
-    },
-    props: ['note', 'editMode', 'bgc'],
+    props: ['note', 'bgc'],
     template: `
     <section >
-        <li
-        v-if="editMode && newNote"
-        >
-            <button 
-            class="save-changes"
-            @click="onSave"
-            >
-            Save
-            </button>
-
-            
-            <input v-model="newNote.info.title" type="text" >
-            <input v-model="newNote.info.txt" type="text" >
-            <p>{{newNote.info.txt}}</p>
-
+        <li>
+            <input class="title-input" v-model="note.info.title" type="text"@input.stop="onSave"  >
+            <input class="txt-input" v-model="note.info.txt" type="text" @input.stop="onSave" >
         </li>
-
-
-        <li 
-       
-        v-else
-        >
-            <h2>{{newNote.info.title}}</h2>
-            <p>{{newNote.info.txt}}</p>
-        </li>
-
     </section>
     `,
     methods: {
         onSave() {
-            eventBus.$emit('onSaveNote', this.newNote)
-            this.$emit('offEditMode', this.newNote)
+            eventBus.$emit('onSaveNote', this.note)
+                // this.$emit('offEditMode', this.note)
         }
     },
-    computed: {
 
-    },
-    data() {
-        return {
-            newNote: null,
-        }
-    },
-    created() {
-        this.newNote = JSON.parse(JSON.stringify(this.note))
-    },
 }

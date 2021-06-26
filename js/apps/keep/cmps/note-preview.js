@@ -28,24 +28,26 @@ export default {
                 <i class="fas fa-share-alt"></i>
             </button>
             
-            <button
-            class="color-btn"
-            > 
-                <i class="fas fa-palette">
-                    <input v-model="bgc" type="color">
-                </i> 
-            </button>
 
 
-            <button v-if="isEditable" @click="onEditNote">
-                <i class="fas fa-edit"></i>
-            </button>
+       
+                <i class="fas fa-palette color-btn" @mouseover="showColors" @mouseleave="hideColors">
+                    <!-- <input v-model="bgc" type="color"> -->
+                    <div class="color-btns" v-if="isShowingColors">
+                        <span class="color-opt" style="background-color: rgb(255, 136, 136);" @click="setColor('rgb(255, 136, 136)')"></span>
+                        <span class="color-opt" style="background-color: rgb(255, 204, 136);" @click="setColor('rgb(255, 204, 136)')"></span>
+                        <span class="color-opt" style="background-color: rgb(204, 255, 153);" @click="setColor('rgb(204, 255, 153)')"></span>
+                        <span class="color-opt" style="background-color: rgb(170, 255, 238);" @click="setColor('rgb(170, 255, 238)')"></span>
+                        <span class="color-opt" style="background-color: rgb(136, 187, 255);" @click="setColor('rgb(136, 187, 255)')"></span>
+                        <span class="color-opt" style="background-color: rgb(255, 255, 136);" @click="setColor('rgb(255, 255, 136)')"></span>
+                        <span class="color-opt" style="background-color: rgb(255, 255, 255);" @click="setColor('rgb(255, 255, 255)')"></span>
+                    </div>
+                </i>
             
             <component 
             :note="note"
             :bgc="bgc"
             :is="cmp"
-            :editMode="editMode"
             @offEditMode="offEdit"
                 />
 
@@ -55,7 +57,8 @@ export default {
         return {
             cmp: 'txtCmp',
             editMode: false,
-            bgc: '000000'
+            bgc: '000000',
+            isShowingColors: false
         }
     },
     methods: {
@@ -87,7 +90,7 @@ export default {
                 case 'noteTodos':
                     let todosStr = ''
                     note.todos.forEach(todo => {
-                        todosStr += '□' + todo.txt + '\n'
+                        todosStr += 'O' + todo.txt + '\n'
                     })
                     str = `${todosStr}`
                     break
@@ -106,12 +109,19 @@ export default {
             }
 
             return str
+        },
+        showColors() {
+            this.isShowingColors = true;
+        },
+        hideColors() {
+            this.isShowingColors = false;
+        },
+        setColor(color) {
+            this.bgc = color
         }
     },
     computed: {
-        isEditable() {
-            return this.note.type === 'noteTxt' || this.note.type === 'noteTodos'
-        },
+
         onUpdateColor(ev) {
             this.bgc = ev.value
         }
