@@ -9,13 +9,13 @@ export default {
             <home-section
             class="mail-container"
             :type="email"
-             />
+            />
 
 
             <home-section
             class="keep-container"
             :type="keep"
-             />
+            />
         </main>
     `,
     data() {

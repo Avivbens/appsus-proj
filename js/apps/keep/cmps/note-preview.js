@@ -21,7 +21,9 @@ export default {
                 <i class="fas fa-trash-alt"></i>
             </button>
             <button @click="pinNote">
-                <i class="fas fa-thumbtack"></i>
+                <i class="fas fa-thumbtack"
+                :style="pinNoteColor"
+                ></i>
             </button>
 
             <button @click="shareNote">
@@ -114,6 +116,9 @@ export default {
         },
         onUpdateColor(ev) {
             this.bgc = ev.value
+        },
+        pinNoteColor() {
+            if (this.note.isPinned) return 'color: #0092ff; -webkit-text-stroke: 2px black;'
         }
     },
 

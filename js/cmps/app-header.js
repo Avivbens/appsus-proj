@@ -6,9 +6,13 @@ export default {
         <header class="app-header">
             <div class="container">
 
-                <div class="logo">
-                    <img src="/img/logo.gif" alt="no img">
-                </div>
+                <router-link
+                to="/"
+                >
+                    <div class="logo">
+                        <img src="/img/logo.gif" alt="no img">
+                    </div>
+                </router-link>
 
                 <search-bar
                 class="search-bar"
