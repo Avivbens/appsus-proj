@@ -71,7 +71,7 @@ export default {
                     .then(() => {
                         eventBus.$emit('reloadMails')
                     })
-            }, 3500)
+            }, 2000)
 
             this.$router.push('/misterEmail')
         },

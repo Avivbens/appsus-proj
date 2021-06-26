@@ -100,7 +100,16 @@ export default {
             mailService.remove(mail)
                 .then((res) => {
                     this.mails = res
+                    const msg = {
+                        txt: `Mail deleted`,
+                        type: 'success',
+                        action: 'remove mail',
+                        // link: `/keep-/${this.book.id}`,
+                    };
+                    eventBus.$emit('show-msg', msg);
+                    console.log('emitted by eventbus')
                 })
+
         },
         archiveMail(mail) {
             mailService.toggleArchive(mail.id)

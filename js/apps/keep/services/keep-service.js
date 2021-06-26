@@ -24,11 +24,16 @@ export const keepService = {
 function query() {
     return storageService.query(NOTES_KEY)
         .then(res => {
+            // console.log('res :>> ', res);
             if (res.length) {
                 return res
             } else {
-                postMany(createFirstNotes())
-                    .then(res => res)
+                console.log('here :>> ');
+                return postMany(createFirstNotes())
+                    .then(res => {
+                        // console.log('res :>> ', res);
+                        return res
+                    })
             }
         })
 }
@@ -108,7 +113,7 @@ function createSimpleNote() {
             imgUrl: '',
             videoUrl: ''
         },
-        categories: ['notes'],
+        categories: ['notes', 'general:color'],
         bgc: '#ffff88'
     }
 

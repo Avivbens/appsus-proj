@@ -15,7 +15,8 @@ export default {
         <section 
         class="note-preview" 
         :class="note.type"
-        :style="{backgroundColor: bgc}">
+        :style="{backgroundColor: bgc}"
+        draggable="true">
         
             <button @click="deleteNote">
                 <i class="fas fa-trash-alt"></i>
@@ -59,13 +60,21 @@ export default {
         return {
             cmp: 'txtCmp',
             editMode: false,
-            bgc: '000000',
+            bgc: 'rgb(255,255,136)',
             isShowingColors: false
         }
     },
     methods: {
         deleteNote() {
             eventBus.$emit('deleteNote', this.note.id)
+            const msg = {
+                txt: `Note deleted`,
+                type: 'success',
+                action: 'remove note',
+                // link: `/keep-/${this.book.id}`,
+            };
+            eventBus.$emit('show-msg', msg);
+            console.log('emitted by eventbus')
         },
         onEditNote() {
             this.editMode = !this.editMode
@@ -120,10 +129,43 @@ export default {
         },
         setColor(color) {
             this.bgc = color
+        },
+        updateFilterByColor() {
+            const currColorIdx = this.note.categories.findIndex(category => category.includes('color'))
+            if (currColorIdx !== -1) this.note.categories.splice(currColorIdx, 1)
+
+            let filter = 'general'
+            switch (this.bgc) {
+                case 'rgb(255, 255, 136)':
+                    filter = 'general'
+                    break;
+                case 'rgb(255, 136, 136)':
+                    filter = 'work'
+                    break;
+                case 'rgb(255, 204, 136)':
+                    filter = 'cars'
+                    break;
+                case 'rgb(204, 255, 153)':
+                    filter = 'insurance'
+                    break;
+                case 'rgb(170, 255, 238)':
+                    filter = 'health'
+                    break;
+                case 'rgb(136, 187, 255)':
+                    filter = 'family'
+                    break;
+                case 'rgb(255, 255, 255)':
+                    filter = 'diet'
+                    break;
+
+                default:
+                    break;
+            }
+
+            this.note.categories.push(`${filter}:color`)
         }
     },
     computed: {
-
         onUpdateColor(ev) {
             this.bgc = ev.value
         },
@@ -156,6 +198,7 @@ export default {
         bgc() {
             this.note.bgc = this.bgc
             eventBus.$emit('onUpdateColor', this.note)
+            this.updateFilterByColor()
         }
     }
 
