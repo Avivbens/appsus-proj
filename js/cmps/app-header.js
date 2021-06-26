@@ -10,7 +10,7 @@ export default {
                 to="/"
                 >
                     <div class="logo">
-                        <img src="/img/logo.gif" alt="no img">
+                        <img src="img/logo.gif" alt="no img">
                     </div>
                 </router-link>
 

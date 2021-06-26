@@ -19,7 +19,7 @@ export default {
                     <router-link
                     to="/misterEmail/newMail"
                     >
-                        <img :key="'img'" src="../../../../img/compose.png" class="inline"
+                        <img :key="'img'" src="img/compose.png" class="inline"
                         >
                     </router-link>
                 </button>

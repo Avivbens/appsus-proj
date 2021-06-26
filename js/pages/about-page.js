@@ -14,8 +14,8 @@ export default {
             </p> 
             
             <div class="imgs-container">
-                <img src="../../img/aviv.png" alt="">
-                <img src="../../img/lee.jpg" alt="">
+                <img src="img/aviv.png" alt="">
+                <img src="img/lee.jpg" alt="">
             </div>
         </div>
 
