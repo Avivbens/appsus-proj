@@ -13,7 +13,7 @@ export default {
             >   
 
 
-                <button
+                <button title="New Mail"
                 class="mail-compose-btn"
                 >
                     <router-link

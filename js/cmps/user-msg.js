@@ -7,7 +7,7 @@ export default {
     leave-active-class="animate__animated animate__backOutUp"
     >
         <div v-if="msg" class="user-msg" :class="msg.type">
-            <button class="fas fa-times"  @click="close"></button> 
+            <button title="Close" class="fas fa-times"  @click="close"></button> 
             <div class="logo">
                 <img src="img/logo.gif" alt="no img">
             </div>   

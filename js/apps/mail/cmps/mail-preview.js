@@ -15,7 +15,7 @@ export default {
                 class="small-prev-container"
                 v-if="!summery">
 
-                    <button 
+                    <button title="Star" 
                     class="starred-mail-btn"
                     @click.stop="onStarMail"
                     :class="starredColor"
@@ -46,19 +46,19 @@ export default {
                         v-else
                         class="preview-btns-container"
                         >
-                            <button 
+                            <button title="Archive" 
                                 class="clickable"
                                 @click.stop="onSendToArchive">
                                 <i class="fas fa-archive"></i>
                             </button>
 
-                            <button 
+                            <button :title="(this.mail.isRead)?'Read' : 'Unread'" 
                                 class="clickable"
                                 @click.stop="onToggleMarkAsRead"> 
                                 <i :class="readButton"></i>
                             </button>
                             
-                            <button 
+                            <button title="Delete" 
                                 class="clickable"
                                 @click.stop="onDeleteMail"
                                 >

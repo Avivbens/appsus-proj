@@ -10,7 +10,7 @@ export default {
         >
 
             <aside class="details-buttons-area">
-                <button 
+                <button title="Draft" 
                 v-if="draftEdit"
                 class="clickable"
                 @click="onEditDraft"
@@ -19,7 +19,7 @@ export default {
                 </button>
 
 
-                <button 
+                <button title="Reply" 
                 v-else
                 class="clickable"
                 @click="onReply"
@@ -27,7 +27,7 @@ export default {
                 <i class="fas fa-reply"></i>
                 </button>
 
-                <button 
+                <button title="Delete" 
                 class="clickable"
                 @click="onDeleteMail(mail)"
                 >
@@ -35,7 +35,7 @@ export default {
                 </button>
 
 
-                <button 
+                <button title="Exit Full Screen" 
                 class="clickable"
                 @click="onExitFullSize"
                 >

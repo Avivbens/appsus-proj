@@ -25,7 +25,7 @@ export default {
 
 
                 <div class="compose-buttons-area">
-                    <button
+                    <button title="Send"
                     @click="onSendMail"
                     >
                     <i class="fas fa-paper-plane"></i>
@@ -33,13 +33,13 @@ export default {
 
 
                     <span>
-                        <button
+                        <button title="Delete"
                         @click.prevent="onDeclareChanges"
                         >
                         <i class="fas fa-trash-alt"></i>
                         </button>
 
-                        <button
+                        <button title="Draft"
                         @click="onSaveAsDraft"
                         >
                         <i class="fas fa-pencil-ruler"></i>

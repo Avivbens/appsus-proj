@@ -30,6 +30,10 @@ export default {
             searchBy: '',
             filterBy: '',
             categories: [{
+                    text: 'all',
+                    icon: 'fas fa-mail-bulk'
+                },
+                {
                     text: 'notes',
                     icon: 'far fa-sticky-note'
                 },
@@ -86,6 +90,8 @@ export default {
             keepService.query()
                 .then(res => {
                     this.notes = res
+                    console.log('this.notes :>> ', this.notes)
+
                 })
         },
         saveNote(note) {

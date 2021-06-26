@@ -7,7 +7,7 @@ export default {
 
             <aside class="summery-buttons-area">
 
-                <button 
+                <button title="Edit Draft" 
                 v-if="!draftEdit"
                 class="clickable"
                 @click.stop="onReply"
@@ -15,21 +15,21 @@ export default {
                 <i class="fas fa-reply"></i>
                 </button>
 
-                <button 
+                <button title="Share" 
                 class="clickable"
                 @click.stop="onShare"
                 >
                 <i class="fas fa-share-square"></i>
                 </button>
 
-                <button 
+                <button title="Delete" 
                 class="clickable"
                 @click.stop="onDeleteMail"
                 >
                 <i class="fas fa-trash-alt"></i>
                 </button>
 
-                <button 
+                <button title="Expand" 
                 class="clickable"
                 @click.stop="onFullSize"
                 >

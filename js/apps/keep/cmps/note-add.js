@@ -15,19 +15,19 @@ export default {
     template: `
         <section class="note-add">
             <div class="modes-btns-container">
-                <button @click = "cmp = 'noteTxt'">
+                <button title="Note" @click = "cmp = 'noteTxt'">
                     <i class="far fa-sticky-note"></i>
                 </button>
 
-                <button @click = "cmp = 'noteTodos'">
+                <button title="Todo" @click = "cmp = 'noteTodos'">
                     <i class="fas fa-list"></i>
                 </button>
                 
-                <button @click = "cmp = 'noteImg'">
+                <button title="Photo" @click = "cmp = 'noteImg'">
                     <i class="fas fa-image"></i>
                 </button>
                 
-                <button @click = "cmp = 'noteVideo'">
+                <button title="Video" @click = "cmp = 'noteVideo'">
                     <i class="fab fa-youtube"></i>
                 </button>
             </div>
@@ -38,9 +38,7 @@ export default {
 
                 <component :is="cmp" @setVal="setAns"/>
 
-                <button
-                class="save-btn"
-                >
+                <button title="Save" class="save-btn">
                     <i class="fas fa-save"></i>    
                 </button>
                 
@@ -75,8 +73,8 @@ export default {
                 type: 'success',
                 action: 'add note',
                 // link: `/keep-/${this.book.id}`,
-            };
-            eventBus.$emit('show-msg', msg);
+            }
+            eventBus.$emit('show-msg', msg)
             console.log('emitted by eventbus')
         },
         setAns(val) {

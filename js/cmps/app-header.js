@@ -9,7 +9,7 @@ export default {
                 <router-link
                 to="/"
                 >
-                    <div class="logo">
+                    <div title="Home" class="logo">
                         <img src="img/logo.gif" alt="no img">
                     </div>
                 </router-link>

@@ -18,23 +18,23 @@ export default {
         :style="{backgroundColor: bgc}"
         draggable="true">
         
-            <button @click="deleteNote">
+            <button title="Delete" @click="deleteNote">
                 <i class="fas fa-trash-alt"></i>
             </button>
-            <button @click="pinNote">
+            <button title="Pin" @click="pinNote">
                 <i class="fas fa-thumbtack"
                 :style="pinNoteColor"
                 ></i>
             </button>
 
-            <button @click="shareNote">
+            <button title="Share" @click="shareNote">
                 <i class="fas fa-share-alt"></i>
             </button>
             
 
 
        
-                <i class="fas fa-palette color-btn" @mouseover="showColors" @mouseleave="hideColors">
+                <i class="fas fa-palette color-btn" title="Color" @mouseover="showColors" @mouseleave="hideColors">
                     <!-- <input v-model="bgc" type="color"> -->
                     <div class="color-btns" v-if="isShowingColors">
                         <span class="color-opt" style="background-color: rgb(255, 136, 136);" @click="setColor('rgb(255, 136, 136)')"></span>
@@ -72,8 +72,8 @@ export default {
                 type: 'success',
                 action: 'remove note',
                 // link: `/keep-/${this.book.id}`,
-            };
-            eventBus.$emit('show-msg', msg);
+            }
+            eventBus.$emit('show-msg', msg)
             console.log('emitted by eventbus')
         },
         onEditNote() {
@@ -122,10 +122,10 @@ export default {
             return str
         },
         showColors() {
-            this.isShowingColors = true;
+            this.isShowingColors = true
         },
         hideColors() {
-            this.isShowingColors = false;
+            this.isShowingColors = false
         },
         setColor(color) {
             this.bgc = color
@@ -138,28 +138,28 @@ export default {
             switch (this.bgc) {
                 case 'rgb(255, 255, 136)':
                     filter = 'general'
-                    break;
+                    break
                 case 'rgb(255, 136, 136)':
                     filter = 'work'
-                    break;
+                    break
                 case 'rgb(255, 204, 136)':
                     filter = 'cars'
-                    break;
+                    break
                 case 'rgb(204, 255, 153)':
                     filter = 'insurance'
-                    break;
+                    break
                 case 'rgb(170, 255, 238)':
                     filter = 'health'
-                    break;
+                    break
                 case 'rgb(136, 187, 255)':
                     filter = 'family'
-                    break;
+                    break
                 case 'rgb(255, 255, 255)':
                     filter = 'diet'
-                    break;
+                    break
 
                 default:
-                    break;
+                    break
             }
 
             this.note.categories.push(`${filter}:color`)
