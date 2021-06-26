@@ -1,7 +1,12 @@
 .mail-app {
     display: flex;
     margin-top: 10px;
+    width: 95%;
     font-family: roboto;
+}
+
+.mail-app * {
+    font-size: .9rem !important;
 }
 
 .mail-side-bar-container {
@@ -9,9 +14,8 @@
     flex-direction: column;
     align-items: center;
     padding: 10px;
-    width: 150px;
+    max-width: 150px;
     margin-top: 10px;
-    gap: 20px;
 }
 
 .mail-app i {
@@ -24,9 +28,12 @@
 }
 
 .mail-app .mail-compose-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: transparent;
     border: 2px solid rgb(53, 53, 53);
-    width: 60%;
+    width: 50%;
     border-radius: 3em;
     transition: all .4s;
 }

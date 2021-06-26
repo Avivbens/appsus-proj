@@ -176,6 +176,7 @@ function createSimpleMail() {
 
 function createFirstMails() {
     const mails = [{
+            id: utilService.makeId(),
             sender: 'iCloud',
             subject: 'Your iCloud storage is full?',
             body: 'Hello Sir, Your iCloud storage is full. Because you have exceeded your storage plan, your documents, contacts, and device data are no longer backing up to iCloud and your photos and videos are not uploading to iCloud Photos. iCloud Drive and iCloud-enabled apps are not updating across your devices.',
@@ -185,8 +186,8 @@ function createFirstMails() {
             sentAt: Date.now(),
             isStarred: false
         },
-
         {
+            id: utilService.makeId(),
             sender: 'Google Cloud',
             subject: 'Your Google Cloud ',
             body: 'Hello Google Cloud Customer, We are sending this message to let you know about the following updates to the Google Cloud platform',
@@ -197,6 +198,7 @@ function createFirstMails() {
             isStarred: false
         },
         {
+            id: utilService.makeId(),
             sender: 'Yaron Biton',
             subject: 'Your Sprint grade',
             body: 'Hello guys, I am sorry to tell you that your sprint was very bad, hope to see some better things in sprint 4',
@@ -207,6 +209,7 @@ function createFirstMails() {
             isStarred: false
         },
         {
+            id: utilService.makeId(),
             sender: 'Stav Partush',
             subject: 'Team leader message',
             body: 'Hello guys, please do not forget to upload everything to dropBox (except of git), and also upload everything to gitHub pages!',
@@ -217,6 +220,7 @@ function createFirstMails() {
             isStarred: false
         },
         {
+            id: utilService.makeId(),
             sender: 'Rotem Carmon',
             subject: 'DropBox',
             body: 'Hi everyone, DO NOT forget to leave git folder out of my amazing and clean DropBox',
@@ -226,6 +230,7 @@ function createFirstMails() {
             sentAt: Date.now(),
             isStarred: false
         }, {
+            id: utilService.makeId(),
             sender: 'iCloud',
             subject: 'Your iCloud storage is full?',
             body: 'Hello Sir, Your iCloud storage is full. Because you have exceeded your storage plan, your documents, contacts, and device data are no longer backing up to iCloud and your photos and videos are not uploading to iCloud Photos. iCloud Drive and iCloud-enabled apps are not updating across your devices.',
@@ -235,8 +240,8 @@ function createFirstMails() {
             sentAt: Date.now(),
             isStarred: false
         },
-
         {
+            id: utilService.makeId(),
             sender: 'Google Cloud',
             subject: 'Your iCloud storage is full?',
             body: 'Hello Google Cloud Customer, We are sending this message to let you know about the following updates to the Google Cloud platform',
@@ -247,6 +252,7 @@ function createFirstMails() {
             isStarred: false
         },
         {
+            id: utilService.makeId(),
             sender: 'Yaron Biton',
             subject: 'Your Sprint grade',
             body: 'Hello guys, I am sorry to tell you that your sprint was very bad, hope to see some better things in sprint 4',
@@ -257,6 +263,7 @@ function createFirstMails() {
             isStarred: false
         },
         {
+            id: utilService.makeId(),
             sender: 'Stav Partush',
             subject: 'Team leader message',
             body: 'Hello guys, please do not forget to upload everything to dropBox (except of git), and also upload everything to gitHub pages!',
@@ -267,6 +274,7 @@ function createFirstMails() {
             isStarred: false
         },
         {
+            id: utilService.makeId(),
             sender: 'Rotem Carmon',
             subject: 'DropBox',
             body: 'Hi everyone, DO NOT forget to leave git folder out of my amazing and clean DropBox',

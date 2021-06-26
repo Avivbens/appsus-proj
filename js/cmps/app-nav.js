@@ -10,17 +10,26 @@ export default {
             <i class="menu-icon fas fa-th fa-lg"
             @click.stop="onToggleMenu" 
             ></i>
-
-            <section 
-            class="menu-container"
-            @click="onToggleMenu"
-            v-if="isNavOpen">
-
+            
+            <transition
+            enter-active-class="animate__animated animate__fadeInRight"
+            leave-active-class="animate__animated animate__fadeOutRight"
+            >
+            <!-- enter-active-class="animate__animated animate__bounceIn"
+            leave-active-class="animate__animated animate__bounceOut" -->
+            <!-- enter-active-class="animate__animated animate__fadeInTopRight"
+            leave-active-class="animate__animated animate__fadeOutTopRight" -->
+                <section 
+                class="menu-container"
+                @click="onToggleMenu"
+                v-if="isNavOpen">
+                
                 <app-nav-item 
                 v-for="item in items"
                 :item="item"
                 />
             </section>
+            </transition>
             
         </nav>
 

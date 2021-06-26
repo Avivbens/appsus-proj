@@ -3,9 +3,7 @@
     border: 1px solid transparent;
     border-radius: 4px;
     position: relative;
-    width: 30vw;
-    min-width: 150px;
-    max-width: 300px;
+    max-width: 250px;
     height: 35px;
 }
 
@@ -17,12 +15,13 @@
 
 .search-bar>input {
     padding: 10px 20px;
+    width: 100%;
 }
 
 .search-bar>img {
     position: absolute;
     object-fit: contain;
     height: 40%;
-    top: 30%;
-    right: 1%;
+    top: 10px;
+    right: 5px;
 }

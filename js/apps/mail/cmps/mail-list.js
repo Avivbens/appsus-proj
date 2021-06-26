@@ -20,7 +20,6 @@ export default {
             @starMail="starMail"
             />
 
-
         </section>
     `,
     methods: {

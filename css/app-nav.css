@@ -1,16 +1,19 @@
 .app-nav {
     align-self: start;
-    position: relative;
+    position: fixed;
+    z-index: 100;
+    top: 20px;
+    right: 30px;
 }
 
 .app-nav .menu-icon {
-    position: absolute;
-    top: 0;
-    right: 0;
     font-size: 30px;
     margin-top: 20px;
     cursor: pointer;
     z-index: 200;
+    position: fixed;
+    top: 5px;
+    right: 20px;
 }
 
 .app-nav-item {
@@ -38,9 +41,9 @@
 
 .menu-container {
     position: absolute;
+    font-family: google-sans-bold;
     top: 50px;
-    right: 0;
-    z-index: 100;
+    right: -30px;
     background-color: white;
     width: 300px;
     height: 300px;
