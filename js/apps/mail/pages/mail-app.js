@@ -19,7 +19,7 @@ export default {
                     <router-link
                     to="/misterEmail/newMail"
                     >
-                        <img :key="'img'" src="../../../../img/compose.png" class="inline"
+                        <img :key="'img'" src="img/compose.png" class="inline"
                         >
                     </router-link>
                 </button>
@@ -54,7 +54,7 @@ export default {
             mails: null,
             categories: [{
                     text: 'all',
-                    icon: 'asdadas'
+                    icon: 'fas fa-mail-bulk'
                 },
                 {
                     text: 'inbox',
@@ -74,7 +74,7 @@ export default {
                 },
                 {
                     text: 'drafts',
-                    icon: 'fas fa-cookie-bite'
+                    icon: 'fas fa-pencil-ruler'
                 }
             ],
             filterBy: 'inbox',
@@ -153,7 +153,7 @@ export default {
             })
 
             this.unreadMails = counter
-        }
+        },
     },
     computed: {
         mailsToShow() {

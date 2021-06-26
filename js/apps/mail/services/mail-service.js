@@ -47,9 +47,9 @@ function getByFilter(mails, filterBy) {
 
 function getBySearch(mails, searchWord) {
     return mails.filter(mail => {
-        return mail.sender.toLowerCase().includes(searchWord) ||
-            mail.subject.toLowerCase().includes(searchWord) ||
-            mail.to.toLowerCase().includes(searchWord)
+        return mail.sender.toLowerCase().includes(searchWord.toLowerCase()) ||
+            mail.subject.toLowerCase().includes(searchWord.toLowerCase()) ||
+            mail.to.toLowerCase().includes(searchWord.toLowerCase())
     })
 }
 

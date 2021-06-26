@@ -6,11 +6,13 @@
     box-shadow: 0 0 6px 1px #b8b8b8f0;
     background-color: rgb(218, 218, 218);
     padding: 10px;
-    width: 90%;
+    width: 93%;
+    padding: 20px;
 }
 
 .mail-summery .summery-title {
     margin: 10px 0;
+    font-size: 1.5rem !important;
 }
 
 .mail-summery .summery-sender {
@@ -19,7 +21,7 @@
 }
 
 .mail-summery .summery-body {
-    margin: 10px 30px;
+    margin: 30px 30px;
 }
 
 .mail-summery .summery-buttons-area {
@@ -29,8 +31,8 @@
 }
 
 .mail-summery .summery-buttons-area>button {
-    width: 45px;
-    height: 45px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     transition: all .4s;
 }
@@ -41,5 +43,5 @@
 
 .mail-summery .summery-buttons-area>*>i {
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 1rem;
 }

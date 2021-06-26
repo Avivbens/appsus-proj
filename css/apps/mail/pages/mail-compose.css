@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    font-family: roboto;
     width: 95%;
 }
 
@@ -34,6 +35,8 @@
 
 .mail-compose textarea {
     padding-bottom: 120px !important;
+    font-family: roboto;
+    font-size: 16px;
     resize: none;
 }
 

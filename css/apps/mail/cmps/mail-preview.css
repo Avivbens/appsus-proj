@@ -20,7 +20,7 @@
     display: flex;
     justify-content: start;
     align-items: center;
-    min-width: 95%;
+    max-width: 95%;
     height: 40px;
 }
 
@@ -54,7 +54,7 @@
     display: flex;
     align-items: center;
     white-space: nowrap;
-    max-width: 43%;
+    max-width: 48%;
     height: 100%;
     overflow: hidden;
     text-overflow: ellipsis;

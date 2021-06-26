@@ -50,8 +50,13 @@ export default {
             </h1>
 
             <h4 class="details-sender">
-                {{mail.sender}}
+                <i class="fas fa-user-circle"></i>
+                {{sender}}
             </h4>
+
+            <span class="details-to">
+                To: {{mailTo}}
+            </span>
 
             <p class="details-body">
                 {{mail.body}}
@@ -84,6 +89,14 @@ export default {
     computed: {
         draftEdit() {
             return this.mail.categories.includes('drafts')
+        },
+        sender() {
+            if (!this.mail.sender.includes('@')) return `${this.mail.sender} <${this.mail.sender.replaceAll(' ', '')}@gmail.com>`
+            return this.mail.sender
+        },
+        mailTo() {
+            if (this.mail.to.toLowerCase() === 'you') return 'Me'
+            return this.mail.to
         }
     },
     watch: {

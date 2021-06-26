@@ -13,7 +13,7 @@ export default {
             ref="input"
             v-model="searchTxt"
             >
-            <img src="../../img/loupe.png">
+            <img src="img/loupe.png">
         </div>
     `,
     data() {

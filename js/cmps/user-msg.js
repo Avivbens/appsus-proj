@@ -9,7 +9,7 @@ export default {
         <div v-if="msg" class="user-msg" :class="msg.type">
             <button class="fas fa-times"  @click="close"></button> 
             <div class="logo">
-                <img src="/img/logo.gif" alt="no img">
+                <img src="img/logo.gif" alt="no img">
             </div>   
             <p>{{msg.txt}}</p>
             <!-- <router-link v-if="msg.action === 'add review'" :to="msg.link"  >watch <span @click="close">book</span></router-link> -->

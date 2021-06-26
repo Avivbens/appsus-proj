@@ -1,5 +1,7 @@
 close - <i class="fas fa-times"></i>
 
+user - <i class="fas fa-user-circle"></i>
+
 delete - <i class="fas fa-trash-alt"></i>
 
 share - <i class="fas fa-share-square"></i>
@@ -16,9 +18,11 @@ archive - <i class="fas fa-archive"></i>
 
 sent - <i class="fas fa-paper-plane"></i>
 
-drafts - <i class="fas fa-cookie-bite"></i>
+drafts - <i class="fas fa-pencil-ruler"></i>
 
 expand - <i class="fas fa-expand"></i>
+
+all - <i class="fas fa-mail-bulk"></i>
 
 todo- <i class="fas fa-list"></i>
 

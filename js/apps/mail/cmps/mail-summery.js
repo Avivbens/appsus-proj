@@ -43,8 +43,13 @@ export default {
             </h2>
 
             <h5 class="summery-sender">
-                {{mail.sender}}
+                <i class="fas fa-user-circle"></i>
+                {{sender}}
             </h5>
+
+            <span>
+                To: {{mailTo}}
+            </span>
 
             <p class="summery-body">
                 {{mail.body}}
@@ -77,7 +82,16 @@ export default {
     computed: {
         draftEdit() {
             return this.mail.categories.includes('drafts')
+        },
+        sender() {
+            if (!this.mail.sender.includes('@')) return `${this.mail.sender} <${this.mail.sender.replaceAll(' ', '')}@gmail.com>`
+            return this.mail.sender
+        },
+        mailTo() {
+            if (this.mail.to.toLowerCase() === 'you') return 'Me'
+            return this.mail.to
         }
+
     },
 
 }
