@@ -141,30 +141,6 @@ function createMail(sender, subject, body, category, to = 'you', isRead = false,
     }
 }
 
-function createSimpleMail() {
-    return {
-        sender: 'You',
-        subject: 'Wassap?',
-        body: utilService.makeLorem(200),
-        categories: ['inbox'],
-        to: 'you',
-        isRead: false,
-        sentAt: Date.now(),
-        isStarred: false
-    }
-}
-
-function createFirstMails() {
-    const mails = []
-    for (let i = 0; i < 10; i++) {
-        const mail = createSimpleMail()
-        mail.id = utilService.makeId()
-        mails.push(mail)
-    }
-
-    return mails
-}
-
 function save(mail) {
     if (mail.id) {
         return storageService.put(MAILS_KEY, mail)
@@ -183,4 +159,124 @@ function save(mail) {
                     })
             })
     }
+}
+
+function createSimpleMail() {
+    return {
+        sender: 'You',
+        subject: 'Wassap?',
+        body: utilService.makeLorem(200),
+        categories: ['inbox'],
+        to: 'you',
+        isRead: false,
+        sentAt: Date.now(),
+        isStarred: false
+    }
+}
+
+function createFirstMails() {
+    const mails = [{
+            sender: 'iCloud',
+            subject: 'Your iCloud storage is full?',
+            body: 'Hello Sir, Your iCloud storage is full. Because you have exceeded your storage plan, your documents, contacts, and device data are no longer backing up to iCloud and your photos and videos are not uploading to iCloud Photos. iCloud Drive and iCloud-enabled apps are not updating across your devices.',
+            categories: ['inbox'],
+            to: 'you',
+            isRead: false,
+            sentAt: Date.now(),
+            isStarred: false
+        },
+
+        {
+            sender: 'Google Cloud',
+            subject: 'Your Google Cloud ',
+            body: 'Hello Google Cloud Customer, We are sending this message to let you know about the following updates to the Google Cloud platform',
+            categories: ['inbox'],
+            to: 'you',
+            isRead: false,
+            sentAt: Date.now(),
+            isStarred: false
+        },
+        {
+            sender: 'Yaron Biton',
+            subject: 'Your Sprint grade',
+            body: 'Hello guys, I am sorry to tell you that your sprint was very bad, hope to see some better things in sprint 4',
+            categories: ['inbox'],
+            to: 'you',
+            isRead: false,
+            sentAt: Date.now(),
+            isStarred: false
+        },
+        {
+            sender: 'Stav Partush',
+            subject: 'Team leader message',
+            body: 'Hello guys, please do not forget to upload everything to dropBox (except of git), and also upload everything to gitHub pages!',
+            categories: ['inbox'],
+            to: 'you',
+            isRead: false,
+            sentAt: Date.now(),
+            isStarred: false
+        },
+        {
+            sender: 'Rotem Carmon',
+            subject: 'DropBox',
+            body: 'Hi everyone, DO NOT forget to leave git folder out of my amazing and clean DropBox',
+            categories: ['inbox'],
+            to: 'you',
+            isRead: false,
+            sentAt: Date.now(),
+            isStarred: false
+        }, {
+            sender: 'iCloud',
+            subject: 'Your iCloud storage is full?',
+            body: 'Hello Sir, Your iCloud storage is full. Because you have exceeded your storage plan, your documents, contacts, and device data are no longer backing up to iCloud and your photos and videos are not uploading to iCloud Photos. iCloud Drive and iCloud-enabled apps are not updating across your devices.',
+            categories: ['inbox'],
+            to: 'you',
+            isRead: false,
+            sentAt: Date.now(),
+            isStarred: false
+        },
+
+        {
+            sender: 'Google Cloud',
+            subject: 'Your iCloud storage is full?',
+            body: 'Hello Google Cloud Customer, We are sending this message to let you know about the following updates to the Google Cloud platform',
+            categories: ['inbox'],
+            to: 'you',
+            isRead: false,
+            sentAt: Date.now(),
+            isStarred: false
+        },
+        {
+            sender: 'Yaron Biton',
+            subject: 'Your Sprint grade',
+            body: 'Hello guys, I am sorry to tell you that your sprint was very bad, hope to see some better things in sprint 4',
+            categories: ['inbox'],
+            to: 'you',
+            isRead: false,
+            sentAt: Date.now(),
+            isStarred: false
+        },
+        {
+            sender: 'Stav Partush',
+            subject: 'Team leader message',
+            body: 'Hello guys, please do not forget to upload everything to dropBox (except of git), and also upload everything to gitHub pages!',
+            categories: ['inbox'],
+            to: 'you',
+            isRead: false,
+            sentAt: Date.now(),
+            isStarred: false
+        },
+        {
+            sender: 'Rotem Carmon',
+            subject: 'DropBox',
+            body: 'Hi everyone, DO NOT forget to leave git folder out of my amazing and clean DropBox',
+            categories: ['inbox'],
+            to: 'you',
+            isRead: false,
+            sentAt: Date.now(),
+            isStarred: false
+        }
+    ]
+
+    return mails
 }

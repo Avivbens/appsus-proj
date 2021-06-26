@@ -7,6 +7,7 @@
 .mail-side-bar-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
     padding: 10px;
     width: 150px;
     margin-top: 10px;
@@ -25,6 +26,13 @@
 .mail-app .mail-compose-btn {
     background-color: transparent;
     border: 2px solid rgb(53, 53, 53);
+    width: 60%;
+    border-radius: 3em;
+    transition: all .4s;
+}
+
+.mail-app .mail-compose-btn:hover {
+    width: 100%;
     border-radius: 3em;
 }
 

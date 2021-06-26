@@ -1,29 +1,34 @@
 export default {
     props: ['categories', 'mainCounter', 'mainCounterIdx', 'isHovered'],
     template: `
-        <aside
-        @mouseover="toggleHover(true)"   
-        @mouseleave="toggleHover(false)"
-        class="side-bar"   
-        >
-        
-            <div
-            v-if="categories" 
-            v-for="(category,idx) in categories" 
-            @click="filterBy(category)"
+            <aside
+            @mouseover="toggleHover(true)"   
+            @mouseleave="toggleHover(false)"
+            class="side-bar"   
             >
-                <span class="side-bar-category">
-                    <span class="main-counter"
-                    v-if="mainCounter && idx===mainCounterIdx"
-                    >
-                        {{mainCounter}}
+            
+                <div
+                v-if="categories" 
+                v-for="(category,idx) in categories" 
+                @click="filterBy(category)"
+                >
+                    <span class="side-bar-category">
+                        <span class="main-counter"
+                        v-if="mainCounter && idx===mainCounterIdx"
+                        >
+                            {{mainCounter}}
+                        </span>
+                        
+                        <i :class="category.icon" class="side-bar-icons"> </i>
+                        <transition 
+                            enter-active-class="animate__animated animate__backInLeft"
+                            leave-active-class="animate__animated animate__backOutLeft"
+                            >
+                            <span class="capitalize" v-if="hover"> {{categoryToShow(category)}}</span>
+                        </transition>
                     </span>
-                    
-                    <i :class="category.icon" class="side-bar-icons"> </i>
-                    <span class="capitalize" v-if="hover"> {{categoryToShow(category)}}</span>
-                </span>
-            </div>
-        </aside>
+                </div>
+            </aside>
     `,
     data() {
         return {

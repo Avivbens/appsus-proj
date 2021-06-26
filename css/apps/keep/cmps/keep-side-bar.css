@@ -8,6 +8,7 @@
 
 .keep-app .side-bar-icons {
     margin-right: 10px;
+    z-index: 10;
 }
 
 .keep-app .side-bar-category {
@@ -18,6 +19,7 @@
 .keep-side-bar>* {
     border-radius: 0 3em 3em 0;
     padding: 5px;
+    transition: all .4s;
 }
 
 .keep-side-bar>*:hover {
@@ -54,4 +56,9 @@
     color: rgb(255, 255, 255);
     border: 1px solid lightgrey;
     border-radius: 50%;
+}
+
+.animate__animated.animate__backInLeft,
+.animate__animated.animate__backOutLeft {
+    --animate-duration: .3s;
 }

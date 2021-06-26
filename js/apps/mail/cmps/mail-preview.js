@@ -25,9 +25,8 @@ export default {
                     </button>
 
                     <span>
-                        <span v-if="isSentMail">{{mail.to}}</span>
-                        <span v-else>{{mail.sender}}</span>
-
+                        <span class="mailTo" v-if="isSentMail">{{mail.to}}</span>
+                        <span class="mailFrom" v-else>{{mail.sender}}</span>
 
                         <span>{{mail.subject}}</span>
                     </span>
