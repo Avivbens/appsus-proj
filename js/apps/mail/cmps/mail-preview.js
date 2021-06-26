@@ -24,11 +24,11 @@ export default {
                     ></i>
                     </button>
 
-                    <span>
-                        <span class="mailTo" v-if="isSentMail">{{mail.to}}</span>
-                        <span class="mailFrom" v-else>{{mail.sender}}</span>
+                    <span >
+                        <span class="mail-to" v-if="isSentMail">{{mail.to}}</span>
+                        <span class="mail-from" v-else>{{mail.sender}}</span>
 
-                        <span>{{mail.subject}}</span>
+                        <span class="mail-subject">{{mail.subject}}</span>
                     </span>
 
                         <div
