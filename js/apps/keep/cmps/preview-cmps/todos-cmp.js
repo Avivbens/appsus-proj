@@ -8,9 +8,9 @@ export default {
                     <br>
                     <div v-for="(line, idx) in note.info.todos" > 
                         <span class="delete-todo" @click.stop="deleteTodo(idx)"><i class="fas fa-trash-alt"></i></span> 
-                        <span :class="{done: line.isDone}" @click.stop="toggleIsDone(idx)">O</span>
+                        <span :class="{'far fa-check-circle': line.isDone, 'far fa-circle': !line.isDone}" class="clickable" @click.stop="toggleIsDone(idx)"></span>
                         <input :class="{done: line.isDone}" class="txt-input"  type="text" v-model="note.info.todos[idx].txt"
-                            @input.stop="addNewLine(idx),onSave()" @change="cleanLastLine" placeholder="write your todo"/>
+                            @input.stop="addNewLine(idx),onSave()" placeholder="write your todo"/>
                     </div>
                 </li>
         </section>
@@ -45,5 +45,8 @@ export default {
     },
     created() {
         document.addEventListener('click', this.cleanLastLine)
+    },
+    destroyed() {
+        document.removeEventListener('click', this.cleanLastLine)
     },
 }

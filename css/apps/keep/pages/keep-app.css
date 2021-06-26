@@ -1,3 +1,7 @@
+.keep-app * {
+    color: #202124;
+}
+
 .keep-app {
     display: flex;
     width: 100%;

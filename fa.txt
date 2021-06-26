@@ -32,4 +32,8 @@ note - <i class="far fa-sticky-note"></i>
 
 edit - <i class="fas fa-edit"></i>
 
+check-circle-empty<i class="far fa-circle"></i>
+check-circle with V<i class="far fa-check-circle"></i>
+
+
 

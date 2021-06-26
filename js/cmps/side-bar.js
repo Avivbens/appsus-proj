@@ -20,7 +20,7 @@ export default {
                     </span>
                     
                     <i :class="category.icon" class="side-bar-icons"> </i>
-                    <span class="capitalize" v-if="hover"> {{category.text}}</span>
+                    <span class="capitalize" v-if="hover"> {{categoryToShow(category)}}</span>
                 </span>
             </div>
         </aside>
@@ -32,7 +32,7 @@ export default {
     },
     methods: {
         filterBy(category) {
-            this.$emit('setFilter', category)
+            this.$emit('setFilter', category.text)
         },
         toggleHover(hovering) {
             if (!this.isHovered) {
@@ -40,7 +40,14 @@ export default {
                 return
             }
             this.hover = hovering
+        },
+        categoryToShow(category) {
+            return category.text.split(':')[0]
         }
+
+    },
+    computed: {
+
     },
     created() {
         this.toggleHover()

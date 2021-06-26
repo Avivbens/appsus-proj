@@ -49,24 +49,53 @@ export default {
                     text: 'media',
                     icon: 'fas fa-photo-video'
                 },
+                {
+                    text: 'general',
+                    icon: 'fas fa-circle general'
+                },
+                {
+                    text: 'work',
+                    icon: 'fas fa-circle work'
+                },
+                {
+                    text: 'family',
+                    icon: 'fas fa-circle family'
+                },
+                {
+                    text: 'cars',
+                    icon: 'fas fa-circle cars'
+                },
+                {
+                    text: 'insurance',
+                    icon: 'fas fa-circle insurance'
+                },
+                {
+                    text: 'health',
+                    icon: 'fas fa-circle health'
+                },
+                {
+                    text: 'diet',
+                    icon: 'fas fa-circle diet'
+                },
+
             ],
         }
     },
     methods: {
         loadNotes() {
             keepService.query()
-                .then(res => this.notes = res)
+                .then(res => {
+                    this.notes = res
+                })
         },
         saveNote(note) {
             keepService.save(note)
                 .then(() => this.loadNotes())
         },
         setFilter(filter) {
-            this.filterBy = filter.text
-                // this.updateNotesToShow()
+            this.filterBy = filter
         },
         setSearch(searchStr) {
-            console.log('here', searchStr)
             this.searchBy = searchStr
         },
         toggleIsDone({ noteId, todoIdx }) {
@@ -81,7 +110,6 @@ export default {
             keepService.togglePinNode(note)
                 .then((res) => this.notes = res)
         },
-
 
     },
     computed: {

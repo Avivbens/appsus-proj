@@ -25,7 +25,7 @@ function query() {
     return storageService.query(MAILS_KEY)
         .then(res => {
             if (!res || !res.length) {
-                postMany(createFirstMails())
+                return postMany(createFirstMails())
                     .then(newMails => {
                         return newMails
                     })

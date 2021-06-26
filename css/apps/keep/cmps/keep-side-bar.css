@@ -25,3 +25,33 @@
     background-color: #0092ff;
     color: white;
 }
+
+.fa-circle.general {
+    color: rgb(255, 255, 136)
+}
+
+.fa-circle.work {
+    color: rgb(255, 136, 136)
+}
+
+.fa-circle.cars {
+    color: rgb(255, 204, 136)
+}
+
+.fa-circle.insurance {
+    color: rgb(204, 255, 153)
+}
+
+.fa-circle.health {
+    color: rgb(170, 255, 238)
+}
+
+.fa-circle.family {
+    color: rgb(136, 187, 255)
+}
+
+.fa-circle.diet {
+    color: rgb(255, 255, 255);
+    border: 1px solid lightgrey;
+    border-radius: 50%;
+}

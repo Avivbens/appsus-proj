@@ -11,24 +11,6 @@ export default {
         noteImg,
         noteVideo
     },
-
-    /* 
-    close - <i class="fas fa-times"></i>
-    
-    delete - <i class="fas fa-trash-alt"></i>
-    
-    todo- 
-    
-    youtube - 
-    
-    photo - 
-    
-    note - 
-    
-    edit - 
-    
-    
-    */
     props: [],
     template: `
         <section class="note-add">
@@ -77,7 +59,7 @@ export default {
                     imgUrl: '',
                     videoUrl: '',
                 },
-                categories: ['']
+                categories: ['notes', 'general:color']
             },
             cmp: 'noteTxt'
         }
@@ -87,6 +69,15 @@ export default {
             if (this.note.type === 'noteTodos') this.note.info.todos.pop() //remove last empty line
             this.$emit('save', this.note)
             eventBus.$emit('cleanInput')
+
+            const msg = {
+                txt: `New note added`,
+                type: 'success',
+                action: 'add note',
+                // link: `/keep-/${this.book.id}`,
+            };
+            eventBus.$emit('show-msg', msg);
+            console.log('emitted by eventbus')
         },
         setAns(val) {
             this.note = JSON.parse(JSON.stringify(val))
